@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include "pch.h"
 
 class physicalObject {
 private:
