@@ -1,6 +1,8 @@
-#pragma once
+#ifndef PHYSICALOBJECT_H
+#define PHYSICALOBJECT_H
+
 #include <array>
-#include "pch.h"
+
 
 class physicalObject {
 private:
@@ -22,3 +24,5 @@ public:
 	float setXacc (float x);
 	float setYacc (float y);
 };
+
+#endif // !PHYSICALOBJECT_H;
