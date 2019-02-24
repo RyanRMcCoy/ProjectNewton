@@ -5,10 +5,14 @@
 #include <iostream>
 #include <array>
 #include "physicalObject.h"
+#include "vector2.h"
 using namespace std;
 
 int main()
 {
+	vector2 v(10, 10);
+	v = v * 10;
+	//cout << "(" << v.getX() << ", " << v.getY() << ")" << endl;
 	physicalObject firstObj(0, 0);
 	//std::cout << firstObj.getXpos();
 }
