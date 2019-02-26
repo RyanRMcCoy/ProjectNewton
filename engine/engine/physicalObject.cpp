@@ -2,6 +2,15 @@
 #include <array>
 #include "pch.h"
 
+physicalObject::physicalObject()
+{
+	position[0] = 0;
+	position[1] = 0;
+	velocity[0] = 0;
+	velocity[1] = 0;
+	acceleration[0] = 0;
+	acceleration[1] = 0;
+}
 
 physicalObject::physicalObject(float x, float y)
 {
@@ -10,7 +19,7 @@ physicalObject::physicalObject(float x, float y)
 	velocity[0] = 0;
 	velocity[1] = 0;
 	acceleration[0] = 0;
-	acceleration[1] = 1;
+	acceleration[1] = 0;
 }
 
 float physicalObject::getXpos()

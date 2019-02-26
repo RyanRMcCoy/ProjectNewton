@@ -4,10 +4,12 @@
 #include <array>
 
 
-class physicalObject {
+class physicalObject 
+{
 private:
 	std::array <float, 2> position, velocity, acceleration;
 public:
+	physicalObject();
 	physicalObject(float x, float y);
 
 	float getXpos ();

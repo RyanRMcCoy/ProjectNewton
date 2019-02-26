@@ -5,12 +5,15 @@
 #include <iostream>
 #include <array>
 #include "physicalObject.h"
+#include "circle.h"
 using namespace std;
 
 int main()
 {
-	physicalObject firstObj(0, 0);
-	//std::cout << firstObj.getXpos();
+	circle firstCircle(25);
+	firstCircle.setXpos(6);
+	std::cout << firstCircle.getXpos() << endl;
+	std::cout << firstCircle.getRadius() << endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

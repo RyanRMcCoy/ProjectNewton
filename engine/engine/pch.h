@@ -10,5 +10,6 @@
 #define PCH_H
 
 #include "physicalObject.h"
+#include "circle.h"
 
 #endif //PCH_H
