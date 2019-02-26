@@ -11,5 +11,7 @@
 
 #include "physicalObject.h"
 #include "circle.h"
+#include "vector2.h"
+
 
 #endif //PCH_H
