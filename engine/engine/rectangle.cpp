@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "rectangle.h"
 
-
 rectangle::rectangle()
 {
 	sideLenX = 0;

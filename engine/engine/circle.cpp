@@ -1,5 +1,4 @@
 #include "circle.h"
-#include "physicalObject.h"
 #include "pch.h"
 
 circle::circle(float rad)
