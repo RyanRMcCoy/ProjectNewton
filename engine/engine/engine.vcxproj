@@ -154,6 +154,7 @@
     <ClInclude Include="circle.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="physicalObject.h" />
+    <ClInclude Include="rectangle.h" />
     <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="physicalObject.cpp" />
+    <ClCompile Include="rectangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

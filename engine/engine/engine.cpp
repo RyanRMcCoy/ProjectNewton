@@ -7,20 +7,20 @@
 #include "physicalObject.h"
 #include "vector2.h"
 #include "circle.h"
+#include "rectangle.h"
 using namespace std;
 
 int main()
 {
-	vector2 v(10, 10);
-	v = v * 10;
+	//vector2 v(10, 10);
+	//v = v * 10;
 	//cout << "(" << v.getX() << ", " << v.getY() << ")" << endl;
 	
-	circle firstCircle(25);
-	firstCircle.setXpos(6);
-	std::cout << firstCircle.getXpos() << endl;
-	std::cout << firstCircle.getRadius() << endl;
+	rectangle firstRect(10, 10);
+	std::cout << firstRect.getXpos() << endl;
+	std::cout << firstRect.getSideX() << endl;
 }
-}
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
