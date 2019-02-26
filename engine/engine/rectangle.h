@@ -1,4 +1,7 @@
-#pragma once
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
+
 #include "physicalObject.h"
 
 class rectangle : public physicalObject
@@ -17,4 +20,6 @@ public:
 
 	//~rectangle();
 };
+
+#endif // !RECTANGLE_H
 

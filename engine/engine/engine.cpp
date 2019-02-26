@@ -3,7 +3,6 @@
 
 #include "pch.h"
 #include <iostream>
-#include <array>
 #include "physicalObject.h"
 #include "vector2.h"
 #include "circle.h"

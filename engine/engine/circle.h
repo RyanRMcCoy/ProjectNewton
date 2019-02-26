@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CIRCLE_H
+#define CIRCLE_H
 
 class circle : public physicalObject
 {
@@ -9,3 +10,5 @@ public:
 	float getRadius ();
 	float setRadius (float rad);
 };
+
+#endif // !CIRCLE_H

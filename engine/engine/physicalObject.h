@@ -2,8 +2,6 @@
 #define PHYSICALOBJECT_H
 
 #include <array>
-
-
 class physicalObject 
 {
 private:
