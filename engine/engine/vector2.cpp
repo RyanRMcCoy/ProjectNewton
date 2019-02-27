@@ -32,7 +32,7 @@ vector2 vector2::unit()
 
 vector2 vector2::project(vector2 v)
 {
-	return v * (vector2(x, y).dot(v) / v.dot(v));
+	return v * (dot(v) / v.dot(v));
 }
 
 vector2 vector2::operator + (vector2 v)
@@ -69,4 +69,29 @@ vector2 vector2::operator / (float f)
 {
 	vector2 vNew(x / f, y / f);
 	return vNew;
+}
+
+bool vector2::operator < (vector2 v)
+{
+	return magnitude() < v.magnitude();
+}
+
+bool vector2::operator <= (vector2 v)
+{
+	return *this < v || *this == v;
+}
+
+bool vector2::operator == (vector2 v)
+{
+	return x == v.x && y == v.y;
+}
+
+bool vector2::operator >= (vector2 v)
+{
+	return *this > v || *this == v;
+}
+
+bool vector2::operator > (vector2 v)
+{
+	return magnitude() > v.magnitude();
 }
