@@ -10,6 +10,9 @@ public:
 	circle (float rad);
 	float getRadius ();
 	float setRadius (float rad);
+
+	bool intersect(circle o);
+	bool intersect(rectangle o);
 };
 
 #endif // !CIRCLE_H

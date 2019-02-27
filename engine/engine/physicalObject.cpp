@@ -5,28 +5,31 @@
 
 physicalObject::physicalObject()
 {
-	position[0] = 0;
-	position[1] = 0;
-	vector2 velocity(0, 0);
-	vector2 acceleration(0, 0);
+	vector2 velocity();
+	vector2 velocity();
+	vector2 acceleration();
 }
 
 physicalObject::physicalObject(float x, float y)
 {
-	position[0] = x;
-	position[1] = y;
-	vector2 velocity(0, 0);
-	vector2 acceleration(0, 0);
+	vector2 position();
+	vector2 velocity();
+	vector2 acceleration();
+}
+
+vector2 physicalObject::getPos()
+{
+	return position;
 }
 
 float physicalObject::getXpos()
 {
-	return position[0];
+	return position.getX();
 }
 
 float physicalObject::getYpos()
 {
-	return position[1];
+	return position.getY();
 }
 
 float physicalObject::getXvel()
@@ -59,15 +62,11 @@ vector2 physicalObject::getAccVector()
 	return acceleration;
 }
 
-float physicalObject::setXpos(float x)
+void setPosition(vector2 position)
 {
-	return position[0] = x;
+	*this.position = position;
 }
 
-float physicalObject::setYpos(float y)
-{
-	return position[1] = y;
-}
 void physicalObject::setVelocity(float x, float y)
 {
 	velocity = vector2(x, y);

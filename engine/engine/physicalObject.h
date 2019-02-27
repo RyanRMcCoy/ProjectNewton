@@ -6,14 +6,13 @@
 class physicalObject 
 {
 private:
-	std::array <float, 2> position;
-	vector2 velocity, acceleration;
+	//std::array <float, 2> position;
+	vector2 position, velocity, acceleration;
 public:
 	physicalObject();
-	physicalObject(float x, float y);
+	physicalObject(vector2 position);
 
-	float getXpos ();
-	float getYpos ();
+	vector2 getPos();
 	float getXvel ();
 	float getYvel ();
 	vector2 getVelVector();
