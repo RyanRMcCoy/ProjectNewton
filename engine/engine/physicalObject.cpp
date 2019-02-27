@@ -5,14 +5,14 @@
 
 physicalObject::physicalObject()
 {
-	vector2 velocity();
+	vector2 position();
 	vector2 velocity();
 	vector2 acceleration();
 }
 
-physicalObject::physicalObject(float x, float y)
+physicalObject::physicalObject(vector2 pos)
 {
-	vector2 position();
+	vector2 position = pos;
 	vector2 velocity();
 	vector2 acceleration();
 }

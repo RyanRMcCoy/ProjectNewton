@@ -12,6 +12,8 @@ public:
 	physicalObject();
 	physicalObject(vector2 position);
 
+	float getXpos();
+	float getYpos();
 	vector2 getPos();
 	float getXvel ();
 	float getYvel ();
@@ -20,9 +22,6 @@ public:
 	float getYacc ();
 	vector2 getAccVector();
 
-
-	float setXpos (float x);
-	float setYpos (float y);
 	void setVelocity(float x, float y);
 	void setAcceleration(float x, float y);
 };
