@@ -2,11 +2,8 @@
 #include <cmath>
 #include "pch.h"
 
-vector2::vector2(float xs, float ys)
-{
-	x = xs;
-	y = ys;
-}
+vector2::vector2() : x(0), y(0) {}
+vector2::vector2(float xs, float ys) : x(xs), y(ys) {}
 
 float vector2::getX()
 {

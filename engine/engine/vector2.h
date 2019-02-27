@@ -6,6 +6,7 @@ class vector2
 private:
 	float x, y;
 public:
+	vector2();
 	vector2(float xs, float ys);
 
 	float getX();
