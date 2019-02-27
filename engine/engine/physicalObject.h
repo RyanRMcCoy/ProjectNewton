@@ -6,6 +6,7 @@ class physicalObject
 {
 private:
 	std::array <float, 2> position, velocity, acceleration;
+	//vector2 velocity, acceleration;
 public:
 	physicalObject();
 	physicalObject(float x, float y);

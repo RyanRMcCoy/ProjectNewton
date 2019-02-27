@@ -1,4 +1,5 @@
 #include "physicalObject.h"
+//#include "vector2.h"
 #include "pch.h"
 
 
@@ -10,6 +11,8 @@ physicalObject::physicalObject()
 	velocity[1] = 0;
 	acceleration[0] = 0;
 	acceleration[1] = 0;
+	//velocity = vector2(0, 0);
+	//acceleration = vector2(0, 0);
 }
 
 physicalObject::physicalObject(float x, float y)
@@ -20,6 +23,8 @@ physicalObject::physicalObject(float x, float y)
 	velocity[1] = 0;
 	acceleration[0] = 0;
 	acceleration[1] = 0;
+	//velocity = vector2(0, 0);
+	//acceleration = vector2(0, 0);
 }
 
 float physicalObject::getXpos()
@@ -35,21 +40,25 @@ float physicalObject::getYpos()
 float physicalObject::getXvel()
 {
 	return velocity[0];
+	//return velocity.getX();
 }
 
 float physicalObject::getYvel()
 {
 	return velocity[1];
+	//return velocity.getY();
 }
 
 float physicalObject::getXacc()
 {
 	return acceleration[0];
+	//return acceleration.getX();
 }
 
 float physicalObject::getYacc()
 {
 	return acceleration[1];
+	//return acceleration.getY()`;
 }
 
 float physicalObject::setXpos(float x)

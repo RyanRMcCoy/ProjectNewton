@@ -1,5 +1,6 @@
 #include "vector2.h"
 #include <cmath>
+#include "pch.h"
 
 vector2::vector2(float xs, float ys)
 {

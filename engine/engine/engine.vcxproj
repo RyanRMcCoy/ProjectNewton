@@ -168,6 +168,7 @@
     </ClCompile>
     <ClCompile Include="physicalObject.cpp" />
     <ClCompile Include="rectangle.cpp" />
+    <ClCompile Include="vector2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
