@@ -11,9 +11,9 @@ using namespace std;
 
 int main()
 {
-	//vector2 v(10, 10);
-	//v = v * 10;
-	//cout << "(" << v.getX() << ", " << v.getY() << ")" << endl;
+	vector2 v(10, 10);
+	v = v * 10;
+	cout << "(" << v.getX() << ", " << v.getY() << ")" << endl;
 	
 	rectangle firstRect(10, 10);
 	std::cout << firstRect.getXpos() << endl;

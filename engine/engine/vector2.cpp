@@ -1,5 +1,6 @@
 #include "vector2.h"
 #include <cmath>
+#include "pch.h"
 
 vector2::vector2() : x(0), y(0) {}
 vector2::vector2(float xs, float ys) : x(xs), y(ys) {}
@@ -31,24 +32,24 @@ vector2 vector2::unit()
 
 vector2 vector2::project(vector2 v)
 {
-	v * (vector2(x, y).dot(v) / v.dot(v));
+	return v * (dot(v) / v.dot(v));
 }
 
 vector2 vector2::operator + (vector2 v)
 {
-	vector2 vNew(x + v.getX, y + v.getY());
+	vector2 vNew(x + v.getX(), y + v.getY());
 	return vNew;
 }
 
 vector2 vector2::operator - (vector2 v)
 {
-	vector2 vNew(x - v.getX, y - v.getY());
+	vector2 vNew(x - v.getX(), y - v.getY());
 	return vNew;
 }
 
 vector2 vector2::operator * (vector2 v)
 {
-	vector2 vNew(x * v.getX, y * v.getY());
+	vector2 vNew(x * v.getX(), y * v.getY());
 	return vNew;
 }
 
@@ -60,7 +61,7 @@ vector2 vector2::operator * (float f)
 
 vector2 vector2::operator / (vector2 v)
 {
-	vector2 vNew(x / v.getX, y / v.getY());
+	vector2 vNew(x / v.getX(), y / v.getY());
 	return vNew;
 }
 
@@ -68,4 +69,29 @@ vector2 vector2::operator / (float f)
 {
 	vector2 vNew(x / f, y / f);
 	return vNew;
+}
+
+bool vector2::operator < (vector2 v)
+{
+	return magnitude() < v.magnitude();
+}
+
+bool vector2::operator <= (vector2 v)
+{
+	return *this < v || *this == v;
+}
+
+bool vector2::operator == (vector2 v)
+{
+	return x == v.x && y == v.y;
+}
+
+bool vector2::operator >= (vector2 v)
+{
+	return *this > v || *this == v;
+}
+
+bool vector2::operator > (vector2 v)
+{
+	return magnitude() > v.magnitude();
 }
