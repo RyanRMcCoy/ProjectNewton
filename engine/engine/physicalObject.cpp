@@ -1,5 +1,5 @@
 #include "physicalObject.h"
-//#include "vector2.h"
+#include "vector2.h"
 #include "pch.h"
 
 
@@ -7,24 +7,16 @@ physicalObject::physicalObject()
 {
 	position[0] = 0;
 	position[1] = 0;
-	velocity[0] = 0;
-	velocity[1] = 0;
-	acceleration[0] = 0;
-	acceleration[1] = 0;
-	//velocity = vector2(0, 0);
-	//acceleration = vector2(0, 0);
+	vector2 velocity(0, 0);
+	vector2 acceleration(0, 0);
 }
 
 physicalObject::physicalObject(float x, float y)
 {
 	position[0] = x;
 	position[1] = y;
-	velocity[0] = 0;
-	velocity[1] = 0;
-	acceleration[0] = 0;
-	acceleration[1] = 0;
-	//velocity = vector2(0, 0);
-	//acceleration = vector2(0, 0);
+	vector2 velocity(0, 0);
+	vector2 acceleration(0, 0);
 }
 
 float physicalObject::getXpos()
@@ -39,26 +31,32 @@ float physicalObject::getYpos()
 
 float physicalObject::getXvel()
 {
-	return velocity[0];
-	//return velocity.getX();
+	return velocity.getX();
 }
 
 float physicalObject::getYvel()
 {
-	return velocity[1];
-	//return velocity.getY();
+	return velocity.getY();
+}
+
+vector2 physicalObject::getVelVector()
+{
+	return velocity;
 }
 
 float physicalObject::getXacc()
 {
-	return acceleration[0];
-	//return acceleration.getX();
+	return acceleration.getX();
 }
 
 float physicalObject::getYacc()
 {
-	return acceleration[1];
-	//return acceleration.getY()`;
+	return acceleration.getY();
+}
+
+vector2 physicalObject::getAccVector()
+{
+	return acceleration;
 }
 
 float physicalObject::setXpos(float x)
@@ -70,23 +68,13 @@ float physicalObject::setYpos(float y)
 {
 	return position[1] = y;
 }
-
-float physicalObject::setXvel(float x)
+void physicalObject::setVelocity(float x, float y)
 {
-	return velocity[0] = x;
+	velocity = vector2(x, y);
 }
 
-float physicalObject::setYvel(float y)
+void physicalObject::setAcceleration(float x, float y)
 {
-	return velocity[1] = y;
+	acceleration = vector2(x, y);
 }
 
-float physicalObject::setXacc(float x)
-{
-	return acceleration[0] = x;
-}
-
-float physicalObject::setYacc(float y)
-{
-	return acceleration[1] = y;
-}

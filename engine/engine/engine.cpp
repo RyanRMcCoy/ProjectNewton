@@ -11,13 +11,11 @@ using namespace std;
 
 int main()
 {
-	/*vector2 v(10, 10);
-	v = v * 10;
-	cout << "(" << v.getX() << ", " << v.getY() << ")" << endl;*/
-	
-	/*rectangle firstRect(10, 10);
-	std::cout << firstRect.getXpos() << endl;
-	std::cout << firstRect.getSideX() << endl;*/
+	circle circ(5);
+	std::cout << "rad: " << circ.getRadius() << ", pos: (" << circ.getXpos() << ", " << circ.getYpos() << ")" << endl;
+	std::cout << "vel: (" << circ.getVelVector().magnitude() << ")" << endl;
+	circ.setVelocity(9, 3);
+	std::cout << "vel: (" << circ.getVelVector().magnitude() << ")" << endl;
 }
 
 

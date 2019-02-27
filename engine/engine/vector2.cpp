@@ -32,24 +32,24 @@ vector2 vector2::unit()
 
 vector2 vector2::project(vector2 v)
 {
-	v * (vector2(x, y).dot(v) / v.dot(v));
+	return v * (vector2(x, y).dot(v) / v.dot(v));
 }
 
 vector2 vector2::operator + (vector2 v)
 {
-	vector2 vNew(x + v.getX, y + v.getY());
+	vector2 vNew(x + v.getX(), y + v.getY());
 	return vNew;
 }
 
 vector2 vector2::operator - (vector2 v)
 {
-	vector2 vNew(x - v.getX, y - v.getY());
+	vector2 vNew(x - v.getX(), y - v.getY());
 	return vNew;
 }
 
 vector2 vector2::operator * (vector2 v)
 {
-	vector2 vNew(x * v.getX, y * v.getY());
+	vector2 vNew(x * v.getX(), y * v.getY());
 	return vNew;
 }
 
@@ -61,7 +61,7 @@ vector2 vector2::operator * (float f)
 
 vector2 vector2::operator / (vector2 v)
 {
-	vector2 vNew(x / v.getX, y / v.getY());
+	vector2 vNew(x / v.getX(), y / v.getY());
 	return vNew;
 }
 
