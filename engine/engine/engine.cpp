@@ -21,9 +21,9 @@ int main()
 
 	circle circ(5);
 	std::cout << "rad: " << circ.getRadius() << ", pos: (" << circ.getXpos() << ", " << circ.getYpos() << ")" << endl;
-	std::cout << "vel: (" << circ.getVelVector().magnitude() << ")" << endl;
+	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
 	circ.setVelocity(9, 3);
-	std::cout << "vel: (" << circ.getVelVector().magnitude() << ")" << endl;
+	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
 }
 
 

@@ -2,14 +2,19 @@
 #define CIRCLE_H
 
 #include "physicalObject.h"
+#include "rectangle.h"
+
 class circle : public physicalObject
 {
 private: 
 	float radius;
 public:
-	circle (float rad);
-	float getRadius ();
-	float setRadius (float rad);
+	circle();
+	circle(float rad);
+	circle(float rad, vector2 pos);
+
+	float getRadius();
+	float setRadius(float rad);
 
 	bool intersect(circle o);
 	bool intersect(rectangle o);

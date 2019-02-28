@@ -2,9 +2,19 @@
 #include "rectangle.h"
 #include "pch.h"
 
+circle::circle()
+{
+	radius = 0;
+}
+
 circle::circle(float rad)
 {
-	physicalObject(0, 0);
+	radius = rad;
+}
+
+circle::circle(float rad, vector2 pos)
+{
+	setPosition(pos.getX(), pos.getY());
 	radius = rad;
 }
 
@@ -20,12 +30,12 @@ float circle::setRadius(float rad)
 
 bool circle::intersect(circle o)
 {
-	if ((getPos() - o.getPos()).magnitude() <= getRadius() + o.getRadius())
+	if ((getPosition() - o.getPosition()).magnitude() <= getRadius() + o.getRadius())
 		return true;
 	return false;
 }
 
 bool circle::intersect(rectangle o)
 {
-	
+	return false;
 }

@@ -11,6 +11,7 @@ private:
 public:
 	rectangle();
 	rectangle(float lenX, float lenY);
+	rectangle(float lenX, float lenY, vector2 pos);
 
 	float getSideX();
 	float getSideY();

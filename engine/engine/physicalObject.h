@@ -6,22 +6,24 @@
 class physicalObject 
 {
 private:
-	//std::array <float, 2> position;
 	vector2 position, velocity, acceleration;
 public:
 	physicalObject();
 	physicalObject(vector2 position);
+	physicalObject(vector2 position, vector2 velocity);
+	physicalObject(vector2 position, vector2 velocity, vector2 acceleration);
 
 	float getXpos();
 	float getYpos();
-	vector2 getPos();
-	float getXvel ();
-	float getYvel ();
-	vector2 getVelVector();
-	float getXacc ();
-	float getYacc ();
-	vector2 getAccVector();
+	vector2 getPosition();
+	float getXvel();
+	float getYvel();
+	vector2 getVelocity();
+	float getXacc();
+	float getYacc();
+	vector2 getAcceleration();
 
+	void setPosition(float x, float y);
 	void setVelocity(float x, float y);
 	void setAcceleration(float x, float y);
 };

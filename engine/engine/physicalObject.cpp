@@ -5,19 +5,33 @@
 
 physicalObject::physicalObject()
 {
-	vector2 position();
-	vector2 velocity();
-	vector2 acceleration();
+	position = vector2();
+	velocity = vector2();
+	acceleration = vector2();
 }
 
 physicalObject::physicalObject(vector2 pos)
 {
-	vector2 position = pos;
-	vector2 velocity();
-	vector2 acceleration();
+	position = pos;
+	velocity = vector2();
+	acceleration = vector2();
 }
 
-vector2 physicalObject::getPos()
+physicalObject::physicalObject(vector2 pos, vector2 vel)
+{
+	position = pos;
+	velocity = vel;
+	acceleration = vector2();
+}
+
+physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
+{
+	position = pos;
+	velocity = vel;
+	acceleration = acc;
+}
+
+vector2 physicalObject::getPosition()
 {
 	return position;
 }
@@ -42,7 +56,7 @@ float physicalObject::getYvel()
 	return velocity.getY();
 }
 
-vector2 physicalObject::getVelVector()
+vector2 physicalObject::getVelocity()
 {
 	return velocity;
 }
@@ -57,14 +71,21 @@ float physicalObject::getYacc()
 	return acceleration.getY();
 }
 
-vector2 physicalObject::getAccVector()
+vector2 physicalObject::getAcceleration()
 {
 	return acceleration;
 }
 
-void setPosition(vector2 position)
+//Tyler did you put this in? Do you need to be able to pass in a vector rather than 
+//just values?
+//void setPosition(vector2 pos)
+//{
+//	*this.position = position;
+//}
+
+void physicalObject::setPosition(float x, float y)
 {
-	*this.position = position;
+	position = vector2(x, y);
 }
 
 void physicalObject::setVelocity(float x, float y)
