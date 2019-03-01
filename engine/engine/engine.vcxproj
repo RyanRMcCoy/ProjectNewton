@@ -154,8 +154,10 @@
     <ClInclude Include="circle.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="physicalObject.h" />
+    <ClInclude Include="polygon.h" />
     <ClInclude Include="rectangle.h" />
     <ClInclude Include="vector2.h" />
+    <ClInclude Include="vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="circle.cpp" />
@@ -167,8 +169,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="physicalObject.cpp" />
+    <ClCompile Include="polygon.cpp" />
     <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="vector2.cpp" />
+    <ClCompile Include="vertex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
