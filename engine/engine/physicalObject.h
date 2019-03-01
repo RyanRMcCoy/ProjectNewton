@@ -23,8 +23,11 @@ public:
 	float getYacc();
 	vector2 getAcceleration();
 
+	void setPosition(vector2 pos);
 	void setPosition(float x, float y);
+	void setVelocity(vector2 vel);
 	void setVelocity(float x, float y);
+	void setAcceleration(vector2 acc);
 	void setAcceleration(float x, float y);
 };
 

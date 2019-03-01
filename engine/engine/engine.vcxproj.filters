@@ -7,6 +7,8 @@
     <ClCompile Include="physicalObject.cpp" />
     <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="vector2.cpp" />
+    <ClCompile Include="polygon.cpp" />
+    <ClCompile Include="vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
@@ -14,5 +16,7 @@
     <ClInclude Include="physicalObject.h" />
     <ClInclude Include="vector2.h" />
     <ClInclude Include="rectangle.h" />
+    <ClInclude Include="polygon.h" />
+    <ClInclude Include="vertex.h" />
   </ItemGroup>
 </Project>
