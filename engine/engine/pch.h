@@ -14,5 +14,4 @@
 #include "vector2.h"
 #include "rectangle.h"
 
-
 #endif //PCH_H

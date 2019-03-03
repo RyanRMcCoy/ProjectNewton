@@ -7,13 +7,29 @@
 #include "vector2.h"
 #include "circle.h"
 #include "rectangle.h"
+#include "polygon.h"
 using namespace std;
 
 int main()
 {
+	// Initialization
+	bool running = true;
+	float dt;
+
+	// while loop for execution bounded by time delta
+	while (running)
+	{
+		
+		running = false; // temporary obviously
+	}
+
 	vector2 v(10, 10);
 	v = v * 10;
 	cout << "(" << v.getX() << ", " << v.getY() << ")" << endl;
+
+	vector2 vertices[3] = { vector2(5, 10), vector2(2, 2), vector2(12, 2) };
+	polygon p(3, vertices);
+	cout << "Vertex 1: (" << p.getVertices()[0].getX() << ", " << p.getVertices()[0].getY() << ")" << endl;
 	
 	rectangle firstRect(10, 10);
 	std::cout << firstRect.getXpos() << endl;
@@ -24,6 +40,8 @@ int main()
 	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
 	circ.setVelocity(9, 3);
 	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
+
+	std::cin >> dt;
 }
 
 

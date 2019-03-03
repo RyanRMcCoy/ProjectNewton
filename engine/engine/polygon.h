@@ -1,13 +1,14 @@
 #pragma once
 
-#include "vertex.h"
-
 class polygon : public physicalObject
 {
 private:
 	int sides;
-	vertex root;
+	vector2 *vertices;
 public:
+	polygon();
 	polygon(int s);
-	polygon(int s, vertex r);
+	polygon(int s, vector2 v[]);
+
+	vector2* getVertices();
 };
