@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Window", "Window\Window.vcxproj", "{EA539162-C1D3-48AE-A44B-312078F3ADD2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameApplication", "GameApplication\GameApplication.vcxproj", "{0315B935-C53E-4D71-9B7F-14A6C6888EF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,19 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Debug|x64.ActiveCfg = Debug|Win32
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Debug|x64.Build.0 = Debug|Win32
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Debug|x86.ActiveCfg = Debug|Win32
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Debug|x86.Build.0 = Debug|Win32
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Release|x64.ActiveCfg = Release|x64
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Release|x64.Build.0 = Release|x64
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Release|x86.ActiveCfg = Release|Win32
-		{EA539162-C1D3-48AE-A44B-312078F3ADD2}.Release|x86.Build.0 = Release|Win32
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Debug|x64.ActiveCfg = Debug|x64
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Debug|x64.Build.0 = Debug|x64
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Debug|x86.ActiveCfg = Debug|Win32
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Debug|x86.Build.0 = Debug|Win32
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Release|x64.ActiveCfg = Release|x64
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Release|x64.Build.0 = Release|x64
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Release|x86.ActiveCfg = Release|Win32
+		{0315B935-C53E-4D71-9B7F-14A6C6888EF0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8EF4FBF7-0B93-4B44-85EA-54595435434D}
+		SolutionGuid = {0FEEF040-2C8C-41D4-A8A7-D72F645CF03C}
 	EndGlobalSection
 EndGlobal
