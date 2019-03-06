@@ -36,18 +36,14 @@ float rectangle::getSideY()
 	return sideLenY;
 }
 
-float rectangle::setSideX(float len)
+void rectangle::setSideX(float len)
 {
 	setPosition(len / 2, sideLenY);
-	return sideLenX = len;
+	sideLenX = len;
 }
 
-float rectangle::setSideY(float len)
+void rectangle::setSideY(float len)
 {
 	setPosition(sideLenX, len / 2);
-	return sideLenY = len;
+	sideLenY = len;
 }
-
-//rectangle::~rectangle()
-//{
-//}

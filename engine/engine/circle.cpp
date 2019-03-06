@@ -23,9 +23,9 @@ float circle::getRadius()
 	return radius;
 }
 
-float circle::setRadius(float rad)
+void circle::setRadius(float rad)
 {
-	return radius = rad;
+	radius = rad;
 }
 
 bool circle::intersect(circle o)

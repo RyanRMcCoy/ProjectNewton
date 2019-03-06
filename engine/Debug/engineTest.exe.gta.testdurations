@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\ryanr\source\repos\ProjectNewton\engine\Debug\engineTest.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="physicalObjectTest.deaultConstructor" Duration="1" />
+    <TestDuration Test="physicalObjectTest.defaultConstructor" Duration="1" />
+    <TestDuration Test="physicalObjectTest.constructorPos" Duration="1" />
+    <TestDuration Test="physicalObjectTest.constructorPosVel" Duration="1" />
+    <TestDuration Test="physicalObjectTest.constructorPosVelAcc" Duration="1" />
+    <TestDuration Test="physicalObjectTest.setPosTest" Duration="1" />
+    <TestDuration Test="physicalObjectTest.setVelTest" Duration="1" />
+    <TestDuration Test="physicalObjectTest.setAccTest" Duration="1" />
+    <TestDuration Test="circleTest.defaultConstructor" Duration="1" />
+    <TestDuration Test="circleTest.constructorRad" Duration="1" />
+    <TestDuration Test="circleTest.constructorRadPos" Duration="1" />
+    <TestDuration Test="circleTest.setRadius" Duration="1" />
+    <TestDuration Test="rectangleTest.defaultConstructor" Duration="1" />
+    <TestDuration Test="rectangleTest.constructorRad" Duration="1" />
+    <TestDuration Test="rectangleTest.constructorRadPos" Duration="1" />
+    <TestDuration Test="rectangleTest.setSideX" Duration="1" />
+    <TestDuration Test="rectangleTest.setSideY" Duration="1" />
+    <TestDuration Test="physicalObjectTest.setPosVectorTest" Duration="1" />
+    <TestDuration Test="physicalObjectTest.setVelVectorTest" Duration="1" />
+    <TestDuration Test="physicalObjectTest.setAccVectorTest" Duration="1" />
+    <TestDuration Test="physicalObjectTest.massTest" Duration="1" />
+    <TestDuration Test="vector2Test.defaultConstructor" Duration="1" />
+    <TestDuration Test="vector2Test.coordConstructor" Duration="1" />
+    <TestDuration Test="vector2Test.magnitude" Duration="1" />
+    <TestDuration Test="forceTest.defaultConstructor" Duration="1" />
+    <TestDuration Test="forceTest.objConstructor" Duration="1" />
+    <TestDuration Test="forceTest.vectorConstructor" Duration="1" />
+    <TestDuration Test="forceTest.fullConstructor" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

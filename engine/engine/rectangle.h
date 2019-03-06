@@ -15,10 +15,8 @@ public:
 
 	float getSideX();
 	float getSideY();
-	float setSideX(float len);
-	float setSideY(float len);
-
-	//~rectangle();
+	void  setSideX(float len);
+	void  setSideY(float len);
 };
 
 #endif // !RECTANGLE_H

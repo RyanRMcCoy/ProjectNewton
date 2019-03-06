@@ -31,6 +31,16 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 	acceleration = acc;
 }
 
+float physicalObject::getMass()
+{
+	return mass;
+}
+
+float physicalObject::setMass(float m)
+{
+	return mass = m;
+}
+
 float physicalObject::getXpos()
 {
 	return position.getX();
@@ -106,3 +116,10 @@ void physicalObject::setAcceleration(float x, float y)
 	acceleration = vector2(x, y);
 }
 
+bool physicalObject::operator == (physicalObject o)
+{
+	return  position == o.getPosition() && 
+			velocity == o.getVelocity() &&
+			acceleration == o.getAcceleration() &&
+			mass == o.getMass();
+}

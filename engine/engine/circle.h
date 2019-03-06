@@ -14,7 +14,7 @@ public:
 	circle(float rad, vector2 pos);
 
 	float getRadius();
-	float setRadius(float rad);
+	void  setRadius(float rad);
 
 	bool intersect(circle o);
 	bool intersect(rectangle o);

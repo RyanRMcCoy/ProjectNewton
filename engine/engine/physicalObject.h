@@ -7,11 +7,15 @@ class physicalObject
 {
 private:
 	vector2 position, velocity, acceleration;
+	float mass;
 public:
 	physicalObject();
 	physicalObject(vector2 position);
 	physicalObject(vector2 position, vector2 velocity);
 	physicalObject(vector2 position, vector2 velocity, vector2 acceleration);
+
+	float getMass();
+	float setMass(float m);
 
 	float getXpos();
 	float getYpos();
@@ -29,6 +33,8 @@ public:
 	void setVelocity(float x, float y);
 	void setAcceleration(vector2 acc);
 	void setAcceleration(float x, float y);
+
+	bool operator == (physicalObject o);
 };
 
 #endif // !PHYSICALOBJECT_H;

@@ -13,5 +13,8 @@
 #include "circle.h"
 #include "vector2.h"
 #include "rectangle.h"
+#include "polygon.h"
+#include "force.h"
+#include <cmath>
 
 #endif //PCH_H

@@ -8,6 +8,7 @@
     <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="vector2.cpp" />
     <ClCompile Include="polygon.cpp" />
+    <ClCompile Include="force.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
@@ -16,5 +17,6 @@
     <ClInclude Include="vector2.h" />
     <ClInclude Include="rectangle.h" />
     <ClInclude Include="polygon.h" />
+    <ClInclude Include="force.h" />
   </ItemGroup>
 </Project>

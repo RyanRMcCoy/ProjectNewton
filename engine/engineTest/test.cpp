@@ -77,6 +77,36 @@ TEST(physicalObjectTest, setAccTest) {
 	EXPECT_EQ(obj.getYacc(), 5);
 }
 
+TEST(physicalObjectTest, setPosVectorTest) {
+	physicalObject obj;
+	obj.setPosition(vector2(5, 5));
+	EXPECT_TRUE(obj.getPosition() == vector2(5, 5));
+	EXPECT_EQ(obj.getXpos(), 5);
+	EXPECT_EQ(obj.getYpos(), 5);
+}
+
+TEST(physicalObjectTest, setVelVectorTest) {
+	physicalObject obj;
+	obj.setVelocity(vector2(5, 5));
+	EXPECT_TRUE(obj.getVelocity() == vector2(5, 5));
+	EXPECT_EQ(obj.getXvel(), 5);
+	EXPECT_EQ(obj.getYvel(), 5);
+}
+
+TEST(physicalObjectTest, setAccVectorTest) {
+	physicalObject obj;
+	obj.setAcceleration(vector2(5, 5));
+	EXPECT_TRUE(obj.getAcceleration() == vector2(5, 5));
+	EXPECT_EQ(obj.getXacc(), 5);
+	EXPECT_EQ(obj.getYacc(), 5);
+}
+
+TEST(physicalObjectTest, massTest) {
+	physicalObject obj;
+	obj.setMass(5);
+	EXPECT_EQ(obj.getMass(), 5);
+}
+
 //Start of circle tests
 TEST(circleTest, defaultConstructor) {
 	circle obj;
@@ -138,4 +168,51 @@ TEST(rectangleTest, setSideY) {
 	EXPECT_TRUE(obj.getPosition() == vector2(0, 3));
 	EXPECT_EQ(obj.getSideX(), 0);
 	EXPECT_EQ(obj.getSideY(), 6);
+}
+
+//Start of Vector2 Tests
+TEST(vector2Test, defaultConstructor) {
+	vector2 obj;
+	EXPECT_EQ(obj.getX(), 0);
+	EXPECT_EQ(obj.getY(), 0);
+}
+
+TEST(vector2Test, coordConstructor) {
+	vector2 obj(5, 5);
+	EXPECT_EQ(obj.getX(), 5);
+	EXPECT_EQ(obj.getY(), 5);
+}
+
+TEST(vector2Test, magnitude) {
+	vector2 obj(3, 4);
+	EXPECT_EQ(obj.magnitude(), 5);
+}
+
+//Start of Force Tests
+TEST(forceTest, defaultConstructor) {
+	force obj;
+	EXPECT_TRUE(obj.getObj() == physicalObject());
+	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	EXPECT_EQ(obj.getMagnitude(), 0);
+}
+
+TEST(forceTest, objConstructor) {
+	force obj(physicalObject(vector2(5, 5)));
+	EXPECT_TRUE(obj.getObj() == physicalObject(vector2(5, 5)));
+	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	EXPECT_EQ(obj.getMagnitude(), 0);
+}
+
+TEST(forceTest, vectorConstructor) {
+	force obj(vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == physicalObject());
+	//EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	//EXPECT_EQ(obj.getMagnitude(), 5);
+}
+
+TEST(forceTest, fullConstructor) {
+	force obj(physicalObject(vector2(5, 5)), vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == physicalObject(vector2(5, 5)));
+	//EXPECT_TRUE(obj.getVector()== obj.getObj().getAcceleration());
+	//EXPECT_EQ(obj.getMagnitude(), 5);
 }

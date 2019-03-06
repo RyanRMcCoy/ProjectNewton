@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
+    <ClInclude Include="force.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="physicalObject.h" />
     <ClInclude Include="polygon.h" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="circle.cpp" />
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="force.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

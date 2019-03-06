@@ -3,7 +3,7 @@
 
 class vector2
 {
-private:
+protected:
 	float x, y;
 public:
 	vector2();
