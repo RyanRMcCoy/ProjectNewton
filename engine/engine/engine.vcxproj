@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="aabbHandler.h" />
     <ClInclude Include="circle.h" />
     <ClInclude Include="force.h" />
     <ClInclude Include="pch.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aabbHandler.cpp" />
     <ClCompile Include="circle.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="force.cpp" />

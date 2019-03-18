@@ -27,15 +27,3 @@ void circle::setRadius(float rad)
 {
 	radius = rad;
 }
-
-bool circle::intersect(circle o)
-{
-	if ((getPosition() - o.getPosition()).magnitude() <= getRadius() + o.getRadius())
-		return true;
-	return false;
-}
-
-bool circle::intersect(rectangle o)
-{
-	return false;
-}

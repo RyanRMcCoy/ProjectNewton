@@ -3,6 +3,9 @@
 
 #include <array>
 #include "vector2.h"
+
+using namespace std;
+
 class physicalObject 
 {
 private:

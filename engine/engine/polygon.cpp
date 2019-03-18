@@ -19,4 +19,3 @@ vector2* polygon::getVertices()
 {
 	return vertices;
 }
-
