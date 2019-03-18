@@ -6,16 +6,12 @@ force::force()
 {
 	obj = physicalObject();
 	accelerationVector = vector2();
-
-	updateMagnitude();
-	updateObjAcc();
 }
 
 force::force(physicalObject o)
 {
 	obj = o;
 	accelerationVector = vector2();
-	
 }
 
 force::force(vector2 v)

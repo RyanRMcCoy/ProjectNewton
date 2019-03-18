@@ -31,5 +31,6 @@
     <TestDuration Test="forceTest.objConstructor" Duration="1" />
     <TestDuration Test="forceTest.vectorConstructor" Duration="1" />
     <TestDuration Test="forceTest.fullConstructor" Duration="1" />
+    <TestDuration Test="physicalObjectTest.constructorFull" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

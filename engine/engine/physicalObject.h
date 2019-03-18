@@ -13,6 +13,7 @@ public:
 	physicalObject(vector2 position);
 	physicalObject(vector2 position, vector2 velocity);
 	physicalObject(vector2 position, vector2 velocity, vector2 acceleration);
+	physicalObject(vector2 pos, vector2 vel, vector2 acc, float m);
 
 	float getMass();
 	float setMass(float m);

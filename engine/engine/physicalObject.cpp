@@ -8,6 +8,8 @@ physicalObject::physicalObject()
 	position = vector2();
 	velocity = vector2();
 	acceleration = vector2();
+
+	mass = 1;
 }
 
 physicalObject::physicalObject(vector2 pos)
@@ -15,6 +17,8 @@ physicalObject::physicalObject(vector2 pos)
 	position = pos;
 	velocity = vector2();
 	acceleration = vector2();
+	
+	mass = 1;
 }
 
 physicalObject::physicalObject(vector2 pos, vector2 vel)
@@ -22,6 +26,8 @@ physicalObject::physicalObject(vector2 pos, vector2 vel)
 	position = pos;
 	velocity = vel;
 	acceleration = vector2();
+
+	mass = 1;
 }
 
 physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
@@ -29,6 +35,17 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 	position = pos;
 	velocity = vel;
 	acceleration = acc;
+
+	mass = 1;
+}
+
+physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc, float m)
+{
+	position = pos;
+	velocity = vel;
+	acceleration = acc;
+
+	mass = m;
 }
 
 float physicalObject::getMass()
