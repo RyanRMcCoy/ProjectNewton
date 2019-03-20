@@ -63,7 +63,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(-1.f, 0.f);
+				avatar.move(-5.f, 0.f);
 			}	
 		}	
 
@@ -77,7 +77,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(1.f, 0.f);
+				avatar.move(5.f, 0.f);
 			}
 		}
 
@@ -90,7 +90,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(0.f, -1.f);
+				avatar.move(0.f, -5.f);
 			}
 		}
 
@@ -103,8 +103,38 @@ int main()
 			}
 			else
 			{
-				avatar.move(0.f, 1.f);
+				avatar.move(0.f, 5.f);
 			}
+		}
+
+		/*
+		TO-DO
+		Error Checking on diagonal movement
+		Currently can go beyond the bounds 
+		*/
+
+		//move diagonally up/right
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			avatar.move(3.f, -3.f);
+		}
+
+		//move diagonally up/left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			avatar.move(-3.f, -3.f);
+		}
+
+		//move diagonally down/right
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			avatar.move(3.f, 3.f);
+		}
+
+		//move diagonally down/left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			avatar.move(-3.f, 3.f);
 		}
 
 		sf::Texture elon;
@@ -137,7 +167,7 @@ int main()
 		}
 
 		//quit the window
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			window.close();
 		}
