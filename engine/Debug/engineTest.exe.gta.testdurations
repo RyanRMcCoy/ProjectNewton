@@ -50,5 +50,7 @@
     <TestDuration Test="vector2Test.operatorProject" Duration="1" />
     <TestDuration Test="circleTest.intersectCircle" Duration="1" />
     <TestDuration Test="circleTest.intersectRect" Duration="1" />
+    <TestDuration Test="circleTest.getArea" Duration="1" />
+    <TestDuration Test="rectangleTest.getArea" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

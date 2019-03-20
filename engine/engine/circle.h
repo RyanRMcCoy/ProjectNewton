@@ -15,6 +15,8 @@ public:
 
 	float getRadius();
 	void  setRadius(float rad);
+
+	float getArea();
 };
 
 #endif // !CIRCLE_H

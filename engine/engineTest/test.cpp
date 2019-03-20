@@ -146,6 +146,11 @@ TEST(circleTest, setRadius) {
 	EXPECT_EQ(obj.getRadius(), 5);
 }
 
+TEST(circleTest, getArea) {
+	circle obj(5, vector2());
+	EXPECT_EQ(obj.getArea(), 3.14 * pow(5, 2));
+}
+
 //Start of Rectangle Tests
 TEST(rectangleTest, defaultConstructor) {
 	rectangle obj;
@@ -182,6 +187,12 @@ TEST(rectangleTest, setSideY) {
 	EXPECT_TRUE(obj.getPosition() == vector2(0, 3));
 	EXPECT_EQ(obj.getSideX(), 0);
 	EXPECT_EQ(obj.getSideY(), 6);
+}
+
+TEST(rectangleTest, getArea) {
+	rectangle obj(5, 5, vector2());
+
+	EXPECT_EQ(obj.getArea(), 25);
 }
 
 //Start of Vector2 Tests
