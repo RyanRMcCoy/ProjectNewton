@@ -57,21 +57,36 @@ int main()
 		//move the avatar left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			avatar.move(-1.f, 0.f);
-		}
+			if (avatar.getPosition().x <= 0)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else
+			{
+				avatar.move(-1.f, 0.f);
+			}	
+		}	
+
 
 		//move the avatar right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			avatar.move(1.f, 0.f);
+			if(avatar.getPosition().x >= 1740)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else
+			{
+				avatar.move(1.f, 0.f);
+			}
 		}
 
 		//move the avatar up
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			if (avatar.getPosition().y >= 540.f)
+			if (avatar.getPosition().y <= 400.f)
 			{
-				break;
+				avatar.move(0.f, 0.f);
 			}
 			else
 			{
@@ -82,7 +97,14 @@ int main()
 		//move the avatar down
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			avatar.move(0.f, 1.f);
+			if (avatar.getPosition().y >= 800)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else
+			{
+				avatar.move(0.f, 1.f);
+			}
 		}
 
 		//quit the window
