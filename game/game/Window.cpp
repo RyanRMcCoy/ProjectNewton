@@ -107,6 +107,35 @@ int main()
 			}
 		}
 
+		sf::Texture elon;
+		if (!elon.loadFromFile("img/elon.png"))
+		{
+			std::cout << "Elon Failed" << std::endl;
+			system("pause");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+						if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+							if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+								if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+										if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+											if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+												avatar.setTexture(elon);
+											}
+
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
 		//quit the window
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
