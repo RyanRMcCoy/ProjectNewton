@@ -57,7 +57,7 @@ bool overlapping(circle o1, circle o2)
 
 bool overlapping(circle o1, polygon o2)
 {
-
+	return false;
 }
 
 bool overlapping(polygon o1, circle o2)
@@ -67,7 +67,7 @@ bool overlapping(polygon o1, circle o2)
 
 bool overlapping(polygon o1, polygon o2)
 {
-
+	return false;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

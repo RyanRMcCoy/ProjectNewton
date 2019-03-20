@@ -32,5 +32,23 @@
     <TestDuration Test="forceTest.vectorConstructor" Duration="1" />
     <TestDuration Test="forceTest.fullConstructor" Duration="1" />
     <TestDuration Test="physicalObjectTest.constructorFull" Duration="1" />
+    <TestDuration Test="forceTest.setObj" Duration="1" />
+    <TestDuration Test="forceTest.setVector" Duration="1" />
+    <TestDuration Test="forceTest.SetMag" Duration="24" />
+    <TestDuration Test="forceTest.setMag" Duration="1" />
+    <TestDuration Test="vector2Test.operatorPlus" Duration="1" />
+    <TestDuration Test="vector2Test.operatorMinus" Duration="1" />
+    <TestDuration Test="vector2Test.operatorMultVector" Duration="1" />
+    <TestDuration Test="vector2Test.operatorMultFloat" Duration="1" />
+    <TestDuration Test="vector2Test.operatorDivVector" Duration="1" />
+    <TestDuration Test="vector2Test.operatorDivFloat" Duration="1" />
+    <TestDuration Test="vector2Test.operatorLesser" Duration="1" />
+    <TestDuration Test="vector2Test.operatorGreater" Duration="1" />
+    <TestDuration Test="vector2Test.operatorLesserEqual" Duration="1" />
+    <TestDuration Test="vector2Test.operatorGreaterEqual" Duration="1" />
+    <TestDuration Test="vector2Test.operatorDot" Duration="1" />
+    <TestDuration Test="vector2Test.operatorProject" Duration="1" />
+    <TestDuration Test="circleTest.intersectCircle" Duration="1" />
+    <TestDuration Test="circleTest.intersectRect" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

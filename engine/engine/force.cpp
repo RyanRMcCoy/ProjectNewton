@@ -34,7 +34,7 @@ force::force(physicalObject o, vector2 v)
 
 void force::updateMagnitude() 
 {
-	magnitude = sqrt(pow(accelerationVector.getX(), 2) + pow(accelerationVector.getY(), 2));
+	magnitude = accelerationVector.magnitude();
 }
 
 void force::updateObjAcc()
@@ -61,6 +61,7 @@ void force::setVector(vector2 v)
 {
 	accelerationVector = vector2(v.getX(), v.getY());
 	updateObjAcc();
+	updateMagnitude();
 }
 
 float force::getMagnitude()
@@ -70,6 +71,7 @@ float force::getMagnitude()
 
 void force::setMagnitude(float mag)
 {
-	accelerationVector = vector2(cos(mag), sin(mag));
-	accelerationVector.magnitude();
+	vector2 newVector = accelerationVector.unit() * mag;
+	
+	setVector(newVector);
 }
