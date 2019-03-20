@@ -10,6 +10,11 @@
 #include "polygon.h"
 using namespace std;
 
+bool overlapping(circle o1, circle o2);
+bool overlapping(circle o1, polygon o2);
+bool overlapping(polygon o1, circle o2);
+bool overlapping(polygon o1, polygon o2);
+
 int main()
 {
 	// Initialization
@@ -44,6 +49,26 @@ int main()
 	std::cin >> dt;
 }
 
+bool overlapping(circle o1, circle o2)
+{
+	return (o1.getPosition() - o2.getPosition()).magnitude() < 
+		o1.getRadius() + o2.getRadius();
+}
+
+bool overlapping(circle o1, polygon o2)
+{
+
+}
+
+bool overlapping(polygon o1, circle o2)
+{
+	return overlapping(o2, o1);
+}
+
+bool overlapping(polygon o1, polygon o2)
+{
+
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

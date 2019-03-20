@@ -15,9 +15,6 @@ public:
 
 	float getRadius();
 	void  setRadius(float rad);
-
-	bool intersect(circle o);
-	bool intersect(rectangle o);
 };
 
 #endif // !CIRCLE_H
