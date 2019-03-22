@@ -11,6 +11,7 @@ class physicalObject
 private:
 	vector2 position, velocity, acceleration;
 	float mass;
+	bool colliding;
 public:
 	physicalObject();
 	physicalObject(vector2 position);
@@ -20,6 +21,9 @@ public:
 
 	float getMass();
 	float setMass(float m);
+
+	bool getCollisionFlag(); // Temporary
+	void setCollisionFlag(bool flag); // Temporary
 
 	float getXpos();
 	float getYpos();

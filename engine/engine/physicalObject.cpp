@@ -9,6 +9,8 @@ physicalObject::physicalObject()
 	velocity = vector2();
 	acceleration = vector2();
 
+	colliding = false;
+
 	mass = 1;
 }
 
@@ -17,6 +19,8 @@ physicalObject::physicalObject(vector2 pos)
 	position = pos;
 	velocity = vector2();
 	acceleration = vector2();
+
+	colliding = false;
 	
 	mass = 1;
 }
@@ -27,6 +31,8 @@ physicalObject::physicalObject(vector2 pos, vector2 vel)
 	velocity = vel;
 	acceleration = vector2();
 
+	colliding = false;
+
 	mass = 1;
 }
 
@@ -36,6 +42,8 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 	velocity = vel;
 	acceleration = acc;
 
+	colliding = false;
+
 	mass = 1;
 }
 
@@ -44,6 +52,8 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc, float m)
 	position = pos;
 	velocity = vel;
 	acceleration = acc;
+
+	colliding = false;
 
 	mass = m;
 }
@@ -56,6 +66,16 @@ float physicalObject::getMass()
 float physicalObject::setMass(float m)
 {
 	return mass = m;
+}
+
+bool physicalObject::getCollisionFlag()
+{
+	return colliding;
+}
+
+void physicalObject::setCollisionFlag(bool flag)
+{
+	colliding = flag;
 }
 
 float physicalObject::getXpos()

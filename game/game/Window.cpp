@@ -1,5 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+/*
+//#include <vector>
+//#include "../../../../engine/engine/engine.h"
+//#include "../../../../engine/engine/vector2.h"
+//#include "../../../../engine/engine/physicalObject.h"
+//#include "../../../../engine/engine/circle.h"
+
+engine physicsEngine = engine();
+
+void doEvents()
+{
+	vector<physicalObject> objects = physicsEngine.getObjects();
+	for (physicalObject o : objects)
+	{
+		vector2 pos = o.getPosition();
+		sf::CircleShape object(sf::Vector2f(pos.getX(), pos.getY()))
+	}
+} 
+*/
 
 int main()
 {
@@ -35,7 +54,6 @@ int main()
 	//Make the avatar smaller and start them on the far left
 	avatar.setScale(.20f, .20f);
 	avatar.setPosition(20.f, 400.f);
-
 
 	while (window.isOpen())
 	{
