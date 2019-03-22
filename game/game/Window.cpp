@@ -153,6 +153,7 @@ int main()
 									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 										if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
 											if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+												std::cout << "ELON" << std::endl;
 												avatar.setTexture(elon);
 											}
 
