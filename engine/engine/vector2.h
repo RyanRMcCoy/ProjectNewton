@@ -3,7 +3,7 @@
 
 class vector2
 {
-protected:
+private:
 	float x, y;
 public:
 	vector2();
@@ -15,6 +15,7 @@ public:
 	float magnitude();
 	float dot(vector2 v);
 	vector2 unit();
+	vector2 perpendicular();
 	vector2 project(vector2 v);
 
 	vector2 operator + (vector2 v);

@@ -1,6 +1,8 @@
+#include "pch.h"
 #include "vector2.h"
 #include <cmath>
-#include "pch.h"
+
+using namespace std;
 
 vector2::vector2() : x(0), y(0) {}
 vector2::vector2(float xs, float ys) : x(xs), y(ys) {}
@@ -28,6 +30,11 @@ float vector2::dot(vector2 v)
 vector2 vector2::unit()
 {
 	return vector2(x, y) / magnitude();
+}
+
+vector2 vector2::perpendicular()
+{
+	return vector2(abs(y), abs(x));
 }
 
 vector2 vector2::project(vector2 v)

@@ -9,12 +9,14 @@
 #ifndef PCH_H
 #define PCH_H
 
+#include "engine.h"
 #include "physicalObject.h"
 #include "circle.h"
 #include "vector2.h"
 #include "rectangle.h"
 #include "polygon.h"
 #include "force.h"
+#include "satHandler.h"
 #include <cmath>
 
 #endif //PCH_H

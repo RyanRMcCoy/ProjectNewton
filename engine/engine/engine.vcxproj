@@ -72,6 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -151,7 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="aabbHandler.h" />
+    <ClInclude Include="engine.h" />
+    <ClInclude Include="satHandler.h" />
     <ClInclude Include="circle.h" />
     <ClInclude Include="force.h" />
     <ClInclude Include="pch.h" />
@@ -161,7 +163,8 @@
     <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="aabbHandler.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="satHandler.cpp" />
     <ClCompile Include="circle.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="force.cpp" />

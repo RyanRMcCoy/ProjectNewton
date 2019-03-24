@@ -15,7 +15,12 @@ polygon::polygon(int s) : sides(s), vertices(new vector2[s]) {}
 
 polygon::polygon(int s, vector2 v[]) : sides(s), vertices(v) {}
 
-vector2* polygon::getVertices()
+int polygon::numSides()
+{
+	return sides;
+}
+
+vector2 *polygon::getVertices()
 {
 	return vertices;
 }

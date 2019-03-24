@@ -1,6 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include <vector>
+
+#include "../../../../engine/engine/engine.h"
+#include "../../../../engine/engine/vector2.h"
+#include "../../../../engine/engine/physicalObject.h"
+#include "../../../../engine/engine/circle.h"
+
+engine physicsEngine = engine();
+
 int main()
 {
 	//Set bounds for the window
@@ -36,7 +45,6 @@ int main()
 	avatar.setScale(.20f, .20f);
 	avatar.setPosition(20.f, 700.f);
 
-
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -52,7 +60,26 @@ int main()
 		window.draw(ground);
 		window.draw(sun);
 		window.draw(avatar);
+
+		// Temp
+			/*
+			vector<circle> objects = physicsEngine.getCircles();
+			for (circle o : objects)
+			{
+				vector2 pos = o.getPosition();
+				sf::CircleShape object(10.f);
+				object.setPosition(sf::Vector2f(pos.getX(), pos.getY()));
+				if (o.getCollisionFlag())
+					object.setFillColor(sf::Color::Green);
+				else
+					object.setFillColor(sf::Color::Red);
+				window.draw(object);
+			}
+			*/
+		// Temp
+
 		window.display();
+
 
 		//move the avatar left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
