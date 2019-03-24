@@ -20,7 +20,7 @@ int polygon::numSides()
 	return sides;
 }
 
-vector2* polygon::getVertices()
+vector2 *polygon::getVertices()
 {
 	return vertices;
 }

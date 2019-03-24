@@ -1,11 +1,13 @@
 #pragma once
 
+#include "circle.h"
+#include "polygon.h"
 #include "vector2.h"
 
-class aabbHandler
+class satHandler
 {
 public:
-	aabbHandler();
+	satHandler();
 
 	vector2 overlapping(circle o1, circle o2);
 	vector2 overlapping(circle o1, polygon o2);
