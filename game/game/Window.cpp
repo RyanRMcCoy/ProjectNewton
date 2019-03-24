@@ -3,10 +3,10 @@
 
 #include <vector>
 
-#include "engine/engine.h"
-#include "engine/vector2.h"
-#include "engine/physicalObject.h"
-#include "engine/circle.h"
+#include "../../../../engine/engine/engine.h"
+#include "../../../../engine/engine/vector2.h"
+#include "../../../../engine/engine/physicalObject.h"
+#include "../../../../engine/engine/circle.h"
 
 engine physicsEngine = engine();
 
@@ -62,18 +62,20 @@ int main()
 		window.draw(avatar);
 
 		// Temp
-		vector<physicalObject> objects = physicsEngine.getObjects();
-		for (physicalObject o : objects)
-		{
-			vector2 pos = o.getPosition();
-			sf::CircleShape object(10.f);
-			object.setPosition(sf::Vector2f(pos.getX(), pos.getY()));
-			if (o.getCollisionFlag())
-				object.setFillColor(sf::Color::Green);
-			else
-				object.setFillColor(sf::Color::Red);
-			window.draw(object);
-		}
+			/*
+			vector<circle> objects = physicsEngine.getCircles();
+			for (circle o : objects)
+			{
+				vector2 pos = o.getPosition();
+				sf::CircleShape object(10.f);
+				object.setPosition(sf::Vector2f(pos.getX(), pos.getY()));
+				if (o.getCollisionFlag())
+					object.setFillColor(sf::Color::Green);
+				else
+					object.setFillColor(sf::Color::Red);
+				window.draw(object);
+			}
+			*/
 		// Temp
 
 		window.display();
