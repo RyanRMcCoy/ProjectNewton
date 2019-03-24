@@ -141,25 +141,85 @@ int main()
 		//move diagonally up/right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			avatar.move(3.f, -3.f);
+			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y <= 400.f)
+			{
+				avatar.move(5.f, 0.f);
+			}
+			else if (avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, -5.f);
+			}
+			else
+			{
+				avatar.move(2.f, -2.f);
+			}
 		}
 
 		//move diagonally up/left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			avatar.move(-3.f, -3.f);
+			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y <= 400.f)
+			{
+				avatar.move(-5.f, 0.f);
+			}
+			else if (avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, -5.f);
+			}
+			else
+			{
+				avatar.move(-2.f, -2.f);
+			}
 		}
 
 		//move diagonally down/right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			avatar.move(3.f, 3.f);
+			if (avatar.getPosition().y >= 800.f && avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y >= 800.f)
+			{
+				avatar.move(5.f, 0.f);
+			}
+			else if (avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, 5.f);
+			}
+			else
+			{
+				avatar.move(2.f, 2.f);
+			}
 		}
 
 		//move diagonally down/left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			avatar.move(-3.f, 3.f);
+			if (avatar.getPosition().y >= 800.f && avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y >= 800.f)
+			{
+				avatar.move(-5.f, 0.f);
+			}
+			else if (avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, 5.f);
+			}
+			else
+			{
+				avatar.move(-2.f, 2.f);
+			}
 		}
 
 		sf::Texture elon;
@@ -178,6 +238,7 @@ int main()
 									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 										if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
 											if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+												std::cout << "ELON" << std::endl;
 												avatar.setTexture(elon);
 											}
 
