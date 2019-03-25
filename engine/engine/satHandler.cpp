@@ -115,8 +115,9 @@ vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj
 vector2 satHandler::overlapping(circle o1, circle o2)
 {
 	vector2 overlap = o2.getPosition() - o1.getPosition();
-	if (overlap.magnitude() < o1.getRadius() + o2.getRadius())
-		return overlap;
+	float distance = overlap.magnitude() - (o1.getRadius() + o2.getRadius());
+	if (distance < 0)
+		return overlap.unit() * distance;
 	return vector2();
 }
 

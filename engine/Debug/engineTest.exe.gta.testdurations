@@ -52,5 +52,6 @@
     <TestDuration Test="circleTest.intersectRect" Duration="1" />
     <TestDuration Test="circleTest.getArea" Duration="1" />
     <TestDuration Test="rectangleTest.getArea" Duration="1" />
+    <TestDuration Test="satHandlerTest.circle_circle_Overlap" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
