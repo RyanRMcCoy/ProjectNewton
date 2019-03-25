@@ -19,7 +19,7 @@ float vector2::getY()
 
 float vector2::magnitude()
 {
-	return sqrt(x * x + y * y);
+	return sqrt((x * x) + (y * y));
 }
 
 float vector2::dot(vector2 v)

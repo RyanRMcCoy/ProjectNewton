@@ -8,21 +8,21 @@
 #include "../../../../engine/engine/physicalObject.h"
 #include "../../../../engine/engine/circle.h"
 
-engine physicsEngine = engine();
+//engine physicsEngine = engine();
 
 int main()
 {
 	//Set bounds for the window
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac", sf::Style::Fullscreen);
 
 	//Set bounds and color for sky
-	sf::RectangleShape sky(sf::Vector2f(1920.f, 540.f));
+	sf::RectangleShape sky(sf::Vector2f(1920.f, 880.f));
 	sky.setFillColor(sf::Color::Cyan);
 
 	//Set bounds and color for ground
-	sf::RectangleShape ground(sf::Vector2f(1920.f, 540.f));
+	sf::RectangleShape ground(sf::Vector2f(1920.f, 300.f));
 	ground.setFillColor(sf::Color::Green);
-	ground.setPosition(0.f, 540.f);
+	ground.setPosition(0.f, 780.f);
 
 	//Set position and color for sun
 	sf::CircleShape sun(200.f);
@@ -43,7 +43,13 @@ int main()
 
 	//Make the avatar smaller and start them on the far left
 	avatar.setScale(.20f, .20f);
-	avatar.setPosition(20.f, 400.f);
+	avatar.setPosition(20.f, 700.f);
+
+	//Enable VSync
+	window.setVerticalSyncEnabled(true);
+
+	//When a key is pressed, KeyPressed will only be true once
+	window.setKeyRepeatEnabled(false);
 
 	while (window.isOpen())
 	{
@@ -111,7 +117,7 @@ int main()
 		//move the avatar up
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			if (avatar.getPosition().y <= 400.f)
+			if (avatar.getPosition().y <= 650.f)
 			{
 				avatar.move(0.f, 0.f);
 			}
@@ -124,7 +130,7 @@ int main()
 		//move the avatar down
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (avatar.getPosition().y >= 800)
+			if (avatar.getPosition().y >= 880)
 			{
 				avatar.move(0.f, 0.f);
 			}
@@ -143,11 +149,11 @@ int main()
 		//move diagonally up/right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x >= 1740.f)
+			if (avatar.getPosition().y <= 650.f && avatar.getPosition().x >= 1740.f)
 			{
 				avatar.move(0.f, 0.f);
 			}
-			else if (avatar.getPosition().y <= 400.f)
+			else if (avatar.getPosition().y <= 650.f)
 			{
 				avatar.move(5.f, 0.f);
 			}
@@ -164,11 +170,11 @@ int main()
 		//move diagonally up/left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x <= 0.f)
+			if (avatar.getPosition().y <= 650.f && avatar.getPosition().x <= 0.f)
 			{
 				avatar.move(0.f, 0.f);
 			}
-			else if (avatar.getPosition().y <= 400.f)
+			else if (avatar.getPosition().y <= 650.f)
 			{
 				avatar.move(-5.f, 0.f);
 			}
@@ -223,36 +229,13 @@ int main()
 				avatar.move(-2.f, 2.f);
 			}
 		}
-
-		sf::Texture elon;
-		if (!elon.loadFromFile("img/elon.png"))
-		{
-			std::cout << "Elon Failed" << std::endl;
-			system("pause");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-						if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-							if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-								if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-										if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-											if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-												std::cout << "ELON" << std::endl;
-												avatar.setTexture(elon);
-											}
-
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		//sf::Sprite Elon;
+		//sf::Texture elonText;
+		//if (!elonText.loadFromFile("img/elon.png"))
+		//{
+		//	std::cout << "Elon Failed" << std::endl;
+		//	system("pause");
+		//}
 
 		//quit the window
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

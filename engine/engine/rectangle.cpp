@@ -47,3 +47,8 @@ void rectangle::setSideY(float len)
 	setPosition(sideLenX, len / 2);
 	sideLenY = len;
 }
+
+float rectangle::getArea()
+{
+	return sideLenX * sideLenY;
+}

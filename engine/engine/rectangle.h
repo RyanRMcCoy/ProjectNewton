@@ -17,6 +17,8 @@ public:
 	float getSideY();
 	void  setSideX(float len);
 	void  setSideY(float len);
+
+	float getArea();
 };
 
 #endif // !RECTANGLE_H

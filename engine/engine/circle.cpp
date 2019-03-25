@@ -27,3 +27,8 @@ void circle::setRadius(float rad)
 {
 	radius = rad;
 }
+
+float circle::getArea()
+{
+	return 3.14 * pow(radius, 2);
+}
