@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Executable>C:\Users\ryanr\source\repos\ProjectNewton\engine\Debug\engineTest.exe</Executable>
+  <Executable>C:\Users\tacom\source\repos\RyanRMcCoy\ProjectNewton\engine\Debug\engineTest.exe</Executable>
   <TestDurations>
     <TestDuration Test="TestCaseName.TestName" Duration="1" />
     <TestDuration Test="physicalObjectTest.deaultConstructor" Duration="1" />
