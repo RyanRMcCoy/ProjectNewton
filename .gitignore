@@ -12,6 +12,7 @@
 
 # Build results
 [Dd]ebugPublic/
+[Dd]ebug/
 [Rr]elease/
 [Rr]eleases/
 x64/
@@ -257,3 +258,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/game/game/Debug/game.tlog/unsuccessfulbuild
+/game/game/Debug/game.tlog/link-rc.write.1.tlog
+/game/game/Debug/game.tlog/link-rc.read.1.tlog
+/game/game/Debug/game.tlog/link-cvtres.write.1.tlog
+/game/game/Debug/game.tlog/link-cvtres.read.1.tlog
