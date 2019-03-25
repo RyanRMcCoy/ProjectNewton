@@ -1,34 +1,36 @@
-#include "vector2.h"
-#include "physicalObject.h"
-#include "aabbHandler.h"
-#include "engine.h"
-#include <ctime>
+// engine.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
 
+#include "pch.h"
+#include <iostream>
+#include "physicalObject.h"
+#include "vector2.h"
+#include "circle.h"
+#include "rectangle.h"
+#include "polygon.h"
 using namespace std;
 
-engine::engine() {
-	collisionHandler = aabbHandler();
-}
-
-void engine::addObject(physicalObject o)
+int main()
 {
-	objects.push_back(o);
-}
+	// Initialization
+	bool running = true;
+	float dt;
 
-vector<physicalObject> engine::getObjects()
-{
-	return objects;
-}
+	// while loop for execution bounded by time delta
+	while (running)
+	{
 
-void engine::update()
-{
-	float dt = lastUpdate - clock();
-	lastUpdate += dt;
+		running = false; // temporary obviously
+	}
+
+	vector2 v(10, 10);
+	v = v * 10;
+	cout << "(" << v.getX() << ", " << v.getY() << ")" << endl;
 
 	vector2 vertices[3] = { vector2(5, 10), vector2(2, 2), vector2(12, 2) };
 	polygon p(3, vertices);
 	cout << "Vertex 1: (" << p.getVertices()[0].getX() << ", " << p.getVertices()[0].getY() << ")" << endl;
-	
+
 	rectangle firstRect(10, 10);
 	std::cout << firstRect.getXpos() << endl;
 	std::cout << firstRect.getSideX() << endl;
@@ -40,27 +42,6 @@ void engine::update()
 	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
 
 	std::cin >> dt;
-}
-
-bool overlapping(circle o1, circle o2)
-{
-	return (o1.getPosition() - o2.getPosition()).magnitude() < 
-		o1.getRadius() + o2.getRadius();
-}
-
-bool overlapping(circle o1, polygon o2)
-{
-	return false;
-}
-
-bool overlapping(polygon o1, circle o2)
-{
-	return overlapping(o2, o1);
-}
-
-bool overlapping(polygon o1, polygon o2)
-{
-	return false;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

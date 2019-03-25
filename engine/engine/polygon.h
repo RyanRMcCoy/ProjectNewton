@@ -10,5 +10,6 @@ public:
 	polygon(int s);
 	polygon(int s, vector2 v[]);
 
+	int numSides();
 	vector2* getVertices();
 };
