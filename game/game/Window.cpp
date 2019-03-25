@@ -8,7 +8,7 @@
 #include "../../../../engine/engine/physicalObject.h"
 #include "../../../../engine/engine/circle.h"
 
-engine physicsEngine = engine();
+//engine physicsEngine = engine();
 
 int main()
 {
@@ -44,6 +44,12 @@ int main()
 	//Make the avatar smaller and start them on the far left
 	avatar.setScale(.20f, .20f);
 	avatar.setPosition(20.f, 700.f);
+
+	//Enable VSync
+	window.setVerticalSyncEnabled(true);
+
+	//When a key is pressed, KeyPressed will only be true once
+	window.setKeyRepeatEnabled(false);
 
 	while (window.isOpen())
 	{
@@ -111,7 +117,7 @@ int main()
 		//move the avatar up
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			if (avatar.getPosition().y <= 400.f)
+			if (avatar.getPosition().y <= 650.f)
 			{
 				avatar.move(0.f, 0.f);
 			}
@@ -143,11 +149,11 @@ int main()
 		//move diagonally up/right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x >= 1740.f)
+			if (avatar.getPosition().y <= 650.f && avatar.getPosition().x >= 1740.f)
 			{
 				avatar.move(0.f, 0.f);
 			}
-			else if (avatar.getPosition().y <= 400.f)
+			else if (avatar.getPosition().y <= 650.f)
 			{
 				avatar.move(5.f, 0.f);
 			}
@@ -164,11 +170,11 @@ int main()
 		//move diagonally up/left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x <= 0.f)
+			if (avatar.getPosition().y <= 650.f && avatar.getPosition().x <= 0.f)
 			{
 				avatar.move(0.f, 0.f);
 			}
-			else if (avatar.getPosition().y <= 400.f)
+			else if (avatar.getPosition().y <= 650.f)
 			{
 				avatar.move(-5.f, 0.f);
 			}
