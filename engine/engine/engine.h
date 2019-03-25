@@ -1,16 +1,25 @@
+#pragma once
+
 #include <vector>
+#include "satHandler.h"
+#include "physicalObject.h"
+#include "circle.h"
+#include "polygon.h"
 
 class engine
 {
 private:
 	float lastUpdate;
 
-	vector<physicalObject> objects;
-	aabbHandler collisionHandler;
+	vector<circle> circles;
+	vector<polygon> polygons;
+	satHandler collisionHandler;
 public:
 	engine();
 
-	void addObject(physicalObject o);
-	vector<physicalObject> getObjects();
+	void addCircle(circle o);
+	void addPolygon(polygon o);
+	vector<circle> getCircles();
+	vector<polygon> getPolygons();
 	void update();
 };

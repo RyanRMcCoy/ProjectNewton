@@ -1,38 +1,28 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-/*
-//#include <vector>
-//#include "../../../../engine/engine/engine.h"
-//#include "../../../../engine/engine/vector2.h"
-//#include "../../../../engine/engine/physicalObject.h"
-//#include "../../../../engine/engine/circle.h"
+
+#include <vector>
+
+#include "../../../../engine/engine/engine.h"
+#include "../../../../engine/engine/vector2.h"
+#include "../../../../engine/engine/physicalObject.h"
+#include "../../../../engine/engine/circle.h"
 
 engine physicsEngine = engine();
-
-void doEvents()
-{
-	vector<physicalObject> objects = physicsEngine.getObjects();
-	for (physicalObject o : objects)
-	{
-		vector2 pos = o.getPosition();
-		sf::CircleShape object(sf::Vector2f(pos.getX(), pos.getY()))
-	}
-} 
-*/
 
 int main()
 {
 	//Set bounds for the window
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac", sf::Style::Fullscreen);
 
 	//Set bounds and color for sky
-	sf::RectangleShape sky(sf::Vector2f(1920.f, 540.f));
+	sf::RectangleShape sky(sf::Vector2f(1920.f, 880.f));
 	sky.setFillColor(sf::Color::Cyan);
 
 	//Set bounds and color for ground
-	sf::RectangleShape ground(sf::Vector2f(1920.f, 540.f));
+	sf::RectangleShape ground(sf::Vector2f(1920.f, 300.f));
 	ground.setFillColor(sf::Color::Green);
-	ground.setPosition(0.f, 540.f);
+	ground.setPosition(0.f, 780.f);
 
 	//Set position and color for sun
 	sf::CircleShape sun(200.f);
@@ -53,7 +43,7 @@ int main()
 
 	//Make the avatar smaller and start them on the far left
 	avatar.setScale(.20f, .20f);
-	avatar.setPosition(20.f, 400.f);
+	avatar.setPosition(20.f, 700.f);
 
 	while (window.isOpen())
 	{
@@ -70,7 +60,26 @@ int main()
 		window.draw(ground);
 		window.draw(sun);
 		window.draw(avatar);
+
+		// Temp
+			/*
+			vector<circle> objects = physicsEngine.getCircles();
+			for (circle o : objects)
+			{
+				vector2 pos = o.getPosition();
+				sf::CircleShape object(10.f);
+				object.setPosition(sf::Vector2f(pos.getX(), pos.getY()));
+				if (o.getCollisionFlag())
+					object.setFillColor(sf::Color::Green);
+				else
+					object.setFillColor(sf::Color::Red);
+				window.draw(object);
+			}
+			*/
+		// Temp
+
 		window.display();
+
 
 		//move the avatar left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -115,7 +124,7 @@ int main()
 		//move the avatar down
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (avatar.getPosition().y >= 800)
+			if (avatar.getPosition().y >= 880)
 			{
 				avatar.move(0.f, 0.f);
 			}
@@ -134,55 +143,93 @@ int main()
 		//move diagonally up/right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			avatar.move(3.f, -3.f);
+			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y <= 400.f)
+			{
+				avatar.move(5.f, 0.f);
+			}
+			else if (avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, -5.f);
+			}
+			else
+			{
+				avatar.move(2.f, -2.f);
+			}
 		}
 
 		//move diagonally up/left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			avatar.move(-3.f, -3.f);
+			if (avatar.getPosition().y <= 400.f && avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y <= 400.f)
+			{
+				avatar.move(-5.f, 0.f);
+			}
+			else if (avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, -5.f);
+			}
+			else
+			{
+				avatar.move(-2.f, -2.f);
+			}
 		}
 
 		//move diagonally down/right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			avatar.move(3.f, 3.f);
+			if (avatar.getPosition().y >= 800.f && avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y >= 800.f)
+			{
+				avatar.move(5.f, 0.f);
+			}
+			else if (avatar.getPosition().x >= 1740.f)
+			{
+				avatar.move(0.f, 5.f);
+			}
+			else
+			{
+				avatar.move(2.f, 2.f);
+			}
 		}
 
 		//move diagonally down/left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			avatar.move(-3.f, 3.f);
-		}
-
-		sf::Texture elon;
-		if (!elon.loadFromFile("img/elon.png"))
-		{
-			std::cout << "Elon Failed" << std::endl;
-			system("pause");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-						if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-							if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-								if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-										if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-											if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-												avatar.setTexture(elon);
-											}
-
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+			if (avatar.getPosition().y >= 800.f && avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, 0.f);
+			}
+			else if (avatar.getPosition().y >= 800.f)
+			{
+				avatar.move(-5.f, 0.f);
+			}
+			else if (avatar.getPosition().x <= 0.f)
+			{
+				avatar.move(0.f, 5.f);
+			}
+			else
+			{
+				avatar.move(-2.f, 2.f);
 			}
 		}
+		//sf::Sprite Elon;
+		//sf::Texture elonText;
+		//if (!elonText.loadFromFile("img/elon.png"))
+		//{
+		//	std::cout << "Elon Failed" << std::endl;
+		//	system("pause");
+		//}
 
 		//quit the window
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

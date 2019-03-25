@@ -1,9 +1,9 @@
 #include <limits>
 #include "pch.h"
-#include "aabbHandler.h"
+#include "satHandler.h"
 #include "vector2.h"
 
-aabbHandler::aabbHandler() {}
+satHandler::satHandler() {}
 
 const float maxFloat = numeric_limits<float>::max();
 
@@ -32,6 +32,7 @@ vector2 getMinProjection(int n, vector2 *vertices, vector2 projectionAxis)
 			}
 		}
 	}
+	return minProjection;
 }
 
 vector2 getMaxProjection(int n, vector2 *vertices, vector2 projectionAxis)
@@ -59,6 +60,7 @@ vector2 getMaxProjection(int n, vector2 *vertices, vector2 projectionAxis)
 			}
 		}
 	}
+	return maxProjection;
 }
 
 /*
@@ -68,7 +70,7 @@ vector2 getMaxProjection(int n, vector2 *vertices, vector2 projectionAxis)
 vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj, vector2 o2MaxProj)
 {
 	// Primitive representations of vector projections (for simpler math)
-	int v11(0), v12(0), v21(0), v22(0), vRef;
+	float v11(0), v12(0), v21(0), v22(0);
 
 	// This checks to make sure that the x dimension is not 0
 	if ((o1MinProj.getX() != 0 && o1MinProj.getX() != o1MaxProj.getX()) ||
@@ -110,7 +112,7 @@ vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj
 	return vector2(maxFloat, 0);
 }
 
-vector2 aabbHandler::overlapping(circle o1, circle o2)
+vector2 satHandler::overlapping(circle o1, circle o2)
 {
 	vector2 overlap = o2.getPosition() - o1.getPosition();
 	if (overlap.magnitude() < o1.getRadius() + o2.getRadius())
@@ -126,10 +128,10 @@ vector2 aabbHandler::overlapping(circle o1, circle o2)
 	Possibly check whether x is 0, and if so then substitute y in for x to avoid writing
 	different chunks of code.
 */
-vector2 aabbHandler::overlapping(circle o1, polygon o2)
+vector2 satHandler::overlapping(circle o1, polygon o2)
 {
 	int n = o2.numSides();
-	vector2 *vertices = o2.getVertices;
+	vector2 *vertices = o2.getVertices();
 
 	float minOverlapMag = maxFloat;
 	vector2 minOverlap; // Direction for o1 to move "out" of o2
@@ -163,17 +165,17 @@ vector2 aabbHandler::overlapping(circle o1, polygon o2)
 	return minOverlap;
 }
 
-vector2 aabbHandler::overlapping(polygon o1, circle o2)
+vector2 satHandler::overlapping(polygon o1, circle o2)
 {
 	return this->overlapping(o2, o1);
 }
 
-vector2 aabbHandler::overlapping(polygon o1, polygon o2)
+vector2 satHandler::overlapping(polygon o1, polygon o2)
 {
 	int n1 = o1.numSides();
-	vector2 *vertices1 = o1.getVertices;
+	vector2 *vertices1 = o1.getVertices();
 	int n2 = o2.numSides();
-	vector2 *vertices2 = o2.getVertices;
+	vector2 *vertices2 = o2.getVertices();
 
 	float minOverlapMag = maxFloat;
 	vector2 minOverlap; // Direction for o1 to move "out" of o2

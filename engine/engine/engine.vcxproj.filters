@@ -9,7 +9,8 @@
     <ClCompile Include="vector2.cpp" />
     <ClCompile Include="polygon.cpp" />
     <ClCompile Include="force.cpp" />
-    <ClCompile Include="aabbHandler.cpp" />
+    <ClCompile Include="satHandler.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
@@ -19,6 +20,7 @@
     <ClInclude Include="rectangle.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="force.h" />
-    <ClInclude Include="aabbHandler.h" />
+    <ClInclude Include="satHandler.h" />
+    <ClInclude Include="engine.h" />
   </ItemGroup>
 </Project>

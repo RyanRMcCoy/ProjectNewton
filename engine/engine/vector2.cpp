@@ -1,6 +1,6 @@
+#include "pch.h"
 #include "vector2.h"
 #include <cmath>
-#include "pch.h"
 
 using namespace std;
 
