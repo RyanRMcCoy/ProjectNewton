@@ -141,7 +141,6 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 	{
 		// Projection axes are normals(perps) of each side of polygon
 		vector2 projectionAxis = (vertices[(i + 1) % n] - vertices[i]).perpendicular().unit();
-		vector2 reference = vertices[i].project(projectionAxis);
 
 		// Get the projections for each shape onto the projectionAxis
 		vector2 o1Proj = o1.getPosition().project(projectionAxis);
@@ -185,7 +184,6 @@ vector2 satHandler::overlapping(polygon o1, polygon o2)
 	{
 		// Projection axes are normals(perps) of each side of polygon
 		vector2 projectionAxis = (vertices1[(i + 1) % n1] - vertices1[i]).perpendicular().unit();
-		vector2 reference = vertices1[i].project(projectionAxis);
 
 		// Get the projections for each shape onto the projectionAxis
 		vector2 o1Proj = o1.getPosition().project(projectionAxis);
@@ -210,7 +208,6 @@ vector2 satHandler::overlapping(polygon o1, polygon o2)
 	{
 		// Projection axes are normals(perps) of each side of polygon
 		vector2 projectionAxis = (vertices2[(i + 1) % n2] - vertices2[i]).perpendicular().unit();
-		vector2 reference = vertices2[i].project(projectionAxis);
 
 		// Get the projections for each shape onto the projectionAxis
 		vector2 o1Proj = o1.getPosition().project(projectionAxis);

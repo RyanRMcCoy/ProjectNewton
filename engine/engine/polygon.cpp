@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <iterator>
 #include "pch.h"
 #include "polygon.h"
 #include "vector2.h"
@@ -9,11 +11,38 @@
 	set of triangles and determining the individual centroids and taking the weighted mean of them all.
 */
 
-polygon::polygon() {}
+using namespace std;
 
-polygon::polygon(int s) : sides(s), vertices(new vector2[s]) {}
+polygon::polygon() : sides(3), vertices(new vector2[3]), relativeVertices(new vector2[3])
+{
+	setPosition(vector2());
+}
 
-polygon::polygon(int s, vector2 v[]) : sides(s), vertices(v) {}
+polygon::polygon(int s) : sides(s), vertices(new vector2[s]), relativeVertices(new vector2[s])
+{
+	setPosition(vector2());
+}
+
+polygon::polygon(int s, vector2 v[]) : sides(s), vertices(new vector2[s]), relativeVertices(new vector2[s])
+{
+	copy(v, v + s, relativeVertices);
+	setPosition(vector2());
+}
+
+polygon::polygon(int s, vector2 v[], vector2 pos) : sides(s), vertices(new vector2[s]), relativeVertices(new vector2[s])
+{
+	copy(v, v + s, relativeVertices);
+	setPosition(pos);
+}
+
+void polygon::setPosition(vector2 pos)
+{
+	__super::setPosition(pos);
+	for (int i = 0; i < sides; i++)
+	{
+		vertices[i] = pos + relativeVertices[i];
+	}
+}
 
 int polygon::numSides()
 {
