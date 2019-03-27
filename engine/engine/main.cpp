@@ -19,7 +19,6 @@ int main()
 	// while loop for execution bounded by time delta
 	while (running)
 	{
-
 		running = false; // temporary obviously
 	}
 

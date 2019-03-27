@@ -2,7 +2,6 @@
 #include "vector2.h"
 #include "pch.h"
 
-
 physicalObject::physicalObject()
 {
 	position = vector2();

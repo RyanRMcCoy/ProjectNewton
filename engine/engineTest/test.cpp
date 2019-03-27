@@ -360,3 +360,11 @@ TEST(forceTest, setMag) {
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
+
+// Start of satHandler tests
+TEST(satHandlerTest, circle_circle_Overlap) {
+	satHandler collisionHandler;
+	circle c1(5, vector2());
+	circle c2(5, vector2(4, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(1, 0));
+}

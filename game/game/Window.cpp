@@ -10,10 +10,24 @@
 
 //engine physicsEngine = engine();
 
+void left(sf::Sprite& sprite, float speed) {
+	std::cout << "move left" << std::endl;
+	sprite.move(-speed, 0.f);
+}
+void right(sf::Sprite& sprite, float speed) {
+	sprite.move(speed, 0.f);
+}
+void up(sf::Sprite& sprite, float speed) {
+	sprite.move(0.f, -speed);
+}
+void down(sf::Sprite& sprite, float speed) {
+	sprite.move(0.f, speed);
+}
+
 int main()
 {
-	//Set bounds for the window
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac", sf::Style::Fullscreen);
+	//Set bounds for the window , sf::Style::Fullscreen
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac");
 
 	//Set bounds and color for sky
 	sf::RectangleShape sky(sf::Vector2f(1920.f, 880.f));
@@ -45,11 +59,7 @@ int main()
 	avatar.setScale(.20f, .20f);
 	avatar.setPosition(20.f, 700.f);
 
-	//Enable VSync
-	window.setVerticalSyncEnabled(true);
 
-	//When a key is pressed, KeyPressed will only be true once
-	window.setKeyRepeatEnabled(false);
 
 	while (window.isOpen())
 	{
@@ -59,6 +69,12 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+
+		//Enable VSync
+		window.setVerticalSyncEnabled(true);
+
+		//When a key is pressed, KeyPressed will only be true once
+		window.setKeyRepeatEnabled(false);
 
 		//draw the objects
 		window.clear();
@@ -82,7 +98,7 @@ int main()
 				window.draw(object);
 			}
 			*/
-		// Temp
+			// Temp
 
 		window.display();
 
@@ -96,21 +112,21 @@ int main()
 			}
 			else
 			{
-				avatar.move(-5.f, 0.f);
-			}	
-		}	
+				left(avatar, 5.f);
+			}
+		}
 
 
 		//move the avatar right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if(avatar.getPosition().x >= 1740)
+			if (avatar.getPosition().x >= 1740)
 			{
 				avatar.move(0.f, 0.f);
 			}
 			else
 			{
-				avatar.move(5.f, 0.f);
+				right(avatar, 5.f);
 			}
 		}
 
@@ -123,7 +139,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(0.f, -5.f);
+				up(avatar, 5.f);
 			}
 		}
 
@@ -136,14 +152,14 @@ int main()
 			}
 			else
 			{
-				avatar.move(0.f, 5.f);
+				down(avatar, 5.f);
 			}
 		}
 
 		/*
 		TO-DO
 		Error Checking on diagonal movement
-		Currently can go beyond the bounds 
+		Currently can go beyond the bounds
 		*/
 
 		//move diagonally up/right
@@ -229,13 +245,15 @@ int main()
 				avatar.move(-2.f, 2.f);
 			}
 		}
-		//sf::Sprite Elon;
-		//sf::Texture elonText;
-		//if (!elonText.loadFromFile("img/elon.png"))
-		//{
-		//	std::cout << "Elon Failed" << std::endl;
-		//	system("pause");
-		//}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			if (!textureApple.loadFromFile("img/elon.png"))
+			{
+				std::cout << "Elon Failed" << std::endl;
+				system("pause");
+			}
+			avatar.setTexture(textureApple);
+		}
 
 		//quit the window
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
