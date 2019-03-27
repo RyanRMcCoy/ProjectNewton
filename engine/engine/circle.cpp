@@ -5,17 +5,35 @@
 circle::circle()
 {
 	radius = 0;
+
+	density = 0;
+	updateMass();
 }
 
 circle::circle(float rad)
 {
 	radius = rad;
+
+	density = 1;
+	updateMass();
 }
 
 circle::circle(float rad, vector2 pos)
 {
 	setPosition(pos.getX(), pos.getY());
 	radius = rad;
+
+	density = 1;
+	updateMass();
+}
+
+circle::circle(float rad, vector2 pos, float d)
+{
+	setPosition(pos.getX(), pos.getY());
+	radius = rad;
+
+	density = d;
+	updateMass();
 }
 
 float circle::getRadius()
@@ -30,5 +48,35 @@ void circle::setRadius(float rad)
 
 float circle::getArea()
 {
-	return 3.14 * pow(radius, 2);
+	return (float) 3.14 * pow(radius, 2);
+}
+
+float circle::getMass()
+{
+	return mass;
+}
+
+float circle::setMass(float m)
+{
+	return mass = m;
+}
+
+float circle::getDensity()
+{
+	return density;
+}
+
+float circle::setDensity(float d)
+{
+	return density = d;
+}
+
+void circle::updateMass()
+{
+	mass = density * getArea();
+}
+
+void circle::updateDensity()
+{
+	density = mass / getArea();
 }

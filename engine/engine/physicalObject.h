@@ -10,19 +10,16 @@ class physicalObject
 {
 private:
 	vector2 position, velocity, acceleration;
-	float mass;
 	bool colliding;
+protected:
+	float mass;
 	float density;
 public:
 	physicalObject();
 	physicalObject(vector2 position);
 	physicalObject(vector2 position, vector2 velocity);
 	physicalObject(vector2 position, vector2 velocity, vector2 acceleration);
-	physicalObject(vector2 pos, vector2 vel, vector2 acc, float d);
-
-	float getMass();
-	float setMass(float m);
-
+	
 	bool getCollisionFlag(); // Temporary
 	void setCollisionFlag(bool flag); // Temporary
 
@@ -42,6 +39,9 @@ public:
 	void setVelocity(float x, float y);
 	void setAcceleration(vector2 acc);
 	void setAcceleration(float x, float y);
+
+	float getMass();
+	float getDensity();
 
 	bool operator == (physicalObject o);
 };

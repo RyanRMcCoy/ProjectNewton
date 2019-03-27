@@ -4,7 +4,7 @@
 
 force::force()
 {
-	obj = physicalObject();
+	obj = circle();
 	accelerationVector = vector2();
 }
 
@@ -16,7 +16,7 @@ force::force(physicalObject o)
 
 force::force(vector2 v)
 {
-	obj = physicalObject();
+	obj = circle(1);
 	accelerationVector = v;
 
 	updateMagnitude();
@@ -39,7 +39,7 @@ void force::updateMagnitude()
 
 void force::updateObjAcc()
 {
-	obj.setAcceleration(accelerationVector / obj.getMass());
+	obj.setAcceleration(accelerationVector);
 }
 
 physicalObject force::getObj()

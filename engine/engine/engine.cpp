@@ -6,7 +6,7 @@
 #include <ctime>
 
 using namespace std;
-
+/*
 engine::engine() {
 	collisionHandler = satHandler();
 }
@@ -117,3 +117,4 @@ bool overlapping(polygon o1, polygon o2)
 		}
 	}
 }
+*/
