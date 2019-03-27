@@ -161,7 +161,7 @@ TEST(rectangleTest, defaultConstructor) {
 
 TEST(rectangleTest, constructorRad) {
 	rectangle obj(6, 6);
-	EXPECT_TRUE(obj.getPosition() == vector2(3, 3));
+	EXPECT_TRUE(obj.getPosition() == vector2(0, 0));
 	EXPECT_EQ(obj.getSideX(), 6);
 	EXPECT_EQ(obj.getSideY(), 6);
 }
@@ -407,70 +407,60 @@ TEST(satHandlerTest, circle_circle_NoOverlap) {
 	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(0, 0));
 }
 
-// Start of SatHandler circle-polygon tests
+// Start of SatHandler circle-rectangle tests
 TEST(satHandlerTest, rectangle_circle_Overlap) {
 	satHandler collisionHandler;
 	circle c(5, vector2());
-	vector2 vertices[4] = {vector2(-5, -5), vector2(5, -5), vector2(5, 5), vector2(-5, 5)};
-	polygon p(4, vertices, vector2(5, 0));
-	EXPECT_TRUE(collisionHandler.overlapping(c, p) == vector2(-5, 0));
+	rectangle r(vector2(10, 10), vector2(5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(-5, 0));
 }
 
 TEST(satHandlerTest, rectangle_circle_Overlap2) {
 	satHandler collisionHandler;
 	circle c(1, vector2());
-	vector2 vertices[4] = {vector2(-1, -1), vector2(1, -1), vector2(1, 1), vector2(-1, 1)};
-	polygon p(4, vertices, vector2());
-	EXPECT_TRUE(collisionHandler.overlapping(c, p) == vector2(0, 2));
+	rectangle r(vector2(2, 2), vector2());
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 2));
 }
 
 TEST(satHandlerTest, rectangle_circle_Touch) {
 	satHandler collisionHandler;
 	circle c(1, vector2(0, -6));
-	vector2 vertices[4] = {vector2(-5, -5), vector2(5, -5), vector2(5, 5), vector2(-5, 5)};
-	polygon p(4, vertices, vector2(0, -12));
-	EXPECT_TRUE(collisionHandler.overlapping(c, p) == vector2(0, 0));
+	rectangle r(vector2(10, 10), vector2(0, -12));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 0));
 }
 
 TEST(satHandlerTest, rectangle_circle_NoOverlap) {
 	satHandler collisionHandler;
 	circle c(50, vector2(1000, 0));
-	vector2 vertices[4] = { vector2(-50, -50), vector2(50, -50), vector2(50, 50), vector2(-50, 50) };
-	polygon p(4, vertices, vector2(0, -2500));
-	EXPECT_TRUE(collisionHandler.overlapping(c, p) == vector2(0, 0));
+	rectangle r(vector2(100, 100), vector2(0, -2500));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 0));
 }
 
-// Start of SatHandler polygon-polygon tests
+// Start of SatHandler rectangle-rectangle tests
 TEST(satHandlerTest, rectangle_rectangle_Overlap) {
 	satHandler collisionHandler;
-	vector2 vertices[4] = {vector2(-5, -5), vector2(5, -5), vector2(5, 5), vector2(-5, 5)};
-	polygon p1(4, vertices, vector2(5, 0));
-	polygon p2(4, vertices, vector2(0, 0));
-	EXPECT_TRUE(collisionHandler.overlapping(p1, p2) == vector2(5, 0));
+	rectangle r1(vector2(10, 10), vector2(5, 0));
+	rectangle r2(vector2(10, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(5, 0));
 }
 
 TEST(satHandlerTest, rectangle_rectangle_Overlap2) {
 	satHandler collisionHandler;
-	vector2 vertices1[4] = {vector2(-5, -5), vector2(5, -5), vector2(5, 5), vector2(-5, 5)};
-	vector2 vertices2[4] = {vector2(-10, -5), vector2(10, -5), vector2(10, 5), vector2(-10, 5)};
-	polygon p1(4, vertices1, vector2(0, 0));
-	polygon p2(4, vertices2, vector2(5, 0));
-	EXPECT_TRUE(collisionHandler.overlapping(p1, p2) == vector2(0, 10));
+	rectangle r1(vector2(10, 10));
+	rectangle r2(vector2(20, 10), vector2(5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 10));
 }
 
 TEST(satHandlerTest, rectangle_rectangle_Touch) {
 	satHandler collisionHandler;
-	vector2 vertices1[4] = { vector2(-5, -5), vector2(5, -5), vector2(5, 5), vector2(-5, 5) };
-	vector2 vertices2[4] = { vector2(-10, -5), vector2(10, -5), vector2(10, 5), vector2(-10, 5) };
-	polygon p1(4, vertices1, vector2(0, 0));
-	polygon p2(4, vertices2, vector2(5, 10));
-	EXPECT_TRUE(collisionHandler.overlapping(p1, p2) == vector2(0, 0));
+	rectangle r1(vector2(10, 10));
+	rectangle r2(vector2(20, 10), vector2(5, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
 }
 
 TEST(satHandlerTest, rectangle_rectangle_NoOverlap) {
 	satHandler collisionHandler;
-	vector2 vertices[4] = { vector2(-5, -5), vector2(5, -5), vector2(5, 5), vector2(-5, 5) };
-	polygon p1(4, vertices, vector2(500, 0));
-	polygon p2(4, vertices, vector2(0, 0));
-	EXPECT_TRUE(collisionHandler.overlapping(p1, p2) == vector2(0, 0));
+	rectangle r1(vector2(10, 10), vector2(500, 0));
+	rectangle r2(vector2(10, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
 }

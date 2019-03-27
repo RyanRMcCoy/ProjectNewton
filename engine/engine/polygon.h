@@ -16,4 +16,5 @@ public:
 
 	int numSides();
 	vector2* getVertices();
+	void setVertices(vector2 v[]);
 };

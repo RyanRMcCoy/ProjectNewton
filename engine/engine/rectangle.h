@@ -2,8 +2,9 @@
 #define RECTANGLE_H
 
 #include "physicalObject.h"
+#include "polygon.h"
 
-class rectangle : public physicalObject
+class rectangle : public polygon
 {
 private:
 	float sideLenX;
@@ -11,7 +12,9 @@ private:
 public:
 	rectangle();
 	rectangle(float lenX, float lenY);
+	rectangle(vector2 size);
 	rectangle(float lenX, float lenY, vector2 pos);
+	rectangle(vector2 size, vector2 pos);
 
 	float getSideX();
 	float getSideY();
