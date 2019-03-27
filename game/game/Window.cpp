@@ -10,6 +10,20 @@
 
 //engine physicsEngine = engine();
 
+void left(sf::Sprite& sprite, float speed) {
+	std::cout << "move left" << std::endl;
+	sprite.move(-speed, 0.f);
+}
+void right(sf::Sprite& sprite, float speed) {
+	sprite.move(speed, 0.f);
+}
+void up(sf::Sprite& sprite, float speed) {
+	sprite.move(0.f, -speed);
+}
+void down(sf::Sprite& sprite, float speed) {
+	sprite.move(0.f, speed);
+}
+
 int main()
 {
 	//Set bounds for the window , sf::Style::Fullscreen
@@ -98,7 +112,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(-5.f, 0.f);
+				left(avatar, 5.f);
 			}
 		}
 
@@ -112,7 +126,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(5.f, 0.f);
+				right(avatar, 5.f);
 			}
 		}
 
@@ -125,7 +139,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(0.f, -5.f);
+				up(avatar, 5.f);
 			}
 		}
 
@@ -138,7 +152,7 @@ int main()
 			}
 			else
 			{
-				avatar.move(0.f, 5.f);
+				down(avatar, 5.f);
 			}
 		}
 
