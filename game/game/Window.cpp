@@ -11,17 +11,91 @@
 //engine physicsEngine = engine();
 
 void left(sf::Sprite& sprite, float speed) {
-	std::cout << "move left" << std::endl;
-	sprite.move(-speed, 0.f);
+	if (sprite.getPosition().x <= 0)
+	{
+		sprite.move(0.f, 0.f);
+	}
+	else {
+		sprite.move(-speed, 0.f);
+	}
 }
 void right(sf::Sprite& sprite, float speed) {
-	sprite.move(speed, 0.f);
+	if (sprite.getPosition().x + sprite.getGlobalBounds().width >= 1920)
+	{
+		sprite.move(0.f, 0.f);
+	}
+	else
+	{
+		sprite.move(speed, 0.f);
+	}
 }
 void up(sf::Sprite& sprite, float speed) {
-	sprite.move(0.f, -speed);
+	if (sprite.getPosition().y <= 650.f)
+	{
+		sprite.move(0.f, 0.f);
+	}
+	else
+	{
+		sprite.move(0.f, -speed);
+	}
 }
+
 void down(sf::Sprite& sprite, float speed) {
-	sprite.move(0.f, speed);
+	if (sprite.getPosition().y + sprite.getGlobalBounds().height >= 1080)
+	{
+		sprite.move(0.f, 0.f);
+	}
+	else
+	{
+		sprite.move(0.f, speed);
+	}
+}
+
+void upRight(sf::Sprite& sprite, float speed) {
+	if (sprite.getPosition().y <= 650 && sprite.getPosition().x + sprite.getGlobalBounds().width >= 1920)
+	{
+		sprite.move(0.f, 0.f);
+	}
+	else if (sprite.getPosition().y <= 650.f)
+	{
+		right(sprite, speed);
+	}
+	else if (sprite.getPosition().x + sprite.getGlobalBounds().width >= 1920)
+	{
+		up(sprite, speed);
+	}
+	else
+	{
+		sprite.move(speed/2.f, speed/2.f);
+	}
+}
+
+void upLeft(sf::Sprite& sprite, float speed) {
+	if (sprite.getPosition().y <= 650.f && sprite.getPosition().x <= 0.f)
+	{
+		sprite.move(0.f, 0.f);
+	}
+	else if (sprite.getPosition().y <= 650.f)
+	{
+		left(sprite, speed);
+	}
+	else if (sprite.getPosition().x <= 0.f)
+	{
+		up(sprite, speed);
+	}
+	else
+	{
+		sprite.move(-speed/2.f, -speed/2.f);
+	}
+}
+
+//TO-DO
+void downRight(sf::Sprite& sprite, float speed) {
+
+}
+//TO-DO
+void downLeft(sf::Sprite& sprite, float speed) {
+
 }
 
 int main()
@@ -59,7 +133,7 @@ int main()
 	avatar.setScale(.20f, .20f);
 	avatar.setPosition(20.f, 700.f);
 
-
+	std::cout << avatar.getGlobalBounds().width << std::endl;
 
 	while (window.isOpen())
 	{
@@ -104,105 +178,24 @@ int main()
 
 
 		//move the avatar left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		{
-			if (avatar.getPosition().x <= 0)
-			{
-				avatar.move(0.f, 0.f);
-			}
-			else
-			{
-				left(avatar, 5.f);
-			}
-		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { left(avatar, 5.f);  }
 
 
 		//move the avatar right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			if (avatar.getPosition().x >= 1740)
-			{
-				avatar.move(0.f, 0.f);
-			}
-			else
-			{
-				right(avatar, 5.f);
-			}
-		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { right(avatar, 5.f); }
 
 		//move the avatar up
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		{
-			if (avatar.getPosition().y <= 650.f)
-			{
-				avatar.move(0.f, 0.f);
-			}
-			else
-			{
-				up(avatar, 5.f);
-			}
-		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { up(avatar, 5.f); }
 
 		//move the avatar down
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			if (avatar.getPosition().y >= 880)
-			{
-				avatar.move(0.f, 0.f);
-			}
-			else
-			{
-				down(avatar, 5.f);
-			}
-		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { down(avatar, 5.f); }
 
-		/*
-		TO-DO
-		Error Checking on diagonal movement
-		Currently can go beyond the bounds
-		*/
 
 		//move diagonally up/right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			if (avatar.getPosition().y <= 650.f && avatar.getPosition().x >= 1740.f)
-			{
-				avatar.move(0.f, 0.f);
-			}
-			else if (avatar.getPosition().y <= 650.f)
-			{
-				avatar.move(5.f, 0.f);
-			}
-			else if (avatar.getPosition().x >= 1740.f)
-			{
-				avatar.move(0.f, -5.f);
-			}
-			else
-			{
-				avatar.move(2.f, -2.f);
-			}
-		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D)){ upRight(avatar, 5.f); }
 
 		//move diagonally up/left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		{
-			if (avatar.getPosition().y <= 650.f && avatar.getPosition().x <= 0.f)
-			{
-				avatar.move(0.f, 0.f);
-			}
-			else if (avatar.getPosition().y <= 650.f)
-			{
-				avatar.move(-5.f, 0.f);
-			}
-			else if (avatar.getPosition().x <= 0.f)
-			{
-				avatar.move(0.f, -5.f);
-			}
-			else
-			{
-				avatar.move(-2.f, -2.f);
-			}
-		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)){ upLeft(avatar, 5.f); }
 
 		//move diagonally down/right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
