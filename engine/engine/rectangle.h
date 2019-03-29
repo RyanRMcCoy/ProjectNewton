@@ -15,6 +15,7 @@ public:
 	rectangle(vector2 size);
 	rectangle(float lenX, float lenY, vector2 pos);
 	rectangle(vector2 size, vector2 pos);
+	rectangle(float lenX, float lenY, vector2 pos, float d);
 
 	float getSideX();
 	float getSideY();
@@ -22,6 +23,15 @@ public:
 	void  setSideY(float len);
 
 	float getArea();
+
+	float getMass();
+	float setMass(float m);
+
+	float getDensity();
+	float setDensity(float d);
+
+	void updateMass();
+	void updateDensity();
 };
 
 #endif // !RECTANGLE_H

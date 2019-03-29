@@ -40,7 +40,7 @@ TEST(physicalObjectTest, constructorPosVel) {
 	EXPECT_EQ(obj.getYacc(), 0);
 }
 
-TEST(physicalObjectTest, constructorPosVelAcc) {
+TEST(physicalObjectTest, constructorFull) {
 	physicalObject obj(vector2(5, 5), vector2(3, 2), vector2(1, 3));
 	EXPECT_TRUE(obj.getPosition() == vector2(5, 5));
 	EXPECT_EQ(obj.getXpos(), 5);
@@ -51,20 +51,6 @@ TEST(physicalObjectTest, constructorPosVelAcc) {
 	EXPECT_TRUE(obj.getAcceleration() == vector2(1, 3));
 	EXPECT_EQ(obj.getXacc(), 1);
 	EXPECT_EQ(obj.getYacc(), 3);
-}
-
-TEST(physicalObjectTest, constructorFull) {
-	physicalObject obj(vector2(5, 5), vector2(3, 2), vector2(1, 3), 6);
-	EXPECT_TRUE(obj.getPosition() == vector2(5, 5));
-	EXPECT_EQ(obj.getXpos(), 5);
-	EXPECT_EQ(obj.getYpos(), 5);
-	EXPECT_TRUE(obj.getVelocity() == vector2(3, 2));
-	EXPECT_EQ(obj.getXvel(), 3);
-	EXPECT_EQ(obj.getYvel(), 2);
-	EXPECT_TRUE(obj.getAcceleration() == vector2(1, 3));
-	EXPECT_EQ(obj.getXacc(), 1);
-	EXPECT_EQ(obj.getYacc(), 3);
-	EXPECT_EQ(obj.getMass(), 6);
 }
 
 TEST(physicalObjectTest, setPosTest) {
@@ -115,10 +101,14 @@ TEST(physicalObjectTest, setAccVectorTest) {
 	EXPECT_EQ(obj.getYacc(), 5);
 }
 
-TEST(physicalObjectTest, massTest) {
+TEST(physicalObjectTest, massGetterTest) {
 	physicalObject obj;
-	obj.setMass(5);
-	EXPECT_EQ(obj.getMass(), 5);
+	EXPECT_EQ(obj.getMass(), 0);
+}
+
+TEST(physicalObjectTest, densityGetterTest) {
+	physicalObject obj;
+	EXPECT_EQ(obj.getDensity(), 0);
 }
 
 //Start of circle tests
@@ -326,38 +316,40 @@ TEST(vector2Test, operatorProject) {
 //Start of Force Tests
 TEST(forceTest, defaultConstructor) {
 	force obj;
-	EXPECT_TRUE(obj.getObj() == physicalObject());
+	EXPECT_TRUE(obj.getObj() == circle());
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
 TEST(forceTest, objConstructor) {
-	force obj(physicalObject(vector2(5, 5)));
-	EXPECT_TRUE(obj.getObj() == physicalObject(vector2(5, 5)));
+	force obj(circle(2, vector2(5, 5)));
+	EXPECT_TRUE(obj.getObj() == circle(2, vector2(5, 5)));
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
 TEST(forceTest, vectorConstructor) {
 	force obj(vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() == 
-		physicalObject(vector2(), vector2(), vector2(3, 4) / obj.getObj().getMass()));
+	circle target(1);
+	target.setAcceleration(vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == target);
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
 TEST(forceTest, fullConstructor) {
-	force obj(physicalObject(vector2(5, 5)), vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() == 
-		physicalObject(vector2(5, 5), vector2(), vector2(3, 4) / obj.getObj().getMass()));
+	force  obj(circle(2, vector2(5, 5)), vector2(3, 4));
+	circle target = circle(2, vector2(5, 5));
+	target.setAcceleration(vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == target);
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
 TEST(forceTest, setObj) {
 	force obj;
-	obj.setObj(physicalObject(vector2(5, 5)));
-	EXPECT_TRUE(obj.getObj() == physicalObject(vector2(5, 5)));
+	obj.setObj(circle(2, vector2(5, 5)));
+	EXPECT_TRUE(obj.getObj() == circle(2, vector2(5, 5)));
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
@@ -365,8 +357,9 @@ TEST(forceTest, setObj) {
 TEST(forceTest, setVector) {
 	force obj;
 	obj.setVector(vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() ==
-		physicalObject(vector2(), vector2(), vector2(3, 4) / obj.getObj().getMass()));
+	circle target = circle();
+	target.setAcceleration(vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == target);
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
