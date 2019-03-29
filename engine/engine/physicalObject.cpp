@@ -8,6 +8,9 @@ physicalObject::physicalObject()
 	velocity = vector2();
 	acceleration = vector2();
 
+	mass = 0;
+	density = 0;
+
 	colliding = false;
 }
 
@@ -17,14 +20,21 @@ physicalObject::physicalObject(vector2 pos)
 	velocity = vector2();
 	acceleration = vector2();
 
+	mass = 0;
+	density = 0;
+
 	colliding = false;
-	}
+}
 
 physicalObject::physicalObject(vector2 pos, vector2 vel)
 {
 	position = pos;
 	velocity = vel;
 	acceleration = vector2();
+
+
+	mass = 0;
+	density = 0;
 
 	colliding = false;
 }
@@ -34,6 +44,9 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 	position = pos;
 	velocity = vel;
 	acceleration = acc;
+
+	mass = 0;
+	density = 0;
 
 	colliding = false;
 }

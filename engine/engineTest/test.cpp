@@ -101,6 +101,16 @@ TEST(physicalObjectTest, setAccVectorTest) {
 	EXPECT_EQ(obj.getYacc(), 5);
 }
 
+TEST(physicalObjectTest, massGetterTest) {
+	physicalObject obj;
+	EXPECT_EQ(obj.getMass(), 0);
+}
+
+TEST(physicalObjectTest, densityGetterTest) {
+	physicalObject obj;
+	EXPECT_EQ(obj.getDensity(), 0);
+}
+
 //Start of circle tests
 TEST(circleTest, defaultConstructor) {
 	circle obj;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Executable>C:\Users\tacom\source\repos\RyanRMcCoy\ProjectNewton\engine\Debug\engineTest.exe</Executable>
+  <Executable>C:\Users\ryanr\source\repos\ProjectNewton\engine\Debug\engineTest.exe</Executable>
   <TestDurations>
     <TestDuration Test="TestCaseName.TestName" Duration="1" />
     <TestDuration Test="physicalObjectTest.deaultConstructor" Duration="1" />
@@ -53,5 +53,7 @@
     <TestDuration Test="circleTest.getArea" Duration="1" />
     <TestDuration Test="rectangleTest.getArea" Duration="1" />
     <TestDuration Test="satHandlerTest.circle_circle_Overlap" Duration="1" />
+    <TestDuration Test="physicalObjectTest.massGetterTest" Duration="1" />
+    <TestDuration Test="physicalObjectTest.densityGetterTest" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
