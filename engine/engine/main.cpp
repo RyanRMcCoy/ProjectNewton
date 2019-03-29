@@ -1,25 +1,37 @@
-// engine.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// main.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include "pch.h"
-#include <iostream>
+#include "engine.h"
 #include "physicalObject.h"
 #include "vector2.h"
 #include "circle.h"
 #include "rectangle.h"
 #include "polygon.h"
+#include <iostream>
+
 using namespace std;
 
 int main()
 {
 	// Initialization
+	engine physicsEngine;
+
 	bool running = true;
-	float dt;
+
+	circle circ1(10, vector2());
+	circ1.setVelocity(vector2(2, 0));
+	rectangle rect1(vector2(10, 5), vector2());
+
+	physicsEngine.addCircle(circ1);
+	physicsEngine.addPolygon(rect1);
 
 	// while loop for execution bounded by time delta
 	while (running)
 	{
-		running = false; // temporary obviously
+		physicsEngine.update();
+		if (circ1.getPosition().getX() > 10)
+			running = false;
 	}
 
 	vector2 v(10, 10);
@@ -39,8 +51,6 @@ int main()
 	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
 	circ.setVelocity(9, 3);
 	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
-
-	std::cin >> dt;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -5,6 +5,8 @@
 #include "engine.h"
 #include <ctime>
 
+#include <iostream>
+
 using namespace std;
 /*
 engine::engine() {
@@ -37,10 +39,18 @@ void engine::update()
 	lastUpdate += dt;
 
 	for (circle o : circles)
+	{
 		o.setCollisionFlag(false);
+		o.setPosition(o.getPosition() + o.getVelocity() * dt);
+		o.setVelocity(o.getVelocity() + o.getAcceleration() * dt);
+	}
 
 	for (polygon o : polygons)
+	{
 		o.setCollisionFlag(false);
+		o.setPosition(o.getPosition() + o.getVelocity() * dt);
+		o.setVelocity(o.getVelocity() + o.getAcceleration() * dt);
+	}
 
 	for (unsigned int i = 0; i < circles.size() + polygons.size(); i++)
 	{
@@ -53,6 +63,8 @@ void engine::update()
 					polygons.at(i).setCollisionFlag(true); // This is a really bad way of doing this
 					polygons.at(i).setCollisionFlag(true); // just for testing tho
 				}
+				if (!(overlap == vector2()))
+					cout << "Overlap: (" << overlap.getX() << ", " << overlap.getY() << ")\n";
 			}
 		for (unsigned int j = circles.size() - 1; j > i; j--)
 		{
@@ -66,6 +78,8 @@ void engine::update()
 				circles.at(i).setCollisionFlag(true); // This is a really bad way of doing this
 				circles.at(i).setCollisionFlag(true); // just for testing tho
 			}
+			if (!(overlap == vector2()))
+				cout << "Overlap: (" << overlap.getX() << ", " << overlap.getY() << ")\n";
 		}
 	}
 }*/

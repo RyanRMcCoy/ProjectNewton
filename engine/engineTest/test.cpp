@@ -151,7 +151,7 @@ TEST(rectangleTest, defaultConstructor) {
 
 TEST(rectangleTest, constructorRad) {
 	rectangle obj(6, 6);
-	EXPECT_TRUE(obj.getPosition() == vector2(3, 3));
+	EXPECT_TRUE(obj.getPosition() == vector2(0, 0));
 	EXPECT_EQ(obj.getSideX(), 6);
 	EXPECT_EQ(obj.getSideY(), 6);
 }
@@ -371,10 +371,89 @@ TEST(forceTest, setMag) {
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
-// Start of satHandler tests
+// Start of SatHandler circle tests
 TEST(satHandlerTest, circle_circle_Overlap) {
 	satHandler collisionHandler;
 	circle c1(5, vector2());
-	circle c2(5, vector2(4, 0));
-	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(1, 0));
+	circle c2(5, vector2(9, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(-1, 0));
+}
+
+TEST(satHandlerTest, circle_circle_Overlap2) {
+	satHandler collisionHandler;
+	circle c1(5, vector2());
+	circle c2(5, vector2(-5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(5, 0));
+}
+
+TEST(satHandlerTest, circle_circle_Touch) {
+	satHandler collisionHandler;
+	circle c1(15, vector2());
+	circle c2(15, vector2(0, 30));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(0, 0));
+}
+
+TEST(satHandlerTest, circle_circle_NoOverlap) {
+	satHandler collisionHandler;
+	circle c1(5, vector2());
+	circle c2(5, vector2(0, 11));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(0, 0));
+}
+
+// Start of SatHandler circle-rectangle tests
+TEST(satHandlerTest, rectangle_circle_Overlap) {
+	satHandler collisionHandler;
+	circle c(5, vector2());
+	rectangle r(vector2(10, 10), vector2(5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(-5, 0));
+}
+
+TEST(satHandlerTest, rectangle_circle_Overlap2) {
+	satHandler collisionHandler;
+	circle c(1, vector2());
+	rectangle r(vector2(2, 2), vector2());
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 2));
+}
+
+TEST(satHandlerTest, rectangle_circle_Touch) {
+	satHandler collisionHandler;
+	circle c(1, vector2(0, -6));
+	rectangle r(vector2(10, 10), vector2(0, -12));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 0));
+}
+
+TEST(satHandlerTest, rectangle_circle_NoOverlap) {
+	satHandler collisionHandler;
+	circle c(50, vector2(1000, 0));
+	rectangle r(vector2(100, 100), vector2(0, -2500));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 0));
+}
+
+// Start of SatHandler rectangle-rectangle tests
+TEST(satHandlerTest, rectangle_rectangle_Overlap) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10), vector2(5, 0));
+	rectangle r2(vector2(10, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(5, 0));
+}
+
+TEST(satHandlerTest, rectangle_rectangle_Overlap2) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10));
+	rectangle r2(vector2(20, 10), vector2(5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 10));
+}
+
+TEST(satHandlerTest, rectangle_rectangle_Touch) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10));
+	rectangle r2(vector2(20, 10), vector2(5, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
+}
+
+TEST(satHandlerTest, rectangle_rectangle_NoOverlap) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10), vector2(500, 0));
+	rectangle r2(vector2(10, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
 }
