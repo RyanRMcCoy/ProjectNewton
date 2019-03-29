@@ -111,6 +111,26 @@ TEST(physicalObjectTest, densityGetterTest) {
 	EXPECT_EQ(obj.getDensity(), 0);
 }
 
+//Start of material properties tests 
+TEST(materialTest, circleDensityConstruct) {
+	circle obj(4, vector2(0, 0), 2);
+	EXPECT_EQ(round(obj.getMass()), 100);
+}
+
+TEST(materialTest, circleSetDensity) {
+	circle obj(4, vector2(0, 0));
+	EXPECT_EQ(round(obj.getMass()), 50);
+	obj.setDensity(2);
+	EXPECT_EQ(round(obj.getMass()), 100);
+}
+
+TEST(materialTest, circleSetMass) {
+	circle obj(4, vector2(0, 0));
+	EXPECT_EQ(round(obj.getMass()), 50);
+	obj.setMass(100.48);
+	EXPECT_EQ(obj.getDensity(), 2);
+}
+
 //Start of circle tests
 TEST(circleTest, defaultConstructor) {
 	circle obj;

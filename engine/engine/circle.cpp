@@ -58,7 +58,9 @@ float circle::getMass()
 
 float circle::setMass(float m)
 {
-	return mass = m;
+	mass = m;
+	updateDensity();
+	return mass;
 }
 
 float circle::getDensity()
@@ -68,7 +70,9 @@ float circle::getDensity()
 
 float circle::setDensity(float d)
 {
-	return density = d;
+	density = d;
+	updateMass();
+	return density;
 }
 
 void circle::updateMass()

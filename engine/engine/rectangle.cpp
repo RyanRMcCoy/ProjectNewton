@@ -17,7 +17,7 @@ rectangle::rectangle(float lenX, float lenY) : polygon(4)
 	float halfY = lenY / 2;
 	vector2 vertices[4] = {vector2(-halfX, -halfY), vector2(halfX, -halfY), vector2(halfX, halfY), vector2(-halfX, halfY)};
 	setVertices(vertices);
-	setPosition(0, 0);
+	
 
 	density = 0;
 	updateMass();
@@ -46,8 +46,6 @@ rectangle::rectangle(float lenX, float lenY, vector2 pos) : polygon(4)
 	vector2 vertices[4] = {vector2(-halfX, -halfY), vector2(halfX, -halfY), vector2(halfX, halfY), vector2(-halfX, halfY)};
 	setVertices(vertices);
 	
-	setPosition(lenX / 2, lenY / 2);
-
 	density = 1;
 	updateMass();
 }
@@ -63,8 +61,7 @@ rectangle::rectangle(vector2 size, vector2 pos)
 	float halfY = sideLenY / 2;
 	vector2 vertices[4] = { vector2(-halfX, -halfY), vector2(halfX, -halfY), vector2(halfX, halfY), vector2(-halfX, halfY) };
 	setVertices(vertices);
-	setPosition(pos.getX(), pos.getY());
-
+	
 	density = 1;
 	updateMass();
 }
@@ -73,8 +70,6 @@ rectangle::rectangle(float lenX, float lenY, vector2 pos, float d)
 {
 	sideLenX = lenX;
 	sideLenY = lenY;
-
-	setPosition(pos.getX(), pos.getY());
 
 	density = d;
 	updateMass();
