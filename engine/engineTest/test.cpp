@@ -40,7 +40,7 @@ TEST(physicalObjectTest, constructorPosVel) {
 	EXPECT_EQ(obj.getYacc(), 0);
 }
 
-TEST(physicalObjectTest, constructorPosVelAcc) {
+TEST(physicalObjectTest, constructorFull) {
 	physicalObject obj(vector2(5, 5), vector2(3, 2), vector2(1, 3));
 	EXPECT_TRUE(obj.getPosition() == vector2(5, 5));
 	EXPECT_EQ(obj.getXpos(), 5);
@@ -51,20 +51,6 @@ TEST(physicalObjectTest, constructorPosVelAcc) {
 	EXPECT_TRUE(obj.getAcceleration() == vector2(1, 3));
 	EXPECT_EQ(obj.getXacc(), 1);
 	EXPECT_EQ(obj.getYacc(), 3);
-}
-
-TEST(physicalObjectTest, constructorFull) {
-	physicalObject obj(vector2(5, 5), vector2(3, 2), vector2(1, 3), 6);
-	EXPECT_TRUE(obj.getPosition() == vector2(5, 5));
-	EXPECT_EQ(obj.getXpos(), 5);
-	EXPECT_EQ(obj.getYpos(), 5);
-	EXPECT_TRUE(obj.getVelocity() == vector2(3, 2));
-	EXPECT_EQ(obj.getXvel(), 3);
-	EXPECT_EQ(obj.getYvel(), 2);
-	EXPECT_TRUE(obj.getAcceleration() == vector2(1, 3));
-	EXPECT_EQ(obj.getXacc(), 1);
-	EXPECT_EQ(obj.getYacc(), 3);
-	EXPECT_EQ(obj.getMass(), 6);
 }
 
 TEST(physicalObjectTest, setPosTest) {
@@ -115,10 +101,14 @@ TEST(physicalObjectTest, setAccVectorTest) {
 	EXPECT_EQ(obj.getYacc(), 5);
 }
 
-TEST(physicalObjectTest, massTest) {
+TEST(physicalObjectTest, massGetterTest) {
 	physicalObject obj;
-	obj.setMass(5);
-	EXPECT_EQ(obj.getMass(), 5);
+	EXPECT_EQ(obj.getMass(), 0);
+}
+
+TEST(physicalObjectTest, densityGetterTest) {
+	physicalObject obj;
+	EXPECT_EQ(obj.getDensity(), 0);
 }
 
 //Start of circle tests
@@ -161,7 +151,7 @@ TEST(rectangleTest, defaultConstructor) {
 
 TEST(rectangleTest, constructorRad) {
 	rectangle obj(6, 6);
-	EXPECT_TRUE(obj.getPosition() == vector2(3, 3));
+	EXPECT_TRUE(obj.getPosition() == vector2(0, 0));
 	EXPECT_EQ(obj.getSideX(), 6);
 	EXPECT_EQ(obj.getSideY(), 6);
 }
@@ -326,38 +316,40 @@ TEST(vector2Test, operatorProject) {
 //Start of Force Tests
 TEST(forceTest, defaultConstructor) {
 	force obj;
-	EXPECT_TRUE(obj.getObj() == physicalObject());
+	EXPECT_TRUE(obj.getObj() == circle());
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
 TEST(forceTest, objConstructor) {
-	force obj(physicalObject(vector2(5, 5)));
-	EXPECT_TRUE(obj.getObj() == physicalObject(vector2(5, 5)));
+	force obj(circle(2, vector2(5, 5)));
+	EXPECT_TRUE(obj.getObj() == circle(2, vector2(5, 5)));
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
 TEST(forceTest, vectorConstructor) {
 	force obj(vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() == 
-		physicalObject(vector2(), vector2(), vector2(3, 4) / obj.getObj().getMass()));
+	circle target(1);
+	target.setAcceleration(vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == target);
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
 TEST(forceTest, fullConstructor) {
-	force obj(physicalObject(vector2(5, 5)), vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() == 
-		physicalObject(vector2(5, 5), vector2(), vector2(3, 4) / obj.getObj().getMass()));
+	force  obj(circle(2, vector2(5, 5)), vector2(3, 4));
+	circle target = circle(2, vector2(5, 5));
+	target.setAcceleration(vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == target);
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
 TEST(forceTest, setObj) {
 	force obj;
-	obj.setObj(physicalObject(vector2(5, 5)));
-	EXPECT_TRUE(obj.getObj() == physicalObject(vector2(5, 5)));
+	obj.setObj(circle(2, vector2(5, 5)));
+	EXPECT_TRUE(obj.getObj() == circle(2, vector2(5, 5)));
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
@@ -365,8 +357,9 @@ TEST(forceTest, setObj) {
 TEST(forceTest, setVector) {
 	force obj;
 	obj.setVector(vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() ==
-		physicalObject(vector2(), vector2(), vector2(3, 4) / obj.getObj().getMass()));
+	circle target = circle();
+	target.setAcceleration(vector2(3, 4));
+	EXPECT_TRUE(obj.getObj() == target);
 	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
@@ -378,10 +371,89 @@ TEST(forceTest, setMag) {
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
-// Start of satHandler tests
+// Start of SatHandler circle tests
 TEST(satHandlerTest, circle_circle_Overlap) {
 	satHandler collisionHandler;
 	circle c1(5, vector2());
-	circle c2(5, vector2(4, 0));
-	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(1, 0));
+	circle c2(5, vector2(9, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(-1, 0));
+}
+
+TEST(satHandlerTest, circle_circle_Overlap2) {
+	satHandler collisionHandler;
+	circle c1(5, vector2());
+	circle c2(5, vector2(-5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(5, 0));
+}
+
+TEST(satHandlerTest, circle_circle_Touch) {
+	satHandler collisionHandler;
+	circle c1(15, vector2());
+	circle c2(15, vector2(0, 30));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(0, 0));
+}
+
+TEST(satHandlerTest, circle_circle_NoOverlap) {
+	satHandler collisionHandler;
+	circle c1(5, vector2());
+	circle c2(5, vector2(0, 11));
+	EXPECT_TRUE(collisionHandler.overlapping(c1, c2) == vector2(0, 0));
+}
+
+// Start of SatHandler circle-rectangle tests
+TEST(satHandlerTest, rectangle_circle_Overlap) {
+	satHandler collisionHandler;
+	circle c(5, vector2());
+	rectangle r(vector2(10, 10), vector2(5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(-5, 0));
+}
+
+TEST(satHandlerTest, rectangle_circle_Overlap2) {
+	satHandler collisionHandler;
+	circle c(1, vector2());
+	rectangle r(vector2(2, 2), vector2());
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 2));
+}
+
+TEST(satHandlerTest, rectangle_circle_Touch) {
+	satHandler collisionHandler;
+	circle c(1, vector2(0, -6));
+	rectangle r(vector2(10, 10), vector2(0, -12));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 0));
+}
+
+TEST(satHandlerTest, rectangle_circle_NoOverlap) {
+	satHandler collisionHandler;
+	circle c(50, vector2(1000, 0));
+	rectangle r(vector2(100, 100), vector2(0, -2500));
+	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 0));
+}
+
+// Start of SatHandler rectangle-rectangle tests
+TEST(satHandlerTest, rectangle_rectangle_Overlap) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10), vector2(5, 0));
+	rectangle r2(vector2(10, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(5, 0));
+}
+
+TEST(satHandlerTest, rectangle_rectangle_Overlap2) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10));
+	rectangle r2(vector2(20, 10), vector2(5, 0));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 10));
+}
+
+TEST(satHandlerTest, rectangle_rectangle_Touch) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10));
+	rectangle r2(vector2(20, 10), vector2(5, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
+}
+
+TEST(satHandlerTest, rectangle_rectangle_NoOverlap) {
+	satHandler collisionHandler;
+	rectangle r1(vector2(10, 10), vector2(500, 0));
+	rectangle r2(vector2(10, 10));
+	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
 }

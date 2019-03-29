@@ -8,7 +8,7 @@
 #include "../../../../engine/engine/physicalObject.h"
 #include "../../../../engine/engine/circle.h"
 
-//engine physicsEngine = engine();
+engine physicsEngine = engine();
 
 void left(sf::Sprite& sprite, float speed) {
 	if (sprite.getPosition().x <= 0)
@@ -182,7 +182,7 @@ int main()
 		window.draw(avatar);
 
 		// Temp
-			/*
+			
 			vector<circle> objects = physicsEngine.getCircles();
 			for (circle o : objects)
 			{
@@ -195,7 +195,7 @@ int main()
 					object.setFillColor(sf::Color::Red);
 				window.draw(object);
 			}
-			*/
+			
 			// Temp
 
 		window.display();
