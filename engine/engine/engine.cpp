@@ -8,7 +8,7 @@
 #include <iostream>
 
 using namespace std;
-/*
+
 engine::engine() {
 	collisionHandler = satHandler();
 }
@@ -82,7 +82,7 @@ void engine::update()
 				cout << "Overlap: (" << overlap.getX() << ", " << overlap.getY() << ")\n";
 		}
 	}
-}*/
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
