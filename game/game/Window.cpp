@@ -8,7 +8,7 @@
 #include "../../../../engine/engine/physicalObject.h"
 #include "../../../../engine/engine/circle.h"
 
-engine physicsEngine = engine();
+//engine physicsEngine = engine();
 
 void left(sf::Sprite& sprite, float speed) {
 	if (sprite.getPosition().x <= 0)
@@ -125,7 +125,7 @@ void downLeft(sf::Sprite& sprite, float speed) {
 int main()
 {
 	//Set bounds for the window , sf::Style::Fullscreen
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sir Issac", sf::Style::Fullscreen);
 
 	//Set bounds and color for sky
 	sf::RectangleShape sky(sf::Vector2f(1920.f, 880.f));
@@ -182,7 +182,7 @@ int main()
 		window.draw(avatar);
 
 		// Temp
-			
+			/*
 			vector<circle> objects = physicsEngine.getCircles();
 			for (circle o : objects)
 			{
@@ -194,7 +194,7 @@ int main()
 				else
 					object.setFillColor(sf::Color::Red);
 				window.draw(object);
-			}
+			}*/
 			
 			// Temp
 

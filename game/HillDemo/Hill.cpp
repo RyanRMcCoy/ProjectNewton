@@ -2,9 +2,22 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Hill Demo", sf::Style::Fullscreen);
+	
+	sf::ConvexShape ground;
+	ground.setFillColor(sf::Color::Green);
+	ground.setPointCount(3);
+	ground.setPoint(0, sf::Vector2f(0, 400));
+	ground.setPoint(1, sf::Vector2f(0, 1080));
+	ground.setPoint(2, sf::Vector2f(1920, 1080));
+
+	sf::ConvexShape sky;
+	sky.setFillColor(sf::Color::Cyan);
+	sky.setPointCount(4);
+	sky.setPoint(0, sf::Vector2f(0, 0));
+	sky.setPoint(1, sf::Vector2f(1920, 0));
+	sky.setPoint(2, sf::Vector2f(1920, 1080));
+	sky.setPoint(3, sf::Vector2f(0, 400));
 
 	while (window.isOpen())
 	{
@@ -16,8 +29,15 @@ int main()
 		}
 
 		window.clear();
-		window.draw(shape);
+		window.draw(ground);
+		window.draw(sky);
 		window.display();
+
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			window.close();
+		}
 	}
 
 	return 0;
