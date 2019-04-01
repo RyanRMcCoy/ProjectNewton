@@ -111,6 +111,11 @@ TEST(physicalObjectTest, densityGetterTest) {
 	EXPECT_EQ(obj.getDensity(), 0);
 }
 
+TEST(physicalObjectTest, frictionGetterTest) {
+	physicalObject obj;
+	EXPECT_EQ(obj.getFriction(), 0);
+}
+
 //Start of material properties tests 
 TEST(materialTest, circleDensityConstruct) {
 	circle obj(4, vector2(0, 0), 2);
@@ -130,6 +135,40 @@ TEST(materialTest, circleSetMass) {
 	obj.setMass(100.48);
 	EXPECT_EQ(obj.getDensity(), 2);
 }
+
+TEST(materialTest, RectDensityConstruct) {
+	rectangle obj(2, 2, vector2(4, 3), 2);
+	EXPECT_EQ(obj.getMass(), 8);
+}
+
+TEST(materialTest, RectSetDensity) {
+	rectangle obj(2, 2, vector2(4, 3));
+	EXPECT_EQ(obj.getMass(), 4);
+	obj.setDensity(2);
+	EXPECT_EQ(obj.getMass(), 8);
+}
+
+TEST(materialTest, RectSetMass) {
+	rectangle obj(2, 2, vector2(4, 3));
+	EXPECT_EQ(obj.getMass(), 4);
+	obj.setMass(8);
+	EXPECT_EQ(obj.getDensity(), 2);
+}
+
+TEST(materialTest, circleFriction) {
+	circle obj(2);
+	EXPECT_EQ(obj.getFriction(), 0);
+	obj.setFriction(1);
+	EXPECT_EQ(obj.getFriction(), 1);
+}
+
+TEST(materialTest, rectFriction) {
+	rectangle obj(2, 2);
+	EXPECT_EQ(obj.getFriction(), 0);
+	obj.setFriction(1);
+	EXPECT_EQ(obj.getFriction(), 1);
+}
+//Friction for both
 
 //Start of circle tests
 TEST(circleTest, defaultConstructor) {
@@ -169,14 +208,14 @@ TEST(rectangleTest, defaultConstructor) {
 	EXPECT_EQ(obj.getSideY(), 0);
 }
 
-TEST(rectangleTest, constructorRad) {
+TEST(rectangleTest, constructorLens) {
 	rectangle obj(6, 6);
 	EXPECT_TRUE(obj.getPosition() == vector2(0, 0));
 	EXPECT_EQ(obj.getSideX(), 6);
 	EXPECT_EQ(obj.getSideY(), 6);
 }
 
-TEST(rectangleTest, constructorRadPos) {
+TEST(rectangleTest, constructorLensPos) {
 	rectangle obj(6, 6, vector2(4, 3));
 	EXPECT_TRUE(obj.getPosition() == vector2(4, 3));
 	EXPECT_EQ(obj.getSideX(), 6);

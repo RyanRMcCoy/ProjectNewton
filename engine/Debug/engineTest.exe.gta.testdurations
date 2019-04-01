@@ -69,5 +69,13 @@
     <TestDuration Test="materialTest.circleDensityConstruct" Duration="1" />
     <TestDuration Test="materialTest.circleSetDensity" Duration="1" />
     <TestDuration Test="materialTest.circleSetMass" Duration="1" />
+    <TestDuration Test="materialTest.RectDensityConstruct" Duration="1" />
+    <TestDuration Test="materialTest.RectSetDensity" Duration="1" />
+    <TestDuration Test="materialTest.RectSetMass" Duration="1" />
+    <TestDuration Test="rectangleTest.constructorLens" Duration="1" />
+    <TestDuration Test="rectangleTest.constructorLensPos" Duration="1" />
+    <TestDuration Test="materialTest.circleFriction" Duration="1" />
+    <TestDuration Test="materialTest.rectFriction" Duration="1" />
+    <TestDuration Test="physicalObjectTest.frictionGetterTest" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

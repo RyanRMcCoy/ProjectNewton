@@ -10,6 +10,7 @@ physicalObject::physicalObject()
 
 	mass = 0;
 	density = 0;
+	mu = 0;
 
 	colliding = false;
 }
@@ -22,6 +23,7 @@ physicalObject::physicalObject(vector2 pos)
 
 	mass = 0;
 	density = 0;
+	mu = 0;
 
 	colliding = false;
 }
@@ -35,6 +37,7 @@ physicalObject::physicalObject(vector2 pos, vector2 vel)
 
 	mass = 0;
 	density = 0;
+	mu = 0;
 
 	colliding = false;
 }
@@ -47,6 +50,7 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 
 	mass = 0;
 	density = 0;
+	mu = 0;
 
 	colliding = false;
 }
@@ -144,6 +148,11 @@ float physicalObject::getMass()
 float physicalObject::getDensity()
 {
 	return density;
+}
+
+float physicalObject::getFriction()
+{
+	return mu;
 }
 
 bool physicalObject::operator == (physicalObject o)

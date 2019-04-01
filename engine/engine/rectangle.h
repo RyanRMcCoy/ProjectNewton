@@ -32,6 +32,9 @@ public:
 
 	void updateMass();
 	void updateDensity();
+
+	float getFriction();
+	void  setFriction(float m);
 };
 
 #endif // !RECTANGLE_H

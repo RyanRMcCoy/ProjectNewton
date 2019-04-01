@@ -27,6 +27,9 @@ public:
 
 	void updateMass();
 	void updateDensity();
+
+	float getFriction();
+	void  setFriction(float m);
 };
 
 #endif // !CIRCLE_H
