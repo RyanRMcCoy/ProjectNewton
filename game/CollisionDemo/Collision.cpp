@@ -7,12 +7,15 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "Collision");
+	sf::RenderWindow window(sf::VideoMode(200, 200), "Collision", sf::Style::Fullscreen);
 
 	engine physics = engine();
 	physics.addCircle(100.f);
 	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	shape.setFillColor(sf::Color::Red);
+
+	sf::RectangleShape background(sf::Vector2f(1920, 1080));
+	background.setFillColor(sf::Color::Green);
 
 	while (window.isOpen())
 	{
@@ -24,8 +27,15 @@ int main()
 		}
 
 		window.clear();
+		window.draw(background);
 		window.draw(shape);
 		window.display();
+
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			window.close();
+		}
 	}
 
 	return 0;
