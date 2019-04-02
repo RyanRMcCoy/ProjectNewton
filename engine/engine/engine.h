@@ -11,15 +11,15 @@ class engine
 private:
 	float lastUpdate;
 
-	vector<circle> circles;
-	vector<polygon> polygons;
+	vector<circle*> circles;
+	vector<polygon*> polygons;
 	satHandler collisionHandler;
 public:
 	engine();
 
-	void addCircle(circle o);
-	void addPolygon(polygon o);
-	vector<circle> getCircles();
-	vector<polygon> getPolygons();
-	void update();
+	void addCircle(circle &o);
+	void addPolygon(polygon &o);
+	vector<circle*> getCircles();
+	vector<polygon*> getPolygons();
+	bool update(int);
 };
