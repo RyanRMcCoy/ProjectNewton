@@ -8,6 +8,8 @@ circle::circle()
 
 	density = 0;
 	updateMass();
+
+	mu = 0;
 }
 
 circle::circle(float rad)
@@ -16,6 +18,8 @@ circle::circle(float rad)
 
 	density = 1;
 	updateMass();
+
+	mu = 0;
 }
 
 circle::circle(float rad, vector2 pos)
@@ -25,6 +29,8 @@ circle::circle(float rad, vector2 pos)
 
 	density = 1;
 	updateMass();
+
+	mu = 0;
 }
 
 circle::circle(float rad, vector2 pos, float d)
@@ -34,6 +40,8 @@ circle::circle(float rad, vector2 pos, float d)
 
 	density = d;
 	updateMass();
+
+	mu = 0;
 }
 
 float circle::getRadius()
@@ -83,4 +91,14 @@ void circle::updateMass()
 void circle::updateDensity()
 {
 	density = mass / getArea();
+}
+
+float circle::getFriction()
+{
+	return mu;
+}
+
+void circle::setFriction(float m)
+{
+	mu = m;
 }

@@ -14,6 +14,7 @@ private:
 protected:
 	float mass;
 	float density;
+	float mu;
 public:
 	physicalObject();
 	physicalObject(vector2 position);
@@ -42,6 +43,7 @@ public:
 
 	float getMass();
 	float getDensity();
+	float getFriction();
 
 	bool operator == (physicalObject o);
 };

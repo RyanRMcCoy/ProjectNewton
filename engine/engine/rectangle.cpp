@@ -6,6 +6,8 @@ rectangle::rectangle() : polygon(4)
 {
 	sideLenX = 0;
 	sideLenY = 0;
+
+	mu = 0;
 }
 
 rectangle::rectangle(float lenX, float lenY) : polygon(4)
@@ -21,6 +23,8 @@ rectangle::rectangle(float lenX, float lenY) : polygon(4)
 
 	density = 0;
 	updateMass();
+
+	mu = 0;
 }
 
 rectangle::rectangle(vector2 size) : polygon(4)
@@ -32,6 +36,11 @@ rectangle::rectangle(vector2 size) : polygon(4)
 	float halfY = sideLenY / 2;
 	vector2 vertices[4] = { vector2(-halfX, -halfY), vector2(halfX, -halfY), vector2(halfX, halfY), vector2(-halfX, halfY) };
 	setVertices(vertices);
+
+	density = 1;
+	updateMass();
+
+	mu = 0;
 }
 
 rectangle::rectangle(float lenX, float lenY, vector2 pos) : polygon(4)
@@ -48,6 +57,8 @@ rectangle::rectangle(float lenX, float lenY, vector2 pos) : polygon(4)
 	
 	density = 1;
 	updateMass();
+
+	mu = 0;
 }
 
 rectangle::rectangle(vector2 size, vector2 pos)
@@ -64,6 +75,8 @@ rectangle::rectangle(vector2 size, vector2 pos)
 	
 	density = 1;
 	updateMass();
+
+	mu = 0;
 }
 
 rectangle::rectangle(float lenX, float lenY, vector2 pos, float d)
@@ -73,6 +86,8 @@ rectangle::rectangle(float lenX, float lenY, vector2 pos, float d)
 
 	density = d;
 	updateMass();
+
+	mu = 0;
 }
 
 float rectangle::getSideX()
@@ -134,4 +149,14 @@ void rectangle::updateMass()
 void rectangle::updateDensity()
 {
 	density = mass / getArea();
+}
+
+float rectangle::getFriction()
+{
+	return mu;
+}
+
+void rectangle::setFriction(float m)
+{
+	mu = m;
 }
