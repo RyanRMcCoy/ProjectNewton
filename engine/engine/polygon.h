@@ -17,4 +17,18 @@ public:
 	int numSides();
 	vector2* getVertices();
 	void setVertices(vector2 v[]);
+
+	float getArea();
+
+	float getMass();
+	float setMass(float m);
+
+	float getDensity();
+	float setDensity(float d);
+
+	void updateMass();
+	void updateDensity();
+
+	float getFriction();
+	void  setFriction(float m);
 };
