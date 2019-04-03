@@ -35,7 +35,7 @@ int main()
 		window.clear();
 		window.draw(ground);
 		window.draw(sky);
-		window.draw(text);
+		//window.draw(text);
 		//window.draw(shape);
 		window.display();
 
