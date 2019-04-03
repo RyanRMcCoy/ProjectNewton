@@ -36,7 +36,7 @@ int main()
 		window.draw(ground);
 		window.draw(sky);
 		window.draw(text);
-		//window.draw(shape);
+		window.draw(shape);
 		window.display();
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
