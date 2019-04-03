@@ -39,7 +39,9 @@ int main()
 	background.setFillColor(sf::Color::Green);
 
 	bool hasStarted = false;
-	force o1Force = force();
+
+	force o1Force = force(o1, vectorHolder);
+	force o2Force = force(o2, vectorHolder);
 
 	while (window.isOpen())
 	{
