@@ -18,10 +18,12 @@ int main()
 	engine physicsEngine;
 
 	bool running = true;
+	bool collision = false;
 
 	circle circ1(10, vector2());
-	circ1.setVelocity(vector2(2, 0));
-	rectangle rect1(vector2(10, 5), vector2());
+	circ1.setVelocity(vector2(5, 0));
+
+	rectangle rect1(vector2(10, 10), vector2());
 
 	physicsEngine.addCircle(circ1);
 	physicsEngine.addPolygon(rect1);
@@ -29,9 +31,16 @@ int main()
 	// while loop for execution bounded by time delta
 	while (running)
 	{
-		physicsEngine.update();
-		if (circ1.getPosition().getX() > 10)
-			running = false;
+		bool updated = physicsEngine.update(120);
+		if (updated)
+		{
+			if (circ1.getCollisionFlag())
+				collision = true;
+			if (circ1.getPosition().getX() >= 100 || collision)
+				running = false;
+			vector2 pos = circ1.getPosition();
+			cout << "Circle at: (" << pos.getX() << ", " << pos.getY() << ")\n";
+		}
 	}
 
 	vector2 v(10, 10);
