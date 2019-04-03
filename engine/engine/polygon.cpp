@@ -54,6 +54,45 @@ vector2 *polygon::getVertices()
 	return vertices;
 }
 
+float polygon::getArea()
+{
+	return 0.0f;
+}
+
+float polygon::getMass()
+{
+	return mass;
+}
+
+float polygon::setMass(float m)
+{
+	mass = m;
+	updateDensity();
+	return mass;
+}
+
+float polygon::getDensity()
+{
+	return density;
+}
+
+float polygon::setDensity(float d)
+{
+	density = d;
+	updateMass();
+	return density;
+}
+
+void polygon::updateMass()
+{
+	mass = density * getArea();
+}
+
+void polygon::updateDensity()
+{
+	density = mass / getArea();
+}
+
 void polygon::setVertices(vector2 v[])
 {
 	copy(v, v + sides, relativeVertices);
