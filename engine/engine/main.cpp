@@ -31,12 +31,12 @@ int main()
 	// while loop for execution bounded by time delta
 	while (running)
 	{
-		bool updated = physicsEngine.update(120);
+		bool updated = physicsEngine.update(10);
 		if (updated)
 		{
 			if (circ1.getCollisionFlag())
 				collision = true;
-			if (circ1.getPosition().getX() >= 100 || collision)
+			if (circ1.getPosition().getX() >= 100 || circ1.getPosition().getX() <= -100)
 				running = false;
 			vector2 pos = circ1.getPosition();
 			cout << "Circle at: (" << pos.getX() << ", " << pos.getY() << ")\n";

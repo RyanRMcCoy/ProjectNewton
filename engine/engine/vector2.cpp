@@ -93,6 +93,11 @@ bool vector2::operator == (vector2 v)
 	return x == v.x && y == v.y;
 }
 
+bool vector2::operator != (vector2 v)
+{
+	return x != v.x || y != v.y;
+}
+
 bool vector2::operator >= (vector2 v)
 {
 	return *this > v || *this == v;

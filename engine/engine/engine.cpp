@@ -2,6 +2,7 @@
 #include "vector2.h"
 #include "physicalObject.h"
 #include "satHandler.h"
+#include "collisionHandler.h"
 #include "engine.h"
 #include <ctime>
 
@@ -10,7 +11,8 @@
 using namespace std;
 
 engine::engine() {
-	collisionHandler = satHandler();
+	collisionFinder = satHandler();
+	collisionResolver = collisionHandler();
 	lastUpdate = clock() / 1000.F;
 }
 
@@ -68,24 +70,22 @@ bool engine::update(int refreshRate)
 				vector2 overlap;
 				if (i < circles.size() && j < circles.size())
 				{
-					overlap = collisionHandler.overlapping(*circles.at(i), *circles.at(j));
+					overlap = collisionFinder.overlapping(*circles.at(i), *circles.at(j));
+					if (overlap != vector2())
+						collisionResolver.resolveCollision(circles.at(i), circles.at(j), &overlap);
 				}
 				else if (i < circles.size() && j >= circles.size())
 				{
-					overlap = collisionHandler.overlapping(*circles.at(i), *polygons.at(j - circles.size()));
+					overlap = collisionFinder.overlapping(*circles.at(i), *polygons.at(j - circles.size()));
+					if (overlap != vector2())
+						collisionResolver.resolveCollision(circles.at(i), polygons.at(j - circles.size()), &overlap);
 				}
 				else
 				{
-					overlap = collisionHandler.overlapping(*polygons.at(i - circles.size()), *polygons.at(j - circles.size()));
+					overlap = collisionFinder.overlapping(*polygons.at(i - circles.size()), *polygons.at(j - circles.size()));
+					if (overlap != vector2())
+						collisionResolver.resolveCollision(polygons.at(i - circles.size()), polygons.at(j - circles.size()), &overlap);
 				}
-				
-				if (!(overlap == vector2()))
-				{
-					circles.at(i)->setCollisionFlag(true); // This is a really bad way of doing this
-					circles.at(i)->setCollisionFlag(true); // just for testing tho
-				}
-				if (!(overlap == vector2()))
-					cout << "Overlap: (" << overlap.getX() << ", " << overlap.getY() << ")\n";
 			}
 		}
 		return true;

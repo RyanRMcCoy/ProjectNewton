@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "satHandler.h"
+#include "collisionHandler.h"
 #include "physicalObject.h"
 #include "circle.h"
 #include "polygon.h"
@@ -13,7 +14,8 @@ private:
 
 	vector<circle*> circles;
 	vector<polygon*> polygons;
-	satHandler collisionHandler;
+	satHandler collisionFinder;
+	collisionHandler collisionResolver;
 public:
 	engine();
 

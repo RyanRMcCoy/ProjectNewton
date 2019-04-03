@@ -11,7 +11,7 @@
     <ClCompile Include="force.cpp" />
     <ClCompile Include="satHandler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="CollisionHandler.cpp" />
+    <ClCompile Include="collisionHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
@@ -23,6 +23,6 @@
     <ClInclude Include="force.h" />
     <ClInclude Include="satHandler.h" />
     <ClInclude Include="engine.h" />
-    <ClInclude Include="CollisionHandler.h" />
+    <ClInclude Include="collisionHandler.h" />
   </ItemGroup>
 </Project>

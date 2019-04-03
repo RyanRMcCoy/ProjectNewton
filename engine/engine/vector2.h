@@ -28,6 +28,7 @@ public:
 	bool operator < (vector2 v);
 	bool operator <= (vector2 v);
 	bool operator == (vector2 v);
+	bool operator != (vector2 v);
 	bool operator >= (vector2 v);
 	bool operator > (vector2 v);
 };
