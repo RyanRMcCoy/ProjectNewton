@@ -6,6 +6,9 @@ private:
 	int sides;
 	vector2 *vertices;
 	vector2 *relativeVertices;
+	float dist(vector2 v1, vector2 v2);
+	float heron(int s, vector2 v[]);
+	void setDefaultMat();
 public:
 	polygon();
 	polygon(int s);

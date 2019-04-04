@@ -21,7 +21,7 @@ rectangle::rectangle(float lenX, float lenY) : polygon(4)
 	setVertices(vertices);
 	
 
-	density = 0;
+	density = 1;
 	updateMass();
 
 	mu = 0;
@@ -61,7 +61,7 @@ rectangle::rectangle(float lenX, float lenY, vector2 pos) : polygon(4)
 	mu = 0;
 }
 
-rectangle::rectangle(vector2 size, vector2 pos)
+rectangle::rectangle(vector2 size, vector2 pos) 
 {
 	sideLenX = size.getX();
 	sideLenY = size.getY();

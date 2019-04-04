@@ -77,5 +77,7 @@
     <TestDuration Test="materialTest.circleFriction" Duration="1" />
     <TestDuration Test="materialTest.rectFriction" Duration="1" />
     <TestDuration Test="physicalObjectTest.frictionGetterTest" Duration="1" />
+    <TestDuration Test="materialTest.polySetDensity" Duration="1" />
+    <TestDuration Test="materialTest.polySetMass" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

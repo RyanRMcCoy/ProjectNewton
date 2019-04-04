@@ -21,14 +21,46 @@ void offsetVertices(int s, vector2 v[], vector2 relativeV[], vector2 pos)
 	}
 }
 
-polygon::polygon() : sides(3), vertices(new vector2[3]), relativeVertices(new vector2[3]), physicalObject() {}
+float polygon::dist(vector2 v1, vector2 v2)
+{
+	return sqrt(pow(v1.getX() - v2.getX(), 2) + pow(v1.getY() - v2.getY(), 2));
+}
 
-polygon::polygon(int s) : sides(s), vertices(new vector2[s]), relativeVertices(new vector2[s]), physicalObject() {}
+//for finding area.
+/*float polygon :: heron(vector2 v[])
+{
+	float perimeter = 0;
+	float sideLen[3];
+	for (int i = 0; i < 2; i++)
+	{
+
+		perimeter = perimeter + dist(v[i], v[i + 1]);
+	}
+	perimeter = perimeter + dist(v[s], v[0]);
+	
+	float p = perimeter / 2;
+	
+
+	return 0.0f;
+}*/
+
+void polygon::setDefaultMat()
+{
+	density = 1;
+	updateMass();
+
+	mu = 0;
+}
+
+polygon::polygon() : sides(3), vertices(new vector2[3]), relativeVertices(new vector2[3]), physicalObject() { setDefaultMat(); }
+
+polygon::polygon(int s) : sides(s), vertices(new vector2[s]), relativeVertices(new vector2[s]), physicalObject() { setDefaultMat(); }
 
 polygon::polygon(int s, vector2 v[]) : sides(s), vertices(new vector2[s]), relativeVertices(new vector2[s]), physicalObject()
 {
 	copy(v, v + s, relativeVertices);
 	offsetVertices(sides, vertices, relativeVertices, getPosition());
+	setDefaultMat();
 }
 
 polygon::polygon(int s, vector2 v[], vector2 pos) : sides(s), vertices(new vector2[s]), 
@@ -36,6 +68,7 @@ relativeVertices(new vector2[s]), physicalObject(pos)
 {
 	copy(v, v + s, relativeVertices);
 	setPosition(pos);
+	setDefaultMat();
 }
 
 void polygon::setPosition(vector2 pos)

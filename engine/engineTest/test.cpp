@@ -136,6 +136,21 @@ TEST(materialTest, circleSetMass) {
 	EXPECT_EQ(obj.getDensity(), 2);
 }
 
+TEST(materialTest, polySetDensity) {
+	vector2 vert[3] = {vector2(0, 0), vector2(3, 0), vector2(0, 4) };
+	polygon obj(3, vert);
+	EXPECT_EQ(round(obj.getMass()), 50);
+	obj.setDensity(2);
+	EXPECT_EQ(round(obj.getMass()), 100);
+}
+
+TEST(materialTest, polySetMass) {
+	circle obj(4, vector2(0, 0));
+	EXPECT_EQ(round(obj.getMass()), 50);
+	obj.setMass(100.48);
+	EXPECT_EQ(obj.getDensity(), 2);
+}
+
 TEST(materialTest, RectDensityConstruct) {
 	rectangle obj(2, 2, vector2(4, 3), 2);
 	EXPECT_EQ(obj.getMass(), 8);
@@ -516,3 +531,5 @@ TEST(satHandlerTest, rectangle_rectangle_NoOverlap) {
 	rectangle r2(vector2(10, 10));
 	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
 }
+
+//TEST(polygonTest, )

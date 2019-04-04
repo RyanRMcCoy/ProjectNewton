@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "force.h"
 
-
 force::force()
 {
 	obj = circle();
