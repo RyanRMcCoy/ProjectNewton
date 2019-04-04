@@ -11,14 +11,13 @@
 using namespace std;
 
 engine::engine() {
-	collisionFinder = satHandler();
+	collisionDetector = satHandler();
 	collisionResolver = collisionHandler();
 	lastUpdate = clock() / 1000.F;
 }
 
 void engine::addCircle(circle &o)
 {
-	cout << "Circle received with memory address " << &o << endl;
 	circles.push_back(&o);
 }
 
@@ -70,19 +69,19 @@ bool engine::update(int refreshRate)
 				vector2 overlap;
 				if (i < circles.size() && j < circles.size())
 				{
-					overlap = collisionFinder.overlapping(*circles.at(i), *circles.at(j));
+					overlap = collisionDetector.overlapping(*circles.at(i), *circles.at(j));
 					if (overlap != vector2())
 						collisionResolver.resolveCollision(circles.at(i), circles.at(j), &overlap);
 				}
 				else if (i < circles.size() && j >= circles.size())
 				{
-					overlap = collisionFinder.overlapping(*circles.at(i), *polygons.at(j - circles.size()));
+					overlap = collisionDetector.overlapping(*circles.at(i), *polygons.at(j - circles.size()));
 					if (overlap != vector2())
 						collisionResolver.resolveCollision(circles.at(i), polygons.at(j - circles.size()), &overlap);
 				}
 				else
 				{
-					overlap = collisionFinder.overlapping(*polygons.at(i - circles.size()), *polygons.at(j - circles.size()));
+					overlap = collisionDetector.overlapping(*polygons.at(i - circles.size()), *polygons.at(j - circles.size()));
 					if (overlap != vector2())
 						collisionResolver.resolveCollision(polygons.at(i - circles.size()), polygons.at(j - circles.size()), &overlap);
 				}

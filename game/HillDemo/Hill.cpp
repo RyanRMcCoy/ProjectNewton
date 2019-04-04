@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "../../../../engine/engine/engine.h"
@@ -5,6 +6,8 @@
 #include "../../../../engine/engine/physicalObject.h"
 #include "../../../../engine/engine/circle.h"
 #include "../../../../engine/engine/force.h"
+
+using namespace std;
 
 int main()
 {
@@ -16,7 +19,8 @@ int main()
 	vector2 groundPoints[3] = { vector2(0, 400) ,  vector2(0, 1080), vector2(1920, 1080) };
 	polygon groundPH = polygon(3, groundPoints);
 	circle ballPH = circle(100.f, vector2(150, 150));
-
+	ballPH.setVelocity(vector2(10, 0));
+	ballPH.setAcceleration(vector2(0, 9.8));
 
 	physics.addPolygon(groundPH);
 	physics.addCircle(ballPH);
@@ -55,6 +59,8 @@ int main()
 				window.close();
 		}
 
+		physics.update(60); // Refresh the engine
+
 		window.clear();
 		window.draw(ground);
 		window.draw(sky);
@@ -68,6 +74,7 @@ int main()
 		}
 
 		if (hasStarted) {
+			cout << ballPH.getVelocity().getX() << ", " << ballPH.getVelocity().getY() << endl;
 			ball.setPosition(ballPH.getXpos(), ballPH.getYpos());
 		}
 

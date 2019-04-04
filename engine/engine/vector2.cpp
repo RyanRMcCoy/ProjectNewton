@@ -107,3 +107,9 @@ bool vector2::operator > (vector2 v)
 {
 	return magnitude() > v.magnitude();
 }
+
+ostream &operator<<(ostream &os, vector2 &v)
+{
+	os << "(" << v.getX() << ", " << v.getY() << ")";
+	return os;
+}
