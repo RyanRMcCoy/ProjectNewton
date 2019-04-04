@@ -35,10 +35,16 @@ int main()
 		window.clear();
 		window.draw(ground);
 		window.draw(sky);
-		window.draw(text);
-		window.draw(shape);
+		//window.draw(text);
+		//window.draw(shape);
 		window.display();
 
+		//start the simulation
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+
+		}
+
+		//close the window
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			window.close();

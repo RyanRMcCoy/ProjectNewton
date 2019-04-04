@@ -1,5 +1,9 @@
-// main.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+///-------------------------------------------------/
+///	File: main.cpp
+///
+///	Purpose: This file is for internal testing of
+///				engine classes and methods
+///-------------------------------------------------/
 
 #include "pch.h"
 #include "engine.h"
@@ -31,12 +35,12 @@ int main()
 	// while loop for execution bounded by time delta
 	while (running)
 	{
-		bool updated = physicsEngine.update(120);
+		bool updated = physicsEngine.update(10);
 		if (updated)
 		{
 			if (circ1.getCollisionFlag())
 				collision = true;
-			if (circ1.getPosition().getX() >= 100 || collision)
+			if (circ1.getPosition().getX() >= 100 || circ1.getPosition().getX() <= -100)
 				running = false;
 			vector2 pos = circ1.getPosition();
 			cout << "Circle at: (" << pos.getX() << ", " << pos.getY() << ")\n";
@@ -61,14 +65,3 @@ int main()
 	circ.setVelocity(9, 3);
 	std::cout << "vel: (" << circ.getVelocity().magnitude() << ")" << endl;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

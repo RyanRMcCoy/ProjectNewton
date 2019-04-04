@@ -217,7 +217,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionHandler.h" />
+    <ClInclude Include="collisionHandler.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="satHandler.h" />
     <ClInclude Include="circle.h" />
@@ -229,7 +229,7 @@
     <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionHandler.cpp" />
+    <ClCompile Include="collisionHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="satHandler.cpp" />
     <ClCompile Include="circle.cpp" />
