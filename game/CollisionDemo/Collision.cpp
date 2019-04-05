@@ -125,6 +125,7 @@ int main()
 			o1.setVelocity(vector2(rand() % 1000 + 500, rand() % 800 - 800));
 			o2.setPosition(vector2(550, 200));
 			o2.setVelocity(vector2(-400, -300));
+			hasStarted = false;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
