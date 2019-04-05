@@ -64,7 +64,7 @@ polygon::polygon(int s, vector2 v[]) : sides(s), vertices(new vector2[s]), relat
 }
 
 polygon::polygon(int s, vector2 v[], vector2 pos) : sides(s), vertices(new vector2[s]), 
-relativeVertices(new vector2[s]), physicalObject(pos)
+	relativeVertices(new vector2[s]), physicalObject(pos)
 {
 	copy(v, v + s, relativeVertices);
 	setPosition(pos);

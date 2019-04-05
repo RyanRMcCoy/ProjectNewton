@@ -70,7 +70,7 @@ rectangle::rectangle(vector2 size, vector2 pos)
 
 	float halfX = sideLenX / 2;
 	float halfY = sideLenY / 2;
-	vector2 vertices[4] = { vector2(-halfX, -halfY), vector2(halfX, -halfY), vector2(halfX, halfY), vector2(-halfX, halfY) };
+	vector2 vertices[4] = {vector2(-halfX, -halfY), vector2(halfX, -halfY), vector2(halfX, halfY), vector2(-halfX, halfY)};
 	setVertices(vertices);
 	
 	density = 1;

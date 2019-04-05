@@ -38,8 +38,6 @@ int main()
 		bool updated = physicsEngine.update(10);
 		if (updated)
 		{
-			if (circ1.getCollisionFlag())
-				collision = true;
 			if (circ1.getPosition().getX() >= 100 || circ1.getPosition().getX() <= -100)
 				running = false;
 			vector2 pos = circ1.getPosition();

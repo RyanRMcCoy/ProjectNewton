@@ -2,6 +2,9 @@
 #include "pch.h"
 #include "satHandler.h"
 #include "vector2.h"
+#include <iostream>
+
+using namespace std;
 
 satHandler::satHandler() {}
 
@@ -162,6 +165,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		}
 	}
 
+	std::cout << "Collision!\n";
 	return minOverlap;
 }
 
