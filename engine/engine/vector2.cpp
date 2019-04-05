@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "vector2.h"
 #include <cmath>
+#include <string>
 
 using namespace std;
 
@@ -34,12 +35,18 @@ vector2 vector2::unit()
 
 vector2 vector2::perpendicular()
 {
-	return vector2(abs(y), abs(x));
+	return vector2(y, -x);
 }
 
 vector2 vector2::project(vector2 v)
 {
 	return v * (dot(v) / v.dot(v));
+}
+
+string vector2::toString()
+{
+	string s = "(" + to_string(x) + ", " + to_string(y) + ")";
+	return s;
 }
 
 vector2 vector2::operator + (vector2 v)

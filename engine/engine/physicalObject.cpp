@@ -12,6 +12,7 @@ physicalObject::physicalObject()
 	density = 0;
 	mu = 0;
 
+	anchored = false;
 	colliding = false;
 }
 
@@ -25,6 +26,7 @@ physicalObject::physicalObject(vector2 pos)
 	density = 0;
 	mu = 0;
 
+	anchored = false;
 	colliding = false;
 }
 
@@ -39,6 +41,7 @@ physicalObject::physicalObject(vector2 pos, vector2 vel)
 	density = 0;
 	mu = 0;
 
+	anchored = false;
 	colliding = false;
 }
 
@@ -52,17 +55,8 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 	density = 0;
 	mu = 0;
 
+	anchored = false;
 	colliding = false;
-}
-
-bool physicalObject::getCollisionFlag()
-{
-	return colliding;
-}
-
-void physicalObject::setCollisionFlag(bool flag)
-{
-	colliding = flag;
 }
 
 float physicalObject::getXpos()
@@ -153,6 +147,16 @@ float physicalObject::getDensity()
 float physicalObject::getFriction()
 {
 	return mu;
+}
+
+bool physicalObject::getAnchored()
+{
+	return anchored;
+}
+
+void physicalObject::setAnchored(bool anchor)
+{
+	anchored = anchor;
 }
 
 bool physicalObject::operator == (physicalObject o)

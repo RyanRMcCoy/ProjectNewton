@@ -1,3 +1,5 @@
+#include <iostream>
+#include <cmath>
 #include <SFML/Graphics.hpp>
 
 #include "../../../../engine/engine/engine.h"
@@ -6,33 +8,64 @@
 #include "../../../../engine/engine/circle.h"
 #include "../../../../engine/engine/force.h"
 
+using namespace std;
+
 int main()
 {
+	int refreshRate = 120;
+
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Collision", sf::Style::Default);
 
 	// Create instance of engine
 	engine physics = engine();
+
 	// Adding circles to the engine
 	circle o1 = circle(100.f);
+	o1.setVelocity(vector2(500, -600));
+	o1.setAcceleration(vector2(0, 960));
+
 	circle o2 = circle(100.f);
+	o2.setVelocity(vector2(-400, -300));
+	o2.setAcceleration(vector2(0, 960));
+	o2.setAnchored(true);
+
+	rectangle ground = rectangle(vector2(800, 100), vector2(400, 640));
+	ground.setAnchored(true);
+
+	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
+	//vector2 vertices[4] = { vector2(0, 550), vector2(800, 550), vector2(800, 650), vector2(0, 650) };
+	//ground.setVertices(vertices);
+
+	vector2 *vertices = ground.getVertices();
+	for (int i = 0; i < 4; i++)
+		cout << vertices[i].toString() << endl;
+
 	vector2 vectorHolder = vector2();
+
 	physics.addCircle(o1);
 	physics.addCircle(o2);
+	//physics.addPolygon(ground);
 
 	// Drawing initial circles on window
-		//Circle 1
+
+	// Circle 1
 	sf::CircleShape object1(o1.getRadius());
 	object1.setFillColor(sf::Color::Red);
-	vectorHolder = vector2(50., 200.);
+	vectorHolder = vector2(50, 200);
 	o1.setPosition(vectorHolder);
 	object1.setPosition(o1.getXpos(), o1.getYpos());
 
-		//Circle2
+	// Circle2
 	sf::CircleShape object2(o2.getRadius());
 	object2.setFillColor(sf::Color::Blue);
-	vectorHolder = vector2(550., 200.);
+	vectorHolder = vector2(550, 200);
 	o2.setPosition(vectorHolder);
 	object2.setPosition(o2.getXpos(), o2.getYpos());
+
+	// Ground
+	sf::RectangleShape object3(sf::Vector2f(800, 100));
+	object3.setFillColor(sf::Color::Cyan);
+	object3.setPosition(0, 590);
 
 	// Drawing background
 	sf::RectangleShape background(sf::Vector2f(800, 600));
@@ -55,19 +88,43 @@ int main()
 		// Using engine to update position
 		if (hasStarted)
 		{
-			
+			physics.update(refreshRate);
+			object1.setPosition(o1.getXpos(), o1.getYpos());
+			object2.setPosition(o2.getXpos(), o2.getYpos());
+			object3.setPosition(ground.getXpos() - ground.getSideX() / 2, ground.getYpos() - ground.getSideY() / 2);
 		}
 
 		window.clear();
 		window.draw(background);
 		window.draw(object1);
 		window.draw(object2);
+		// window.draw(object3);
 		window.display();
+
+		// If o1 is out of screen, wrap it around
+		vector2 o1Pos = o1.getPosition();
+		if (o1Pos.getX() > 800 + o1.getRadius())
+			o1.setPosition(vector2(-o1.getRadius() * 2, o1Pos.getY()));
+		else if (o1Pos.getX() < -o1.getRadius() * 2)
+			o1.setPosition(vector2(800 + o1.getRadius(), o1Pos.getY()));
+
+		if (o1Pos.getY() > 600 + o1.getRadius())
+			o1.setPosition(vector2(o1Pos.getX(), -o1.getRadius() * 2));
+		else if (o1Pos.getY() < -o1.getRadius() * 2)
+			o1.setPosition(vector2(o1Pos.getX(), 600 + o1.getRadius()));
 
 		// Waiting for 'S' to be pressed before starting demo
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			hasStarted = true;
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			o1.setPosition(vector2(50, 200));
+			o1.setVelocity(vector2(rand() % 1000 + 500, rand() % 800 - 800));
+			o2.setPosition(vector2(550, 200));
+			o2.setVelocity(vector2(-400, -300));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

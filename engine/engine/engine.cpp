@@ -43,23 +43,28 @@ bool engine::update(int refreshRate)
 	bool enabled = false;
 	if (dt > (1.F / refreshRate)) {
 		lastUpdate += dt;
-		enabled = true;
+		if (dt < .25)
+			enabled =true;
 	}
-
+	
 	if (enabled)
 	{
 		for (circle *o : circles)
 		{
-			o->setCollisionFlag(false);
-			o->setPosition(o->getPosition() + o->getVelocity() * dt);
-			o->setAcceleration(o->getVelocity() + o->getAcceleration() * dt);
+			if (!o->getAnchored())
+			{
+				o->setPosition(o->getPosition() + o->getVelocity() * dt);
+				o->setVelocity(o->getVelocity() + o->getAcceleration() * dt);
+			}
 		}
 
 		for (polygon *o : polygons)
 		{
-			o->setCollisionFlag(false);
-			o->setPosition(o->getPosition() + o->getVelocity() * dt);
-			o->setVelocity(o->getVelocity() + o->getAcceleration() * dt);
+			if (!o->getAnchored())
+			{
+				o->setPosition(o->getPosition() + o->getVelocity() * dt);
+				o->setVelocity(o->getVelocity() + o->getAcceleration() * dt);
+			}
 		}
 
 		for (unsigned int i = 0; i < circles.size() + polygons.size() && enabled; i++)

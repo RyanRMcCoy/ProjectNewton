@@ -8,6 +8,10 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
+#include <string>
+
+using namespace std;
+
 class vector2
 {
 private:
@@ -40,6 +44,10 @@ public:
 	/// Function: project
 	/// Purpose: Projects this vector onto vector v
 	vector2 project(vector2 v);
+
+	/// Function: toString
+	/// Purpose: Returns a string represenation of the vector
+	string toString();
 
 	/// Functions: operator(+, -, *, /)
 	/// Purpose: Override basic mathematical operators to allow 

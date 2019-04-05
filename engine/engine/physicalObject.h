@@ -15,14 +15,12 @@ protected:
 	float mass;
 	float density;
 	float mu;
+	bool anchored;
 public:
 	physicalObject();
 	physicalObject(vector2 position);
 	physicalObject(vector2 position, vector2 velocity);
 	physicalObject(vector2 position, vector2 velocity, vector2 acceleration);
-	
-	bool getCollisionFlag(); // Temporary
-	void setCollisionFlag(bool flag); // Temporary
 
 	float getXpos();
 	float getYpos();
@@ -44,6 +42,9 @@ public:
 	float getMass();
 	float getDensity();
 	float getFriction();
+
+	bool getAnchored();
+	void setAnchored(bool);
 
 	bool operator == (physicalObject o);
 };
