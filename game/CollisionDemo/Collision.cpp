@@ -113,6 +113,17 @@ int main()
 		else if (o1Pos.getY() < -o1.getRadius() * 2)
 			o1.setPosition(vector2(o1Pos.getX(), 600 + o1.getRadius()));
 
+		vector2 o2Pos = o2.getPosition();
+		if (o2Pos.getX() > 800 + o2.getRadius())
+			o2.setPosition(vector2(-o2.getRadius() * 2, o2Pos.getY()));
+		else if (o2Pos.getX() < -o2.getRadius() * 2)
+			o2.setPosition(vector2(800 + o2.getRadius(), o2Pos.getY()));
+
+		if (o2Pos.getY() > 600 + o2.getRadius())
+			o2.setPosition(vector2(o2Pos.getX(), -o2.getRadius() * 2));
+		else if (o2Pos.getY() < -o2.getRadius() * 2)
+			o2.setPosition(vector2(o2Pos.getX(), 600 + o2.getRadius()));
+
 		// Waiting for 'S' to be pressed before starting demo
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
