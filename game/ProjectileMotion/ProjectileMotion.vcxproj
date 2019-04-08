@@ -172,6 +172,11 @@
   <ItemGroup>
     <ClCompile Include="Projectile.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\engine\engine\engine.vcxproj">
+      <Project>{dbdef8b2-8334-4dc7-875b-a27dc7df0c98}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
