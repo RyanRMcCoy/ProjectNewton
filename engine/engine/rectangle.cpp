@@ -20,7 +20,6 @@ rectangle::rectangle(float lenX, float lenY) : polygon(4)
 	vector2 vertices[4] = {vector2(-halfX, -halfY), vector2(halfX, -halfY), vector2(halfX, halfY), vector2(-halfX, halfY)};
 	setVertices(vertices);
 	
-
 	density = 1;
 	updateMass();
 
@@ -61,7 +60,7 @@ rectangle::rectangle(float lenX, float lenY, vector2 pos) : polygon(4)
 	mu = 0;
 }
 
-rectangle::rectangle(vector2 size, vector2 pos) 
+rectangle::rectangle(vector2 size, vector2 pos) : polygon(4)
 {
 	sideLenX = size.getX();
 	sideLenY = size.getY();
@@ -79,7 +78,7 @@ rectangle::rectangle(vector2 size, vector2 pos)
 	mu = 0;
 }
 
-rectangle::rectangle(float lenX, float lenY, vector2 pos, float d)
+rectangle::rectangle(float lenX, float lenY, vector2 pos, float d) : polygon(4)
 {
 	sideLenX = lenX;
 	sideLenY = lenY;

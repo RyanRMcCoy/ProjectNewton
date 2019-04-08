@@ -45,6 +45,10 @@ public:
 	/// Purpose: Projects this vector onto vector v
 	vector2 project(vector2 v);
 
+	/// Function: absolute
+	/// Purpose: Returns a vector with the absolute value of the current parameters
+	vector2 absolute();
+
 	/// Function: toString
 	/// Purpose: Returns a string represenation of the vector
 	string toString();
