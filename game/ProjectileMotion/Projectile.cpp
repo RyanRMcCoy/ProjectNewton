@@ -16,24 +16,29 @@ int main()
 	bool running = false;
 
 	circle circ1(50, vector2(100, 100));
+	circle circ2(100, vector2(300, 100));
 	circ1.setAcceleration(vector2(0, 1960));
+	circ2.setAcceleration(vector2(0, 1960));
 
 	rectangle rect1(vector2(1920, 100), vector2(-960, 500));
 	rect1.setAnchored(true);
 
 	physics.addCircle(circ1);
+	physics.addCircle(circ2);
 	physics.addPolygon(rect1);
 
-	sf::RenderWindow window(sf::VideoMode(200, 200), "Projectile Motion", sf::Style::Fullscreen);
-	sf::CircleShape circle(50);
-	circle.setFillColor(sf::Color::Red);
+	sf::RenderWindow window(sf::VideoMode(600, 400), "Projectile Motion", sf::Style::Fullscreen);
+	sf::CircleShape circle1(50);
+	sf::CircleShape circle2(100);
+	circle1.setFillColor(sf::Color::Red);
+	circle2.setFillColor(sf::Color::Blue);
 
 	sf::RectangleShape ground(sf::Vector2f(1920, 100));
 	ground.setFillColor(sf::Color::Green);
-	ground.setPosition(0, 500);
+	ground.setPosition(0, 100);
 
-	//sf::RectangleShape sky(sf::Vector2f(1920, 1080 - ground.getGlobalBounds().height));
-	//sky.setFillColor(sf::Color::Cyan);
+	sf::RectangleShape sky(sf::Vector2f(1920, 1080 - ground.getGlobalBounds().height));
+	sky.setFillColor(sf::Color::Cyan);
 
 	/*
 	sf::Text text;
@@ -56,14 +61,11 @@ int main()
 
 		window.clear();
 		window.draw(ground);
-		//window.draw(sky);
+		window.draw(sky);
 		//window.draw(text);
-		window.draw(circle);
+		window.draw(circle1);
+		window.draw(circle2);
 		window.display();
-
-		//sfml graphics for ground
-		sf::RectangleShape ground;
-		ground.setFillColor(sf::Color::Green);
 
 		//start the simulation
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
@@ -78,7 +80,7 @@ int main()
 
 		if (running)
 		{
-			circle.setPosition(circ1.getXpos(), circ1.getYpos());
+			circle1.setPosition(circ1.getXpos(), circ1.getYpos());
 			physics.update(frameRate);
 		}
 	}
