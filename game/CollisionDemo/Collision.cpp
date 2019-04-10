@@ -29,7 +29,7 @@ int main()
 	o2.setAcceleration(vector2(0, 960));
 	o2.setAnchored(true);
 
-	rectangle ground = rectangle(vector2(800, 100), vector2(400, 640));
+	rectangle ground = rectangle(vector2(800, 100), vector2(400, 650));
 	ground.setAnchored(true);
 
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
@@ -44,7 +44,7 @@ int main()
 
 	physics.addCircle(o1);
 	physics.addCircle(o2);
-	//physics.addPolygon(ground);
+	physics.addPolygon(ground);
 
 	// Drawing initial circles on window
 
