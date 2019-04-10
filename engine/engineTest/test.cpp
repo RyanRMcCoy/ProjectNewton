@@ -395,15 +395,15 @@ TEST(vector2Test, operatorProject) {
 //Start of Force Tests
 TEST(forceTest, defaultConstructor) {
 	force obj;
-	EXPECT_TRUE(obj.getObj() == circle());
-	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	EXPECT_TRUE(*obj.getObj() == circle());
+	EXPECT_TRUE(obj.getVector() == (*obj.getObj()).getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
 TEST(forceTest, objConstructor) {
-	force obj(circle(2, vector2(5, 5)));
-	EXPECT_TRUE(obj.getObj() == circle(2, vector2(5, 5)));
-	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	force obj(&circle(2, vector2(5, 5)));
+	EXPECT_TRUE(*obj.getObj() == circle(2, vector2(5, 5)));
+	EXPECT_TRUE(obj.getVector() == (*obj.getObj()).getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
@@ -411,25 +411,25 @@ TEST(forceTest, vectorConstructor) {
 	force obj(vector2(3, 4));
 	circle target(1);
 	target.setAcceleration(vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() == target);
-	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	EXPECT_TRUE(*obj.getObj() == target);
+	EXPECT_TRUE(obj.getVector() == (*obj.getObj()).getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
 TEST(forceTest, fullConstructor) {
-	force  obj(circle(2, vector2(5, 5)), vector2(3, 4));
+	force  obj(&circle(2, vector2(5, 5)), vector2(3, 4));
 	circle target = circle(2, vector2(5, 5));
 	target.setAcceleration(vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() == target);
-	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	EXPECT_TRUE(*obj.getObj() == target);
+	EXPECT_TRUE(obj.getVector() == (*obj.getObj()).getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
 TEST(forceTest, setObj) {
 	force obj;
-	obj.setObj(circle(2, vector2(5, 5)));
-	EXPECT_TRUE(obj.getObj() == circle(2, vector2(5, 5)));
-	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	obj.setObj(&circle(2, vector2(5, 5)));
+	EXPECT_TRUE(*obj.getObj() == circle(2, vector2(5, 5)));
+	EXPECT_TRUE(obj.getVector() == (*obj.getObj()).getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
@@ -438,15 +438,15 @@ TEST(forceTest, setVector) {
 	obj.setVector(vector2(3, 4));
 	circle target = circle();
 	target.setAcceleration(vector2(3, 4));
-	EXPECT_TRUE(obj.getObj() == target);
-	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	EXPECT_TRUE(*obj.getObj() == target);
+	EXPECT_TRUE(obj.getVector() == (*obj.getObj()).getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
 TEST(forceTest, setMag) {
 	force obj(vector2(1, 1));	
 	obj.setMagnitude(5);
-	EXPECT_TRUE(obj.getVector() == obj.getObj().getAcceleration());
+	EXPECT_TRUE(obj.getVector() == (*obj.getObj()).getAcceleration());
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
