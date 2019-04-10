@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "polygon.h"
 #include "vector2.h"
+#include <iostream>
 
 /* So the idea that I have right now is to come up with some intermediate class/object whose purpose is to
 	translate a set of vertices passed into the physics engine into a set of vertices centered around the center
@@ -17,6 +18,7 @@ void offsetVertices(int s, vector2 v[], vector2 relativeV[], vector2 pos)
 {
 	for (int i = 0; i < s; i++)
 	{
+		//cout << v[i].toString() << endl;
 		v[i] = pos + relativeV[i];
 	}
 }

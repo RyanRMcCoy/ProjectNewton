@@ -143,7 +143,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 	for (int i = 0; i < n; i++)
 	{
 		// Projection axes are normals(perps) of each side of polygon
-		vector2 projectionAxis = (vertices[(i + 1) % n] - vertices[i]).perpendicular().unit();
+		vector2 projectionAxis = (vertices[(i + 1) % n] - vertices[i]).perpendicular().unit().absolute();
 
 		// Get the projections for each shape onto the projectionAxis
 		vector2 o1Proj = o1.getPosition().project(projectionAxis);

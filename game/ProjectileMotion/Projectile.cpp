@@ -15,35 +15,49 @@ int main()
 	int frameRate = 120;
 	bool running = false;
 
-	circle circ1(50, vector2(100, 100));
-	circ1.setAcceleration(vector2(0, 1960));
+	circle circ1(50, vector2(0, 400-100));
+	circle circ2(100, vector2(0, 980-200));
 
-	rectangle rect1(vector2(1920, 100), vector2(-960, 500));
+	//force f1 = force(circ1, vector2(20, 10));
+	//force f2 = force(circ2, vector2(20, 10));
+	circ1.setMass(1);
+	circ2.setMass(100);
+	
+
+	rectangle rect1(vector2(1920, 100), vector2(0, 980));
 	rect1.setAnchored(true);
 
+	rectangle rect2(vector2(1920, 100), vector2(0, 400));
+	rect2.setAnchored(true);
+
 	physics.addCircle(circ1);
+	physics.addCircle(circ2);
 	physics.addPolygon(rect1);
+	physics.addPolygon(rect2);
 
-	sf::RenderWindow window(sf::VideoMode(200, 200), "Projectile Motion", sf::Style::Fullscreen);
-	sf::CircleShape circle(50);
-	circle.setFillColor(sf::Color::Red);
+	sf::RenderWindow window(sf::VideoMode(600, 400), "Projectile Motion", sf::Style::Fullscreen);
+	sf::CircleShape circle1(circ1.getRadius());
+	sf::CircleShape circle2(circ2.getRadius());
+	circle1.setFillColor(sf::Color::Red);
+	circle2.setFillColor(sf::Color::Blue);
+	circle1.setPosition(circ1.getXpos(), circ1.getYpos());
+	circle2.setPosition(circ2.getXpos(), circ2.getYpos());
 
-	sf::RectangleShape ground(sf::Vector2f(1920, 100));
-	ground.setFillColor(sf::Color::Green);
-	ground.setPosition(0, 500);
+	sf::RectangleShape ground1(sf::Vector2f(1920, 100));
+	ground1.setFillColor(sf::Color::Green);
+	ground1.setPosition(0, 980);
 
-	//sf::RectangleShape sky(sf::Vector2f(1920, 1080 - ground.getGlobalBounds().height));
-	//sky.setFillColor(sf::Color::Cyan);
+	sf::RectangleShape ground2(sf::Vector2f(1920, 100));
+	ground2.setFillColor(sf::Color::Green);
+	ground2.setPosition(0, 400);
+	
+	sf::RectangleShape sky(sf::Vector2f(1920, 1080));
+	sky.setFillColor(sf::Color::Cyan);
 
-	/*
-	sf::Text text;
-	//text.setFont(font);
-	text.setString("Press Space to Launch");
-	text.setCharacterSize(20);
-	text.setStyle(sf::Text::Bold);
-	text.setFillColor(sf::Color::Black);
-	text.setPosition(400, 400);
-	*/
+	force circ1Force = force(circ1, vector2(100, 0));
+	force circ2Force = force(circ2, vector2(100, 0));
+
+	
 
 	while (window.isOpen())
 	{
@@ -55,19 +69,26 @@ int main()
 		}
 
 		window.clear();
-		window.draw(ground);
-		//window.draw(sky);
-		//window.draw(text);
-		window.draw(circle);
+		window.draw(sky);
+		window.draw(ground1);
+		window.draw(ground2);
+		window.draw(circle2);
+		window.draw(circle1);
 		window.display();
-
-		//sfml graphics for ground
-		sf::RectangleShape ground;
-		ground.setFillColor(sf::Color::Green);
 
 		//start the simulation
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 			running = true;
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			circ1.setPosition(vector2(0, 400-100));
+			circ2.setPosition(vector2(0, 980-200));
+			
+			circle1.setPosition(0, 400-100);
+			circle2.setPosition(0, 980-200);
+			
+			running = false;
 		}
 
 		//close the window
@@ -78,7 +99,9 @@ int main()
 
 		if (running)
 		{
-			circle.setPosition(circ1.getXpos(), circ1.getYpos());
+			physics.update(120);
+			circle1.setPosition(circ1.getXpos(), circ1.getYpos());
+			circle2.setPosition(circ2.getXpos(), circ2.getYpos());
 			physics.update(frameRate);
 		}
 	}

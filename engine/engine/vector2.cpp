@@ -43,6 +43,11 @@ vector2 vector2::project(vector2 v)
 	return v * (dot(v) / v.dot(v));
 }
 
+vector2 vector2::absolute()
+{
+	return vector2(abs(x), abs(y));
+}
+
 string vector2::toString()
 {
 	string s = "(" + to_string(x) + ", " + to_string(y) + ")";
