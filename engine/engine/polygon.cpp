@@ -21,29 +21,6 @@ void offsetVertices(int s, vector2 v[], vector2 relativeV[], vector2 pos)
 	}
 }
 
-float polygon::dist(vector2 v1, vector2 v2)
-{
-	return sqrt(pow(v1.getX() - v2.getX(), 2) + pow(v1.getY() - v2.getY(), 2));
-}
-
-//for finding area.
-/*float polygon :: heron(vector2 v[])
-{
-	float perimeter = 0;
-	float sideLen[3];
-	for (int i = 0; i < 2; i++)
-	{
-
-		perimeter = perimeter + dist(v[i], v[i + 1]);
-	}
-	perimeter = perimeter + dist(v[s], v[0]);
-	
-	float p = perimeter / 2;
-	
-
-	return 0.0f;
-}*/
-
 void polygon::setDefaultMat()
 {
 	density = 1;
@@ -89,7 +66,16 @@ vector2 *polygon::getVertices()
 
 float polygon::getArea()
 {
-	return 0.0f;
+	float area = 0;
+	int j = sides;
+
+	for (int i = 0; i < sides; i++) {
+		area = area + ((vertices[j].getX() + vertices[i].getX()) * (vertices[j].getY() + vertices[i].getY()));
+
+		j = i;
+	}
+
+	return area / 2;
 }
 
 float polygon::getMass()

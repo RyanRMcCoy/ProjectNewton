@@ -79,5 +79,6 @@
     <TestDuration Test="physicalObjectTest.frictionGetterTest" Duration="1" />
     <TestDuration Test="materialTest.polySetDensity" Duration="1" />
     <TestDuration Test="materialTest.polySetMass" Duration="1" />
+    <TestDuration Test="materialTest.heron" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
