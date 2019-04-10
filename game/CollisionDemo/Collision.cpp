@@ -22,14 +22,15 @@ int main()
 	// Adding circles to the engine
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(500, -600));
-	o1.setAcceleration(vector2(0, 960));
+	force f = force(o1, vector2(0, 960));
+	//o1.setAcceleration(vector2(0, 960));
 
 	circle o2 = circle(100.f);
 	o2.setVelocity(vector2(-400, -300));
 	o2.setAcceleration(vector2(0, 960));
 	o2.setAnchored(true);
 
-	rectangle ground = rectangle(vector2(800, 100), vector2(400, 650));
+	rectangle ground = rectangle(vector2(800, 100), vector2(400, 640));
 	ground.setAnchored(true);
 
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
@@ -51,16 +52,16 @@ int main()
 	// Circle 1
 	sf::CircleShape object1(o1.getRadius());
 	object1.setFillColor(sf::Color::Red);
-	vectorHolder = vector2(50, 200);
+	vectorHolder = vector2(150, 300);
 	o1.setPosition(vectorHolder);
-	object1.setPosition(o1.getXpos(), o1.getYpos());
+	object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
 
 	// Circle2
 	sf::CircleShape object2(o2.getRadius());
 	object2.setFillColor(sf::Color::Blue);
-	vectorHolder = vector2(550, 200);
+	vectorHolder = vector2(650, 300);
 	o2.setPosition(vectorHolder);
-	object2.setPosition(o2.getXpos(), o2.getYpos());
+	object2.setPosition(o2.getXpos() - o1.getRadius(), o2.getYpos() - o1.getRadius());
 
 	// Ground
 	sf::RectangleShape object3(sf::Vector2f(800, 100));
@@ -89,8 +90,8 @@ int main()
 		if (hasStarted)
 		{
 			physics.update(refreshRate);
-			object1.setPosition(o1.getXpos(), o1.getYpos());
-			object2.setPosition(o2.getXpos(), o2.getYpos());
+			object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
+			object2.setPosition(o2.getXpos() - o2.getRadius(), o2.getYpos() - o2.getRadius());
 			object3.setPosition(ground.getXpos() - ground.getSideX() / 2, ground.getYpos() - ground.getSideY() / 2);
 		}
 
@@ -98,7 +99,7 @@ int main()
 		window.draw(background);
 		window.draw(object1);
 		window.draw(object2);
-		// window.draw(object3);
+		window.draw(object3);
 		window.display();
 
 		// If o1 is out of screen, wrap it around
