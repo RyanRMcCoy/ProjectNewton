@@ -7,7 +7,7 @@ force::force()
 	accelerationVector = vector2();
 }
 
-force::force(physicalObject o)
+force::force(physicalObject &o)
 {
 	obj = o;
 	accelerationVector = vector2();

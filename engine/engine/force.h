@@ -9,7 +9,7 @@ private:
 	float magnitude;
 public:
 	force();
-	force(physicalObject o);
+	force(physicalObject &o);
 	force(vector2 v);
 	force(physicalObject o, vector2 v);
 
