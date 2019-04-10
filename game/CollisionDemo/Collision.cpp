@@ -22,7 +22,10 @@ int main()
 	// Adding circles to the engine
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(500, -600));
-	force f = force(o1, vector2(0, 960));
+	force f = force(&o1, vector2(0, 960) * o1.getMass());
+	cout << f.getObj() << endl;
+	cout << &o1 << endl;
+	cout << o1.getAcceleration().toString() << endl;
 	//o1.setAcceleration(vector2(0, 960));
 
 	circle o2 = circle(100.f);
@@ -74,8 +77,8 @@ int main()
 
 	bool hasStarted = false;
 
-	force o1Force = force(o1, vectorHolder);
-	force o2Force = force(o2, vectorHolder);
+	//force o1Force = force(o1, vectorHolder);
+	//force o2Force = force(o2, vectorHolder);
 
 	while (window.isOpen())
 	{

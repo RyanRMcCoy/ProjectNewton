@@ -9,15 +9,15 @@ private:
 	float magnitude;
 public:
 	force();
-	force(physicalObject &o);
+	force(physicalObject *o);
 	force(vector2 v);
-	force(physicalObject o, vector2 v);
+	force(physicalObject *o, vector2 v);
 
 	void updateMagnitude();
 	void updateObjAcc();
 
-	physicalObject getObj();
-	void setObj(physicalObject o);
+	physicalObject *getObj();
+	void setObj(physicalObject *o);
 	
 	vector2 getVector();
 	void setVector(vector2 v);
