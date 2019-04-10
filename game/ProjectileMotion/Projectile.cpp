@@ -20,9 +20,7 @@ int main()
 
 	//force f1 = force(circ1, vector2(20, 10));
 	//force f2 = force(circ2, vector2(20, 10));
-	circ1.setAcceleration(vector2(2000, 0));
-	circ2.setAcceleration(vector2(2000, 0));
-	circ1.setMass(50);
+	circ1.setMass(1);
 	circ2.setMass(100);
 	
 
@@ -46,7 +44,7 @@ int main()
 	circle2.setPosition(circ2.getXpos(), circ2.getYpos());
 
 	sf::RectangleShape ground1(sf::Vector2f(1920, 100));
-	ground1.setFillColor(sf::Color::Magenta);
+	ground1.setFillColor(sf::Color::Green);
 	ground1.setPosition(0, 980);
 
 	sf::RectangleShape ground2(sf::Vector2f(1920, 100));
@@ -56,6 +54,10 @@ int main()
 	sf::RectangleShape sky(sf::Vector2f(1920, 1080));
 	sky.setFillColor(sf::Color::Cyan);
 
+	force circ1Force = force(circ1, vector2(100, 0));
+	force circ2Force = force(circ2, vector2(100, 0));
+
+	
 
 	while (window.isOpen())
 	{
@@ -80,8 +82,12 @@ int main()
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-			circ1.setPosition(vector2(0, 880));
-			circ2.setPosition(vector2(0, 780));
+			circ1.setPosition(vector2(0, 400-100));
+			circ2.setPosition(vector2(0, 980-200));
+			
+			circle1.setPosition(0, 400-100);
+			circle2.setPosition(0, 980-200);
+			
 			running = false;
 		}
 
@@ -93,6 +99,7 @@ int main()
 
 		if (running)
 		{
+			physics.update(120);
 			circle1.setPosition(circ1.getXpos(), circ1.getYpos());
 			circle2.setPosition(circ2.getXpos(), circ2.getYpos());
 			physics.update(frameRate);
