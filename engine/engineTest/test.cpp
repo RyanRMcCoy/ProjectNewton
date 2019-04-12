@@ -140,14 +140,15 @@ TEST(materialTest, circleSetMass) {
 TEST(materialTest, polySetDensity) {
 	vector2 vert[3] = {vector2(0, 0), vector2(3, 0), vector2(0, 4) };
 	polygon obj(3, vert);
-	EXPECT_EQ(round(obj.getMass()), 50);
+	EXPECT_EQ(round(obj.getMass()), 6);
 	obj.setDensity(2);
-	EXPECT_EQ(round(obj.getMass()), 100);
+	EXPECT_EQ(round(obj.getMass()), 12);
 }
 
 TEST(materialTest, polyArea) {
 	vector2 vert[3] = { vector2(0, 0), vector2(3, 0), vector2(0, 4) };
 	polygon obj(3, vert);
+	EXPECT_EQ(obj.getArea(), 6);
 }
 
 TEST(materialTest, polySetMass) {
