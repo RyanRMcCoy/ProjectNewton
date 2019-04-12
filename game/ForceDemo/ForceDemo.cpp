@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 #include "../../../../engine/engine/engine.h"
 #include "../../../../engine/engine/vector2.h"
@@ -23,6 +24,7 @@ int main()
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(0, 0));
 	o1.setAcceleration(vector2(0, 0));
+	o1.setMass(10.f);
 
 	physics.addCircle(o1);
 
@@ -31,7 +33,7 @@ int main()
 	// Circle 1
 	sf::CircleShape object1(o1.getRadius());
 	object1.setFillColor(sf::Color::Red);
-	o1.setPosition(vector2(50, 200));
+	o1.setPosition(vector2(400, 300));
 	object1.setPosition(o1.getXpos(), o1.getYpos());
 
 	// Drawing background
@@ -48,7 +50,7 @@ int main()
 		}
 
 		physics.update(refreshRate);
-		object1.setPosition(o1.getXpos(), o1.getYpos());
+		object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
 
 		window.clear();
 		window.draw(background);
@@ -67,26 +69,32 @@ int main()
 		else if (o1Pos.getY() < -o1.getRadius() * 2)
 			o1.setPosition(vector2(o1Pos.getX(), 600 + o1.getRadius()));
 
-		// Waiting for 'S' to be pressed before starting demo
+		// Applying force to the circle when wasd is pressed
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			
+			force downForce = force(&o1, vector2(0, 960));
+			cout << o1.getAcceleration().getX() << endl;
+			cout << o1.getAcceleration().getY() << endl;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			
+			force upForce = force(&o1, vector2(0, -960));
+			cout << "FORCE" << endl;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			
+			force downForce = force(&o1, vector2(-960, 0));
+			cout << "FORCE" << endl;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			
+			force downForce = force(&o1, vector2(960, 0));
+			cout << "FORCE" << endl;
 		}
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			window.close();
