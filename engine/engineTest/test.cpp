@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <cmath>
 
 //Start of physical object tests
 TEST(physicalObjectTest, defaultConstructor) {
@@ -484,6 +485,8 @@ TEST(satHandlerTest, rectangle_circle_Overlap) {
 	satHandler collisionHandler;
 	circle c(5, vector2());
 	rectangle r(vector2(10, 10), vector2(5, 0));
+	vector2 overlap = collisionHandler.overlapping(c, r);
+	cout << overlap.toString() << endl;
 	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(-5, 0));
 }
 
@@ -506,6 +509,18 @@ TEST(satHandlerTest, rectangle_circle_NoOverlap) {
 	circle c(50, vector2(1000, 0));
 	rectangle r(vector2(100, 100), vector2(0, -2500));
 	EXPECT_TRUE(collisionHandler.overlapping(c, r) == vector2(0, 0));
+}
+
+// Start of SatHandler triangle-circle tests
+
+TEST(satHandlerTest, triangle_circle_Overlap) {
+	satHandler collisionHandler;
+	circle c(50);
+	vector2 points[3] = {vector2(0, 100), vector2(100, 0), vector2(0, 0)};
+	polygon t(3, points, vector2(-50, -50));
+	vector2 overlap = collisionHandler.overlapping(c, t);
+	cout << overlap.toString() << endl;
+	EXPECT_TRUE(collisionHandler.overlapping(c, t).unit() == vector2(sqrt(2) / 2, sqrt(2) / 2));
 }
 
 // Start of SatHandler rectangle-rectangle tests
@@ -536,5 +551,3 @@ TEST(satHandlerTest, rectangle_rectangle_NoOverlap) {
 	rectangle r2(vector2(10, 10));
 	EXPECT_TRUE(collisionHandler.overlapping(r1, r2) == vector2(0, 0));
 }
-
-//TEST(polygonTest, )

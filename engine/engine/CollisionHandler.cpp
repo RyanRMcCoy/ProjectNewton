@@ -49,6 +49,9 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 	float p1 = (v1 * ((o1->getMass() - o2->getMass()) / (totalMass)) + v2 * ((2 * o2->getMass()) / totalMass)).magnitude() * o1->getMass();
 	float p2 = totalMomentum - p1;
 
+	p1 *= .75;
+	p2 *= .75;
+
 	// Determine velocities
 	o1->setVelocity(
 		v1 * ((o1->getMass() - o2->getMass()) / (totalMass)) +

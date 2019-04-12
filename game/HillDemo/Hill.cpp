@@ -11,48 +11,58 @@ using namespace std;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Hill Demo");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Hill Demo");
 	
 	engine physics = engine();
 
 	//initilizing objects in the engine
-	vector2 groundPoints[3] = {vector2(0, 400) , vector2(0, 1080), vector2(1920, 1080)};
-	polygon groundPH = polygon(3, groundPoints, vector2(0, -275));
+	vector2 groundPoints[3] = {vector2(0, 200) , vector2(0, 600), vector2(800, 600)};
+	polygon groundPH = polygon(3, groundPoints);
 	groundPH.setAnchored(true);
 
-	rectangle boxPH = rectangle(vector2(50, 1600), vector2(1000, 590));
-	boxPH.setAnchored(false);
+	rectangle boxPH = rectangle(vector2(50, 200), vector2(400, 0));
+	boxPH.setAnchored(true);
 
-	circle ballPH = circle(100.F, vector2(150, 150));
+	rectangle box2PH = rectangle(vector2(100, 100), vector2(250, 100));
+	box2PH.setAcceleration(vector2(0, 1920));
+	//boxPH.setAnchored(true);
+
+	circle ballPH = circle(100.F, vector2(100, 100));
 	ballPH.setVelocity(vector2(0, 100));
 	ballPH.setAcceleration(vector2(0, 1920));
-	// ballPH.setAnchored(true);
+	//ballPH.setAnchored(true);
 
 	physics.addPolygon(groundPH);
-	//physics.addPolygon(boxPH);
+	physics.addPolygon(boxPH);
+	physics.addPolygon(box2PH);
 	physics.addCircle(ballPH);
 
 	// sfml graphics for ground
 	sf::ConvexShape ground;
 	ground.setFillColor(sf::Color::Green);
 	ground.setPointCount(3);
-	ground.setPoint(0, sf::Vector2f(0, 400));
-	ground.setPoint(1, sf::Vector2f(0, 1080));
-	ground.setPoint(2, sf::Vector2f(1920, 1080));
+	ground.setPoint(0, sf::Vector2f(0, 200));
+	ground.setPoint(1, sf::Vector2f(0, 600));
+	ground.setPoint(2, sf::Vector2f(800, 600));
 
 	//sfml graphics for box
-	sf::RectangleShape box(sf::Vector2f(50, 800));
-	box.setPosition(sf::Vector2f(1000-25, 500-400));
+	sf::RectangleShape box(sf::Vector2f(boxPH.getSideX(), boxPH.getSideY()));
+	box.setPosition(boxPH.getXpos() - boxPH.getSideX() / 2, boxPH.getYpos() - boxPH.getSideY() / 2);
 	box.setFillColor(sf::Color::Green);
 
 	//sfml graphics for sky
-	sf::RectangleShape sky(sf::Vector2f(1920, 1080));
+	sf::RectangleShape sky(sf::Vector2f(800, 600));
 	sky.setFillColor(sf::Color::Cyan);
+
+	//sfml graphics for box2
+	sf::RectangleShape box2(sf::Vector2f(box2PH.getSideX(), box2PH.getSideY()));
+	box2.setPosition(box2PH.getXpos() - box2PH.getSideX() / 2, box2PH.getYpos() - box2PH.getSideY() / 2);
+	box2.setFillColor(sf::Color::Red);
 
 	//sfml graphics for ball
 	sf::CircleShape ball(ballPH.getRadius());
 	ball.setFillColor(sf::Color::Red);
-	ball.setPosition(ballPH.getXpos(), ballPH.getYpos());
+	ball.setPosition(ballPH.getXpos() - ballPH.getRadius(), ballPH.getYpos() - ballPH.getRadius());
 
 	bool hasStarted = false;
 	//force ballForce = force(ballPH, vector2(0, 0));
@@ -68,22 +78,35 @@ int main()
 
 		window.clear();
 		window.draw(sky);
+		window.draw(box);
 		window.draw(ground);
-		//window.draw(box);
 		window.draw(ball);
+		window.draw(box2);
 		window.display();
 
 		// If ball is out of screen, wrap it around
 		vector2 ballPos = ballPH.getPosition();
-		if (ballPos.getX() > 1920 + ballPH.getRadius())
+		if (ballPos.getX() > 800 + ballPH.getRadius())
 			ballPH.setPosition(vector2(-ballPH.getRadius() * 2, ballPos.getY()));
 		else if (ballPos.getX() < -ballPH.getRadius() * 2)
-			ballPH.setPosition(vector2(1920 + ballPH.getRadius(), ballPos.getY()));
+			ballPH.setPosition(vector2(800 + ballPH.getRadius(), ballPos.getY()));
 
-		if (ballPos.getY() > 1080 + ballPH.getRadius())
+		if (ballPos.getY() > 600 + ballPH.getRadius())
 			ballPH.setPosition(vector2(ballPos.getX(), -ballPH.getRadius() * 2));
 		else if (ballPos.getY() < -ballPH.getRadius() * 2)
-			ballPH.setPosition(vector2(ballPos.getX(), 1080 + ballPH.getRadius()));
+			ballPH.setPosition(vector2(ballPos.getX(), 600 + ballPH.getRadius()));
+
+		// If box2 is out of screen, wrap around
+		vector2 boxPos = box2PH.getPosition();
+		if (boxPos.getX() > 800 + box2PH.getSideX() / 2)
+			box2PH.setPosition(vector2(-box2PH.getSideX() / 2, boxPos.getY()));
+		else if (boxPos.getX() < -box2PH.getSideX() / 2)
+			box2PH.setPosition(vector2(800 + box2PH.getSideX() / 2, boxPos.getY()));
+
+		if (boxPos.getY() > 600 + box2PH.getSideY() / 2)
+			box2PH.setPosition(vector2(boxPos.getX(), -box2PH.getSideY() / 2));
+		else if (boxPos.getY() < -box2PH.getSideY() / 2)
+			box2PH.setPosition(vector2(boxPos.getX(), 600 + box2PH.getSideY() / 2));
 
 		//start the simulation
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
@@ -92,16 +115,16 @@ int main()
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-			ballPH.setPosition(vector2(150, 150));
+			ballPH.setPosition(vector2(100, 100));
 			ballPH.setVelocity(vector2(0, 100));
 			hasStarted = false;
 		}
 
 		if (hasStarted) {
 			physics.update(120); // Refresh the engine
-			ball.setPosition(ballPH.getXpos(), ballPH.getYpos());
-			box.setPosition(boxPH.getXpos(), boxPH.getYpos());
-			ground.setPosition(groundPH.getXpos(), groundPH.getYpos() + 275);
+			ball.setPosition(ballPH.getXpos() - ballPH.getRadius(), ballPH.getYpos() - ballPH.getRadius());
+			box.setPosition(boxPH.getXpos() - boxPH.getSideX() / 2, boxPH.getYpos() - boxPH.getSideY() / 2);
+			box2.setPosition(box2PH.getXpos() - box2PH.getSideX() / 2, box2PH.getYpos() - box2PH.getSideY() / 2);
 		}
 
 		//close the window
