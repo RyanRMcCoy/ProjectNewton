@@ -26,14 +26,14 @@ int main()
 	cout << f.getObj() << endl;
 	cout << &o1 << endl;
 	cout << o1.getAcceleration().toString() << endl;
-	//o1.setAcceleration(vector2(0, 960));
+	o1.setAcceleration(vector2(0, 960));
 
 	circle o2 = circle(100.f);
 	o2.setVelocity(vector2(-400, -300));
 	o2.setAcceleration(vector2(0, 960));
 	o2.setAnchored(true);
 
-	rectangle ground = rectangle(vector2(800, 100), vector2(400, 640));
+	rectangle ground = rectangle(vector2(700, 100), vector2(400, 640));
 	ground.setAnchored(true);
 
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
@@ -67,7 +67,7 @@ int main()
 	object2.setPosition(o2.getXpos() - o1.getRadius(), o2.getYpos() - o1.getRadius());
 
 	// Ground
-	sf::RectangleShape object3(sf::Vector2f(800, 100));
+	sf::RectangleShape object3(sf::Vector2f(700, 100));
 	object3.setFillColor(sf::Color::Cyan);
 	object3.setPosition(0, 590);
 
@@ -108,13 +108,13 @@ int main()
 		// If o1 is out of screen, wrap it around
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 800 + o1.getRadius())
-			o1.setPosition(vector2(-o1.getRadius() * 2, o1Pos.getY()));
-		else if (o1Pos.getX() < -o1.getRadius() * 2)
+			o1.setPosition(vector2(-o1.getRadius(), o1Pos.getY()));
+		else if (o1Pos.getX() < -o1.getRadius())
 			o1.setPosition(vector2(800 + o1.getRadius(), o1Pos.getY()));
 
 		if (o1Pos.getY() > 600 + o1.getRadius())
-			o1.setPosition(vector2(o1Pos.getX(), -o1.getRadius() * 2));
-		else if (o1Pos.getY() < -o1.getRadius() * 2)
+			o1.setPosition(vector2(o1Pos.getX(), -o1.getRadius()));
+		else if (o1Pos.getY() < -o1.getRadius())
 			o1.setPosition(vector2(o1Pos.getX(), 600 + o1.getRadius()));
 
 		vector2 o2Pos = o2.getPosition();
@@ -138,7 +138,7 @@ int main()
 		{
 			o1.setPosition(vector2(50, 200));
 			o1.setVelocity(vector2(rand() % 1000 + 500, rand() % 800 - 800));
-			o2.setPosition(vector2(550, 200));
+			o2.setPosition(vector2(650, 300));
 			o2.setVelocity(vector2(-400, -300));
 			hasStarted = false;
 		}

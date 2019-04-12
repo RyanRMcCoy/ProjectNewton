@@ -143,7 +143,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 	for (int i = 0; i < n; i++)
 	{
 		// Projection axes are normals(perps) of each side of polygon
-		vector2 projectionAxis = (vertices[(i + 1) % n] - vertices[i]).perpendicular().unit().absolute();
+		vector2 projectionAxis = (vertices[(i + 1) % n] - vertices[i]).perpendicular().unit();
 
 		// Get the projections for each shape onto the projectionAxis
 		vector2 o1Proj = o1.getPosition().project(projectionAxis);
@@ -152,10 +152,34 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		vector2 o2MinProj = getMinProjection(n, vertices, projectionAxis);
 		vector2 o2MaxProj = getMaxProjection(n, vertices, projectionAxis);
 
+		if (projectionAxis.getX() != 0 && o1MinProj.getX() > o1MaxProj.getX())
+		{
+			vector2 temp = o1MinProj;
+			o1MinProj = o1MaxProj;
+			o1MaxProj = temp;
+		}
+		else if (projectionAxis.getY() != 0 && o1MinProj.getY() > o1MaxProj.getY())
+		{
+			vector2 temp = o1MinProj;
+			o1MinProj = o1MaxProj;
+			o1MaxProj = temp;
+		}
+
 		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj);
 
-		if (overlap.getX() == maxFloat) { // No overlap so return
+		// If there was no overlap found, then return zero vector
+		if (overlap.getX() == maxFloat)
 			return vector2();
+
+		// Check if the circle overlaps the vertex at all
+		vector2 vertexOverlap = o1.getPosition() - vertices[i];
+		if (vertexOverlap.magnitude() < o1.getRadius())
+		{
+			if (vertexOverlap.magnitude() < minOverlapMag)
+			{
+				minOverlap = vertexOverlap;
+				minOverlapMag = vertexOverlap.magnitude();
+			}
 		}
 
 		if (overlap.magnitude() < minOverlapMag)
@@ -165,7 +189,6 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		}
 	}
 
-	std::cout << "Collision!\n";
 	return minOverlap;
 }
 
@@ -187,7 +210,7 @@ vector2 satHandler::overlapping(polygon o1, polygon o2)
 	for (int i = 0; i < n1; i++)
 	{
 		// Projection axes are normals(perps) of each side of polygon
-		vector2 projectionAxis = (vertices1[(i + 1) % n1] - vertices1[i]).perpendicular().unit();
+		vector2 projectionAxis = (vertices1[(i + 1) % n1] - vertices1[i]).perpendicular();
 
 		// Get the projections for each shape onto the projectionAxis
 		vector2 o1Proj = o1.getPosition().project(projectionAxis);
