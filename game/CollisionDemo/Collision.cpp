@@ -24,7 +24,7 @@ int main()
 	o1.setVelocity(vector2(500, -600));
 	o1.setAnchored(false);
 	
-	force f = force(&o1 , vector2(0, 980));
+	force f = force(&o1 , vector2(0, 980) * o1.getMass() / 2);
 	//o1.setAcceleration(vector2(0, 980));
 
 	circle o2 = circle(100.f);
@@ -38,10 +38,6 @@ int main()
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
 	//vector2 vertices[4] = { vector2(0, 550), vector2(800, 550), vector2(800, 650), vector2(0, 650) };
 	//ground.setVertices(vertices);
-
-	vector2 *vertices = ground.getVertices();
-	for (int i = 0; i < 4; i++)
-		cout << vertices[i].toString() << endl;
 
 	vector2 vectorHolder = vector2();
 
@@ -130,13 +126,11 @@ int main()
 		// Waiting for 'S' to be pressed before starting demo
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			cout << "start" << endl;
 			hasStarted = true;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		{
-			cout << "reset" << endl;
 			o1.setPosition(vector2(50, 200));
 			o1.setVelocity(vector2(rand() % 1000 + 500, rand() % 800 - 800));
 			o2.setPosition(vector2(650, 300));

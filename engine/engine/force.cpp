@@ -38,7 +38,7 @@ void force::updateMagnitude()
 
 void force::updateObjAcc()
 {
-	obj -> setAcceleration(accelerationVector);
+	obj -> setAcceleration(accelerationVector/obj->getMass());
 }
 
 physicalObject* force::getObj()

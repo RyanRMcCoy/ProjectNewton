@@ -24,7 +24,7 @@ int main()
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(0, 0));
 	o1.setAcceleration(vector2(0, 0));
-	o1.setMass(10.f);
+	o1.setMass(1000.f);
 
 	physics.addCircle(o1);
 
@@ -73,26 +73,21 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			force downForce = force(&o1, vector2(0, 960));
-			cout << o1.getAcceleration().getX() << endl;
-			cout << o1.getAcceleration().getY() << endl;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			force upForce = force(&o1, vector2(0, -960));
-			cout << "FORCE" << endl;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			force downForce = force(&o1, vector2(-960, 0));
-			cout << "FORCE" << endl;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			force downForce = force(&o1, vector2(960, 0));
-			cout << "FORCE" << endl;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
