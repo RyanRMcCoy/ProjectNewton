@@ -17,7 +17,7 @@ void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *p
 	// Determine velocities
 	o1->setVelocity(o1->getVelocity() - penetration->unit() *
 		(o1->getVelocity().dot(penetration->unit())) * 2);
-	o1->setVelocity(o1->getVelocity() * .75);
+	o1->setVelocity(o1->getVelocity() - o1->getVelocity().project(*penetration) * .25);
 
 	// Move objects out of each other
 	o1->setPosition(o1->getPosition() + (*penetration));
