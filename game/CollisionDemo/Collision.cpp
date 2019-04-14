@@ -21,7 +21,7 @@ int main()
 
 	// Adding circles to the engine
 	circle o1 = circle(100.f);
-	o1.setVelocity(vector2(500, -600));
+	o1.setVelocity(vector2(500, -400));
 	o1.setAnchored(false);
 	
 	force f = force(&o1, vector2(0, 980) * o1.getMass());
@@ -32,7 +32,7 @@ int main()
 	o2.setAcceleration(vector2(0, 980));
 	o2.setAnchored(true);
 
-	rectangle ground = rectangle(vector2(700, 100), vector2(400, 640));
+	rectangle ground = rectangle(vector2(800, 100), vector2(400, 640));
 	ground.setAnchored(true);
 
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
@@ -62,7 +62,7 @@ int main()
 	object2.setPosition(o2.getXpos() - o1.getRadius(), o2.getYpos() - o1.getRadius());
 
 	// Ground
-	sf::RectangleShape object3(sf::Vector2f(700, 100));
+	sf::RectangleShape object3(sf::Vector2f(800, 100));
 	object3.setFillColor(sf::Color::Cyan);
 	object3.setPosition(50, 590);
 
@@ -137,7 +137,7 @@ int main()
 			o2.setVelocity(vector2(-400, -300));
 			hasStarted = false;
 		}
-
+		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			window.close();
