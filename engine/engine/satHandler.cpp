@@ -70,7 +70,7 @@ vector2 getMaxProjection(int n, vector2 *vertices, vector2 projectionAxis)
 	Not sure if the overlap calculations for the cases where one objects projection
 	is within the others are correct.
 */
-vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj, vector2 o2MaxProj)
+vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj, vector2 o2MaxProj, bool *overhang)
 {
 	// Primitive representations of vector projections (for simpler math)
 	float v11(0), v12(0), v21(0), v22(0);
@@ -95,7 +95,10 @@ vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj
 	if (v11 >= v21 && v11 <= v22)
 	{
 		if (v12 >= v22) // o1 projection partially inside o2 projection (coming from right side)
+		{ 
+			*overhang = true;
 			return o2MaxProj - o1MinProj;
+		}
 		else // o1 projection completely inside o2 projection
 			if (abs(v22 - v11) < abs(v21 - v12))
 				return o2MaxProj - o1MinProj; // I'm a little confused about what to return here maybe cuz I'm tired
@@ -105,7 +108,10 @@ vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj
 	if (v21 >= v11 && v21 <= v12)
 	{
 		if (v22 >= v12) // o2 projection partially inside o1 projection (coming from right side also)
+		{ 
+			*overhang = true;
 			return o2MinProj - o1MaxProj;
+		}
 		else // o2 projection completely inside o1 projection
 			if (abs(v12 - v21) < abs(v11 - v22))
 				return o1MaxProj - o2MinProj;
@@ -140,6 +146,8 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 	float minOverlapMag = maxFloat;
 	vector2 minOverlap; // Direction for o1 to move "out" of o2
 
+	bool overhang = false;
+
 	for (int i = 0; i < n; i++)
 	{
 		// Projection axes are normals(perps) of each side of polygon
@@ -151,6 +159,8 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		vector2 o1MaxProj = o1Proj + projectionAxis * o1.getRadius();
 		vector2 o2MinProj = getMinProjection(n, vertices, projectionAxis);
 		vector2 o2MaxProj = getMaxProjection(n, vertices, projectionAxis);
+
+		bool newOverhang = overhang;
 
 		if (projectionAxis.getX() != 0 && o1MinProj.getX() > o1MaxProj.getX())
 		{
@@ -165,7 +175,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 			o1MaxProj = temp;
 		}
 
-		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj);
+		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj, &newOverhang);
 
 		// If there was no overlap found, then return zero vector
 		if (overlap.getX() == maxFloat)
@@ -177,6 +187,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		{
 			if (vertexOverlap.magnitude() < minOverlapMag)
 			{
+				overhang = newOverhang;
 				minOverlap = vertexOverlap;
 				minOverlapMag = vertexOverlap.magnitude();
 			}
@@ -186,6 +197,19 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		{
 			minOverlap = overlap;
 			minOverlapMag = minOverlap.magnitude();
+		}
+	}
+
+	cout << overhang << endl;
+	if (overhang)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			vector2 vertex = vertices[i];
+			if ((o1.getPosition() - vertex).magnitude() < o1.getRadius())
+			{
+				return (vertex - o2.getPosition());
+			}
 		}
 	}
 
@@ -207,6 +231,8 @@ vector2 satHandler::overlapping(polygon o1, polygon o2)
 	float minOverlapMag = maxFloat;
 	vector2 minOverlap; // Direction for o1 to move "out" of o2
 
+	bool overhang = false;
+
 	for (int i = 0; i < n1; i++)
 	{
 		// Projection axes are normals(perps) of each side of polygon
@@ -219,7 +245,7 @@ vector2 satHandler::overlapping(polygon o1, polygon o2)
 		vector2 o2MinProj = getMinProjection(n2, vertices2, projectionAxis);
 		vector2 o2MaxProj = getMaxProjection(n2, vertices2, projectionAxis);
 
-		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj);
+		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj, &overhang);
 
 		if (overlap.getX() == maxFloat) { // No overlap so return
 			return vector2();
@@ -243,7 +269,7 @@ vector2 satHandler::overlapping(polygon o1, polygon o2)
 		vector2 o2MinProj = getMinProjection(n2, vertices2, projectionAxis);
 		vector2 o2MaxProj = getMaxProjection(n2, vertices2, projectionAxis);
 
-		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj);
+		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj, &overhang);
 
 		if (overlap.getX() == maxFloat) { // No overlap so return
 			return vector2();

@@ -44,7 +44,7 @@ bool engine::update(int refreshRate)
 	if (dt > (1.F / refreshRate)) {
 		lastUpdate += dt;
 		if (dt < .25)
-			enabled =true;
+			enabled = true;
 	}
 	
 	if (enabled)
@@ -67,7 +67,7 @@ bool engine::update(int refreshRate)
 			}
 		}
 
-		for (unsigned int i = 0; i < circles.size() + polygons.size() && enabled; i++)
+		for (unsigned int i = 0; i < circles.size() + polygons.size(); i++)
 		{
 			for (unsigned int j = circles.size() + polygons.size() - 1; j > i; j--)
 			{
