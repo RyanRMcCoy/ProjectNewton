@@ -3,19 +3,19 @@
 
 force::force()
 {
-	obj = circle();
+	obj = &circle();
 	accelerationVector = vector2();
 }
 
 force::force(physicalObject *o)
 {
-	obj = *o;
+	obj = o;
 	accelerationVector = vector2();
 }
 
 force::force(vector2 v)
 {
-	obj = circle(1);
+	obj = &circle(1);
 	accelerationVector = v;
 
 	updateMagnitude();
@@ -24,11 +24,14 @@ force::force(vector2 v)
 
 force::force(physicalObject *o, vector2 v)
 {
-	obj = *o; 
+	obj = o; 
 	accelerationVector = v;
 
 	updateMagnitude();
 	updateObjAcc();
+
+	printf("the value of ACC is %f, %f\n",
+		obj -> getAcceleration().getX(), obj -> getAcceleration().getY());
 }
 
 void force::updateMagnitude() 
@@ -38,17 +41,17 @@ void force::updateMagnitude()
 
 void force::updateObjAcc()
 {
-	obj.setAcceleration(accelerationVector);
+	obj -> setAcceleration(accelerationVector);
 }
 
-physicalObject *force::getObj()
+physicalObject* force::getObj()
 {
-	return &obj;
+	return obj;
 }
 
 void force::setObj(physicalObject *o)
 {
-	obj = *o;
+	obj = o;
 }
 
 vector2 force::getVector()

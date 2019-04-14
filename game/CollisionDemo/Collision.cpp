@@ -21,16 +21,21 @@ int main()
 
 	// Adding circles to the engine
 	circle o1 = circle(100.f);
-	o1.setVelocity(vector2(500, -600));
-	force f = force(&o1, vector2(0, 960) * o1.getMass());
+	//o1.setVelocity(vector2(500, -600));
+	o1.setAnchored(false);
+	
+	force f = force(&o1 , vector2(0, 980));
 	cout << f.getObj() << endl;
+	cout << &f << endl;
 	cout << &o1 << endl;
-	cout << o1.getAcceleration().toString() << endl;
-	o1.setAcceleration(vector2(0, 960));
+	cout << sizeof(circle) << endl;
+	cout << o1.getAcceleration().getX() 
+		<< "," << o1.getAcceleration().getY() << endl;
+	//o1.setAcceleration(vector2(0, 980));
 
 	circle o2 = circle(100.f);
 	o2.setVelocity(vector2(-400, -300));
-	o2.setAcceleration(vector2(0, 960));
+	o2.setAcceleration(vector2(0, 980));
 	o2.setAnchored(true);
 
 	rectangle ground = rectangle(vector2(700, 100), vector2(400, 640));
@@ -131,11 +136,13 @@ int main()
 		// Waiting for 'S' to be pressed before starting demo
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
+			cout << "start" << endl;
 			hasStarted = true;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		{
+			cout << "reset" << endl;
 			o1.setPosition(vector2(50, 200));
 			o1.setVelocity(vector2(rand() % 1000 + 500, rand() % 800 - 800));
 			o2.setPosition(vector2(650, 300));

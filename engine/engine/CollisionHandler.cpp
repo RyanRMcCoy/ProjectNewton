@@ -12,6 +12,8 @@ void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *p
 
 	vector2 v1 = o1->getVelocity();
 
+	//force frictionalForce = force(o1, vector2(o1->getAcceleration().getX() * avgFriction, o1->getAcceleration().getY() *avgFriction));
+
 	// Determine velocities
 	o1->setVelocity(o1->getVelocity() - penetration->unit() *
 		(o1->getVelocity().dot(penetration->unit())) * 2);
