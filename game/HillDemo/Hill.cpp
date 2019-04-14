@@ -115,6 +115,7 @@ int main()
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			box2PH.setPosition(vector2(250, 100));
 			ballPH.setPosition(vector2(100, 100));
 			ballPH.setVelocity(vector2(0, 100));
 			hasStarted = false;
