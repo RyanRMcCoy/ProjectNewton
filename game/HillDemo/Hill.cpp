@@ -28,13 +28,13 @@ int main()
 	//boxPH.setAnchored(true);
 
 	circle ballPH = circle(100.F, vector2(100, 100));
-	ballPH.setVelocity(vector2(0, 100));
+	ballPH.setVelocity(vector2(200, 100));
 	ballPH.setAcceleration(vector2(0, 1920));
 	//ballPH.setAnchored(true);
 
 	physics.addPolygon(groundPH);
 	physics.addPolygon(boxPH);
-	physics.addPolygon(box2PH);
+	//physics.addPolygon(box2PH);
 	physics.addCircle(ballPH);
 
 	// sfml graphics for ground
@@ -87,13 +87,13 @@ int main()
 		// If ball is out of screen, wrap it around
 		vector2 ballPos = ballPH.getPosition();
 		if (ballPos.getX() > 800 + ballPH.getRadius())
-			ballPH.setPosition(vector2(-ballPH.getRadius() * 2, ballPos.getY()));
-		else if (ballPos.getX() < -ballPH.getRadius() * 2)
+			ballPH.setPosition(vector2(-ballPH.getRadius(), ballPos.getY()));
+		else if (ballPos.getX() < -ballPH.getRadius())
 			ballPH.setPosition(vector2(800 + ballPH.getRadius(), ballPos.getY()));
 
 		if (ballPos.getY() > 600 + ballPH.getRadius())
-			ballPH.setPosition(vector2(ballPos.getX(), -ballPH.getRadius() * 2));
-		else if (ballPos.getY() < -ballPH.getRadius() * 2)
+			ballPH.setPosition(vector2(ballPos.getX(), -ballPH.getRadius()));
+		else if (ballPos.getY() < -ballPH.getRadius())
 			ballPH.setPosition(vector2(ballPos.getX(), 600 + ballPH.getRadius()));
 
 		// If box2 is out of screen, wrap around
