@@ -160,7 +160,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		vector2 o2MinProj = getMinProjection(n, vertices, projectionAxis);
 		vector2 o2MaxProj = getMaxProjection(n, vertices, projectionAxis);
 
-		bool newOverhang = overhang;
+		bool newOverhang = false;
 
 		if (projectionAxis.getX() != 0 && o1MinProj.getX() > o1MaxProj.getX())
 		{
@@ -200,7 +200,6 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		}
 	}
 
-	cout << overhang << endl;
 	if (overhang)
 	{
 		for (int i = 0; i < n; i++)

@@ -29,9 +29,6 @@ force::force(physicalObject *o, vector2 v)
 
 	updateMagnitude();
 	updateObjAcc();
-
-	printf("the value of ACC is %f, %f\n",
-		obj -> getAcceleration().getX(), obj -> getAcceleration().getY());
 }
 
 void force::updateMagnitude() 
@@ -41,7 +38,7 @@ void force::updateMagnitude()
 
 void force::updateObjAcc()
 {
-	obj -> setAcceleration(accelerationVector);
+	obj -> setAcceleration(accelerationVector/obj->getMass());
 }
 
 physicalObject* force::getObj()
