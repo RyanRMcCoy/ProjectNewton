@@ -21,7 +21,7 @@ int main()
 	//force f1 = force(circ1, vector2(20, 10));
 	//force f2 = force(circ2, vector2(20, 10));
 	circ1.setMass(1);
-	circ2.setMass(100);
+	circ2.setMass(1000);
 	
 
 	rectangle rect1(vector2(1920, 100), vector2(0, 980));
@@ -54,9 +54,11 @@ int main()
 	sf::RectangleShape sky(sf::Vector2f(1920, 1080));
 	sky.setFillColor(sf::Color::Cyan);
 
-	force circ1Force = force(circ1, vector2(100, 0));
-	force circ2Force = force(circ2, vector2(100, 0));
+	//force circ1Force = force(circ1, vector2(100, 0));
+	//force circ2Force = force(circ2, vector2(100, 0));
 
+	circ1.setAcceleration(0, 0);
+	circ2.setAcceleration(0, 0);
 	
 
 	while (window.isOpen())
