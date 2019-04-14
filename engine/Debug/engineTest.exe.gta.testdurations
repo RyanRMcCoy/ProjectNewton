@@ -29,7 +29,7 @@
     <TestDuration Test="vector2Test.magnitude" Duration="1" />
     <TestDuration Test="forceTest.defaultConstructor" Duration="1" />
     <TestDuration Test="forceTest.objConstructor" Duration="1" />
-    <TestDuration Test="forceTest.vectorConstructor" Duration="1" />
+    <TestDuration Test="forceTest.vectorConstructor" Duration="53" />
     <TestDuration Test="forceTest.fullConstructor" Duration="1" />
     <TestDuration Test="physicalObjectTest.constructorFull" Duration="1" />
     <TestDuration Test="forceTest.setObj" Duration="1" />
@@ -50,7 +50,7 @@
     <TestDuration Test="vector2Test.operatorProject" Duration="1" />
     <TestDuration Test="circleTest.intersectCircle" Duration="1" />
     <TestDuration Test="circleTest.intersectRect" Duration="1" />
-    <TestDuration Test="circleTest.getArea" Duration="1" />
+    <TestDuration Test="circleTest.getArea" Duration="2" />
     <TestDuration Test="rectangleTest.getArea" Duration="1" />
     <TestDuration Test="satHandlerTest.circle_circle_Overlap" Duration="1" />
     <TestDuration Test="satHandlerTest.circle_circle_Overlap2" Duration="1" />
