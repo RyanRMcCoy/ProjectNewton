@@ -24,7 +24,7 @@ int main()
 	o1.setVelocity(vector2(500, -400));
 	o1.setAnchored(false);
 	
-	force f = force(&o1 , vector2(0, 980) * o1.getMass() / 2);
+	force f = force(&o1, vector2(0, 980) * o1.getMass());
 	//o1.setAcceleration(vector2(0, 980));
 
 	circle o2 = circle(100.f);
@@ -64,7 +64,7 @@ int main()
 	// Ground
 	sf::RectangleShape object3(sf::Vector2f(800, 100));
 	object3.setFillColor(sf::Color::Cyan);
-	object3.setPosition(0, 590);
+	object3.setPosition(50, 590);
 
 	// Drawing background
 	sf::RectangleShape background(sf::Vector2f(800, 600));
