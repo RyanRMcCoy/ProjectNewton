@@ -16,13 +16,13 @@ int main()
 	bool running = false;
 
 	//initilize circles in the engine
-	circle circ1(50, vector2(0, 400-100));
-	circle circ2(100, vector2(0, 980-200));
+	circle circ1(50, vector2(0, 400 - 100));
+	circle circ2(100, vector2(0, 980 - 200));
 
 	//set the mass of the larger circle to be twice as much as the smaller circle
 	circ1.setMass(5);
 	circ2.setMass(10);
-	
+
 	//Initilize rectangles in the engine and set them not to move
 	rectangle rect1(vector2(1920, 100), vector2(0, 980));
 	rect1.setAnchored(true);
@@ -51,7 +51,7 @@ int main()
 	sf::RectangleShape ground2(sf::Vector2f(1920, 100));
 	ground2.setFillColor(sf::Color::Green);
 	ground2.setPosition(0, 400);
-	
+
 	sf::RectangleShape sky(sf::Vector2f(1920, 1080));
 	sky.setFillColor(sf::Color::Cyan);
 
@@ -77,6 +77,21 @@ int main()
 		window.draw(circle2);
 		window.draw(circle1);
 		window.display();
+
+		// If ball is out of screen, wrap it around and reset
+		int circ1X = circ1.getXpos();
+		int circ2X = circ2.getXpos();
+		if (circ1X > 1920 + circ1.getRadius()) {
+			circ1.setPosition(vector2(0, 400 - 100));
+			circle1.setPosition(0, 400 - 100);
+			circ1.setVelocity(0, 0);
+		}
+		if (circ2X > 1920 + circ2.getRadius()) {
+			circ2.setPosition(vector2(0, 980 - 200));
+			circ2.setVelocity(0, 0);
+			circle2.setPosition(0, 980 - 200);
+		}
+			
 
 		//start the simulation
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
