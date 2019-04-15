@@ -1,10 +1,34 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Irregular Polygon Demo");
+	sf::VertexArray triangleStrip(sf::TriangleStrip, 10);
+
+	triangleStrip[0].position = sf::Vector2f(10.f, 10.f);
+	triangleStrip[1].position = sf::Vector2f(10.f, 100.f);
+	triangleStrip[2].position = sf::Vector2f(100.f, 10.f);
+	triangleStrip[3].position = sf::Vector2f(100.f, 100.f);
+	triangleStrip[4].position = sf::Vector2f(160.f, 50.f);
+	triangleStrip[5].position = sf::Vector2f(160.f, 140.f);
+	triangleStrip[6].position = sf::Vector2f(225.f, 50.f);
+	triangleStrip[7].position = sf::Vector2f(225.f, 140.f);
+	triangleStrip[8].position = sf::Vector2f(300.f, 90.f);
+	triangleStrip[9].position = sf::Vector2f(300.f, 180.f);
+
+	triangleStrip[0].color = sf::Color::Red;
+	triangleStrip[1].color = sf::Color::Cyan;
+	triangleStrip[2].color = sf::Color::Blue;
+	triangleStrip[3].color = sf::Color::Green;
+	triangleStrip[4].color = sf::Color::Magenta;
+	triangleStrip[5].color = sf::Color::Red;
+	triangleStrip[6].color = sf::Color::Red;
+	triangleStrip[7].color = sf::Color::Red;
+	triangleStrip[8].color = sf::Color::Red;
+	triangleStrip[9].color = sf::Color::Red;
+
 
 	while (window.isOpen())
 	{
@@ -16,7 +40,7 @@ int main()
 		}
 
 		window.clear();
-		window.draw(shape);
+		window.draw(triangleStrip);
 		window.display();
 	}
 
