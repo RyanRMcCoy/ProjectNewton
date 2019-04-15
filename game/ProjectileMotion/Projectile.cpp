@@ -15,26 +15,27 @@ int main()
 	int frameRate = 120;
 	bool running = false;
 
+	//initilize circles in the engine
 	circle circ1(50, vector2(0, 400-100));
 	circle circ2(100, vector2(0, 980-200));
 
-	//force f1 = force(circ1, vector2(20, 10));
-	//force f2 = force(circ2, vector2(20, 10));
+	//set the mass of the larger circle to be twice as much as the smaller circle
 	circ1.setMass(5);
 	circ2.setMass(10);
 	
-
+	//Initilize rectangles in the engine and set them not to move
 	rectangle rect1(vector2(1920, 100), vector2(0, 980));
 	rect1.setAnchored(true);
-
 	rectangle rect2(vector2(1920, 100), vector2(0, 400));
 	rect2.setAnchored(true);
 
+	//add the objects to the engine
 	physics.addCircle(circ1);
 	physics.addCircle(circ2);
 	physics.addPolygon(rect1);
 	physics.addPolygon(rect2);
 
+	//SFML Graphics Setup
 	sf::RenderWindow window(sf::VideoMode(600, 400), "Projectile Motion", sf::Style::Fullscreen);
 	sf::CircleShape circle1(circ1.getRadius());
 	sf::CircleShape circle2(circ2.getRadius());
@@ -54,13 +55,11 @@ int main()
 	sf::RectangleShape sky(sf::Vector2f(1920, 1080));
 	sky.setFillColor(sf::Color::Cyan);
 
-	force circ1Force = force(&circ1, vector2(300, 0));
-	force circ2Force = force(&circ2, vector2(300, 0));
+	//Initilize forces
+	force circ1Force = force();
+	force circ2Force = force();
 
-	//circ1.setAcceleration(0, 0);
-	//circ2.setAcceleration(0, 0);
-	
-
+	//Window loop
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -70,6 +69,7 @@ int main()
 				window.close();
 		}
 
+		//draw the objects 
 		window.clear();
 		window.draw(sky);
 		window.draw(ground1);
@@ -83,10 +83,14 @@ int main()
 			running = true;
 		}
 
+		//reset the simulation
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
 			circ1.setPosition(vector2(0, 400-100));
 			circ2.setPosition(vector2(0, 980-200));
-			
+
+			circ1.setVelocity(0, 0);
+			circ2.setVelocity(0, 0);
+						
 			circle1.setPosition(0, 400-100);
 			circle2.setPosition(0, 980-200);
 			
@@ -99,9 +103,13 @@ int main()
 			window.close();
 		}
 
+		/*If the simulation is started apply the same force to both 
+		circles and update their graphics on screen*/
 		if (running)
 		{
 			physics.update(120);
+			circ1Force = force(&circ1, vector2(300, 0));
+			circ2Force = force(&circ2, vector2(300, 0));
 			circle1.setPosition(circ1.getXpos(), circ1.getYpos());
 			circle2.setPosition(circ2.getXpos(), circ2.getYpos());
 			physics.update(frameRate);
