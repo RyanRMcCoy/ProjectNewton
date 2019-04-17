@@ -4,7 +4,7 @@
 class force
 {
 private:
-	physicalObject *obj;			// Object being acted upon
+	physicalObject *obj;		// Object being acted upon
 	vector2 accelerationVector;	// Vector of the Force
 	float magnitude;
 public:
