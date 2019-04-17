@@ -31,8 +31,22 @@ int main()
 	o2.setAcceleration(vector2(0, 0));
 	o2.setMass(5.f);
 
+	rectangle left = rectangle(1, 10000, vector2(0, 0));
+	rectangle right = rectangle(1, 10000, vector2(1920, 0));
+	rectangle top = rectangle(192000, 1, vector2(0, 0));
+	rectangle bottom = rectangle(192000, 1, vector2(0, 1080));
+
+	left.setAnchored(true);
+	right.setAnchored(true);
+	top.setAnchored(true);
+	bottom.setAnchored(true);
+
 	physics.addCircle(o1);
 	physics.addCircle(o2);
+	physics.addPolygon(right);
+	physics.addPolygon(left);
+	physics.addPolygon(top);
+	physics.addPolygon(bottom);
 
 	// Drawing initial circles on window
 
@@ -47,6 +61,11 @@ int main()
 	object2.setFillColor(sf::Color::Blue);
 	o2.setPosition(vector2(1000, 540));
 	object2.setPosition(o2.getXpos(), o2.getYpos());
+
+	sf::RectangleShape leftDis(sf::Vector2f(left.getSideX(), left.getSideY()));
+	leftDis.setPosition(left.getXpos() - left.getSideX() / 2, left.getYpos() - left.getSideY() / 2);
+	leftDis.setFillColor(sf::Color::Magenta);
+	
 
 	// Drawing background
 	sf::RectangleShape background(sf::Vector2f(1920, 1080));
@@ -95,7 +114,7 @@ int main()
 		else if (o2Pos.getY() < -o2.getRadius() * 2)
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
 
-		int speed = 600;
+		int speed = 1000;
 
 		// Applying force to the circle when wasd is pressed
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
