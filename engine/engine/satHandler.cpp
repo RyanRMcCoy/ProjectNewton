@@ -70,7 +70,7 @@ vector2 getMaxProjection(int n, vector2 *vertices, vector2 projectionAxis)
 	Not sure if the overlap calculations for the cases where one objects projection
 	is within the others are correct.
 */
-vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj, vector2 o2MaxProj, bool *overhang)
+vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj, vector2 o2MaxProj, int *overhang)
 {
 	// Primitive representations of vector projections (for simpler math)
 	float v11(0), v12(0), v21(0), v22(0);
@@ -146,7 +146,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 	float minOverlapMag = maxFloat;
 	vector2 minOverlap; // Direction for o1 to move "out" of o2
 
-	bool overhang = false;
+	int overhangs = 0;
 
 	for (int i = 0; i < n; i++)
 	{
@@ -160,7 +160,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		vector2 o2MinProj = getMinProjection(n, vertices, projectionAxis);
 		vector2 o2MaxProj = getMaxProjection(n, vertices, projectionAxis);
 
-		bool newOverhang = false;
+		int overhang = false;
 
 		if (projectionAxis.getX() != 0 && o1MinProj.getX() > o1MaxProj.getX())
 		{
@@ -175,7 +175,8 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 			o1MaxProj = temp;
 		}
 
-		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj, &newOverhang);
+		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj, &overhang);
+		overhangs += overhang;
 
 		// If there was no overlap found, then return zero vector
 		if (overlap.getX() == maxFloat)
@@ -187,7 +188,6 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		{
 			if (vertexOverlap.magnitude() < minOverlapMag)
 			{
-				overhang = newOverhang;
 				minOverlap = vertexOverlap;
 				minOverlapMag = vertexOverlap.magnitude();
 			}
@@ -200,19 +200,21 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		}
 	}
 
-	if (overhang)
+	if (overhangs >= 2)
 	{
 		for (int i = 0; i < n; i++)
 		{
-			vector2 vertex = vertices[i];
-			if ((o1.getPosition() - vertex).magnitude() < o1.getRadius())
+			//vector2 vertex = vertices[i];
+			float overlap = o1.getRadius() - (vertices[i] - o1.getPosition()).magnitude();
+			if (overlap > 0)
 			{
-				return (vertex - o2.getPosition());
+				return ((o1.getPosition() - vertices[i]).unit() * overlap);
 			}
 		}
+		return vector2();
 	}
-
-	return minOverlap;
+	else
+		return minOverlap;
 }
 
 vector2 satHandler::overlapping(polygon o1, circle o2)
@@ -230,7 +232,7 @@ vector2 satHandler::overlapping(polygon o1, polygon o2)
 	float minOverlapMag = maxFloat;
 	vector2 minOverlap; // Direction for o1 to move "out" of o2
 
-	bool overhang = false;
+	int overhang = 0;
 
 	for (int i = 0; i < n1; i++)
 	{
