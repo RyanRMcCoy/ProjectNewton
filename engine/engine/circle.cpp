@@ -2,7 +2,7 @@
 #include "rectangle.h"
 #include "pch.h"
 
-circle::circle()
+circle::circle() : physicalObject()
 {
 	radius = 0;
 
@@ -12,7 +12,7 @@ circle::circle()
 	mu = 0;
 }
 
-circle::circle(float rad)
+circle::circle(float rad) : physicalObject()
 {
 	radius = rad;
 
@@ -22,7 +22,7 @@ circle::circle(float rad)
 	mu = 0;
 }
 
-circle::circle(float rad, vector2 pos)
+circle::circle(float rad, vector2 pos) : physicalObject()
 {
 	setPosition(pos.getX(), pos.getY());
 	radius = rad;
@@ -33,7 +33,7 @@ circle::circle(float rad, vector2 pos)
 	mu = 0;
 }
 
-circle::circle(float rad, vector2 pos, float d)
+circle::circle(float rad, vector2 pos, float d) : physicalObject()
 {
 	setPosition(pos.getX(), pos.getY());
 	radius = rad;
