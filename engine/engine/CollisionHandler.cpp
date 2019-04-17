@@ -9,10 +9,12 @@ collisionHandler::collisionHandler() {}
 void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 {
 	float avgFriction = (o1->getFriction() + o2->getFriction()) / 2;
+	force frictionalForce = force(o1, vector2(o1->getAcceleration().getX() * avgFriction, o1->getAcceleration().getY() *avgFriction));
 
 	vector2 v1 = o1->getVelocity();
 
-	//force frictionalForce = force(o1, vector2(o1->getAcceleration().getX() * avgFriction, o1->getAcceleration().getY() *avgFriction));
+	if (v1.magnitude() < 0)
+		frictionalForce.remove();
 
 	// Determine velocities
 	o1->setVelocity(o1->getVelocity() - penetration->unit() *
@@ -21,6 +23,8 @@ void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *p
 
 	// Move objects out of each other
 	o1->setPosition(o1->getPosition() + (*penetration));
+
+	frictionalForce.remove();
 }
 
 void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
@@ -37,6 +41,10 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 	}
 
 	float avgFriction = (o1->getFriction() + o2->getFriction()) / 2;
+
+	force frictionalForceO1 = force(o1, vector2(o1->getAcceleration().getX() * avgFriction, o1->getAcceleration().getY() *avgFriction));
+	force frictionalForceO2 = force(o2, vector2(o2->getAcceleration().getX() * avgFriction, o2->getAcceleration().getY() *avgFriction));
+
 	float totalMass = (o1->getMass() + o2->getMass());
 	float o1Ratio = (o1->getVelocity() * o1->getMass()).magnitude() / 
 		((o1->getVelocity() * o1->getMass()).magnitude() + (o2->getVelocity() * o2->getMass()).magnitude());
@@ -47,6 +55,11 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 
 	vector2 v1 = o1->getVelocity();
 	vector2 v2 = o2->getVelocity();
+
+	if (v1.magnitude() <= 0)
+		frictionalForceO1.remove();
+	if (v2.magnitude() <= 0)
+		frictionalForceO2.remove();
 
 	float p1 = (v1 * ((o1->getMass() - o2->getMass()) / (totalMass)) + v2 * ((2 * o2->getMass()) / totalMass)).magnitude() * o1->getMass();
 	float p2 = totalMomentum - p1;
@@ -69,6 +82,9 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 	cout << "Resolution Position: " << (o1->getPosition() + (*penetration) * o1Ratio).toString() << endl;
 	o1->setPosition(o1->getPosition() + (*penetration) * o1Ratio);
 	o2->setPosition(o2->getPosition() + (*penetration) * o2Ratio);
+	
+	frictionalForceO1.remove();
+	frictionalForceO2.remove();
 }
 
 /* 
