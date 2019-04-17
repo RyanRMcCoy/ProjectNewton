@@ -2,10 +2,19 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
+#include "../../../../engine/engine/engine.h"
+#include "../../../../engine/engine/vector2.h"
+#include "../../../../engine/engine/physicalObject.h"
+#include "../../../../engine/engine/circle.h"
+#include "../../../../engine/engine/force.h"
+
+#include <vector>
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Irregular Polygon Demo");
-	sf::VertexArray triangleStrip(sf::TriangleStrip, 10);
+	int points = 10;
+	sf::VertexArray triangleStrip(sf::TriangleStrip, points);
 
 	triangleStrip[0].position = sf::Vector2f(10.f, 10.f);
 	triangleStrip[1].position = sf::Vector2f(10.f, 100.f);
@@ -28,6 +37,11 @@ int main()
 	triangleStrip[7].color = sf::Color::Red;
 	triangleStrip[8].color = sf::Color::Red;
 	triangleStrip[9].color = sf::Color::Red;
+
+	engine physics = engine();
+
+	vector<vector2> irregularPolygon(points);
+
 
 
 	while (window.isOpen())
