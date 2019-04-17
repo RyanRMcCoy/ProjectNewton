@@ -95,45 +95,47 @@ int main()
 		else if (o2Pos.getY() < -o2.getRadius() * 2)
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
 
+		int speed = 600;
+
 		// Applying force to the circle when wasd is pressed
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			force downForce1 = force(&o1, vector2(0, 600));
+			force downForce1 = force(&o1, vector2(0, speed));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			force downForce2 = force(&o2, vector2(0, 600));
+			force downForce2 = force(&o2, vector2(0, speed));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			force upForce1 = force(&o1, vector2(0, -600));
+			force upForce1 = force(&o1, vector2(0, -speed));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			force upForce2 = force(&o2, vector2(0, -600));
+			force upForce2 = force(&o2, vector2(0, -speed));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			force downForce1 = force(&o1, vector2(-600, 0));
+			force downForce1 = force(&o1, vector2(-speed, 0));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			force downForce2 = force(&o2, vector2(-600, 0));
+			force downForce2 = force(&o2, vector2(-speed, 0));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			force downForce1 = force(&o1, vector2(600, 0));
+			force downForce1 = force(&o1, vector2(speed, 0));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			force downForce2 = force(&o2, vector2(600, 0));
+			force downForce2 = force(&o2, vector2(speed, 0));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
