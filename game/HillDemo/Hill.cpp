@@ -28,7 +28,7 @@ int main()
 	//boxPH.setAnchored(true);
 
 	circle ballPH = circle(100.F, vector2(100, 100));
-	ballPH.setVelocity(vector2(200, 100));
+	ballPH.setVelocity(vector2(100, 200));
 	ballPH.setAcceleration(vector2(0, 1920));
 	//ballPH.setAnchored(true);
 

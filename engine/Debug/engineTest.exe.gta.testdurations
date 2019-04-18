@@ -81,6 +81,6 @@
     <TestDuration Test="materialTest.polySetMass" Duration="1" />
     <TestDuration Test="materialTest.heron" Duration="1" />
     <TestDuration Test="materialTest.polyArea" Duration="1" />
-    <TestDuration Test="satHandlerTest.triangle_circle_Overlap" Duration="1" />
+    <TestDuration Test="satHandlerTest.triangle_circle_Overlap" Duration="5" />
   </TestDurations>
 </GtaTestDurations>

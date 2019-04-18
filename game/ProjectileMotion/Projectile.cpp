@@ -123,8 +123,8 @@ int main()
 		if (running)
 		{
 			physics.update(120);
-			circ1Force = force(&circ1, vector2(300, 0));
-			circ2Force = force(&circ2, vector2(300, 0));
+			circ1Force = force(&circ1, vector2(30, 0));
+			circ2Force = force(&circ2, vector2(30, 0));
 			circle1.setPosition(circ1.getXpos(), circ1.getYpos());
 			circle2.setPosition(circ2.getXpos(), circ2.getYpos());
 			physics.update(frameRate);
