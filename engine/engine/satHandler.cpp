@@ -7,7 +7,6 @@
 using namespace std;
 
 satHandler::satHandler() {}
-
 const float maxFloat = numeric_limits<float>::max();
 
 vector2 getMinProjection(int n, vector2 *vertices, vector2 projectionAxis)

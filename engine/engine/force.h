@@ -24,5 +24,7 @@ public:
 
 	float getMagnitude();
 	void  setMagnitude(float mag);
+	
+	void remove();
 };
 

@@ -7,6 +7,7 @@
 #include "../../../../engine/engine/physicalObject.h"
 #include "../../../../engine/engine/circle.h"
 #include "../../../../engine/engine/force.h"
+#include "../../../../engine/engine/polygon.h"
 
 #include <vector>
 
@@ -39,10 +40,24 @@ int main()
 	triangleStrip[9].color = sf::Color::Red;
 
 	engine physics = engine();
+	int refreshRate = 120;
 
-	vector<vector2> irregularPolygon(points);
+	vector2 pointsArray[] = {
+		vector2(10.f, 10.f),
+		vector2(10.f, 100.f),
+		vector2(100.f, 10.f),
+		vector2(100.f, 100.f),
+		vector2(160.f, 50.f),
+		vector2(160.f, 140.f),
+		vector2(225.f, 50.f),
+		vector2(225.f, 140.f),
+		vector2(300.f, 90.f),
+		vector2(300.f, 180.f)
+	};
 
-
+	polygon physicsObject = polygon(points, pointsArray, vector2(0, 0));
+	physicsObject.setMass(100.f);
+	physics.addPolygon(physicsObject);
 
 	while (window.isOpen())
 	{
@@ -53,9 +68,37 @@ int main()
 				window.close();
 		}
 
+		physics.update(refreshRate);
+		vector2 *vertices = physicsObject.getVertices();
+
+		for (int i = 0; i < (int)triangleStrip.getVertexCount(); ++i) {
+			triangleStrip[i].position = sf::Vector2f(vertices[i].getX(), vertices[i].getY());
+		}
+
 		window.clear();
 		window.draw(triangleStrip);
 		window.display();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			force upForce = force(&physicsObject, vector2(0.f, -100.f));
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+			force leftForce = force(&physicsObject, vector2(-100.f, 0.f));
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			force downForce = force(&physicsObject, vector2(0.f, 100.f));
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+			force rightForce = force(&physicsObject, vector2(100.f, 0.f));
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			window.close();
+		}
 	}
 
 	return 0;

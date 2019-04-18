@@ -31,10 +31,15 @@ int main()
 	o2.setAcceleration(vector2(0, 0));
 	o2.setMass(5.f);
 
-	rectangle left = rectangle(1, 10000, vector2(0, 0));
-	rectangle right = rectangle(1, 10000, vector2(1920, 0));
-	rectangle top = rectangle(192000, 1, vector2(0, 0));
-	rectangle bottom = rectangle(192000, 1, vector2(0, 1080));
+	int big = 100000;
+	rectangle left = rectangle(1, big);
+	left.setPosition(vector2(0, 0));
+	rectangle right = rectangle(1, big);
+	right.setPosition(vector2(1920, 0));
+	rectangle top = rectangle(big, 1);
+	top.setPosition(vector2(0, 0));
+	rectangle bottom = rectangle(big, 1);
+	bottom.setPosition(vector2(0, 1080));
 
 	left.setAnchored(true);
 	right.setAnchored(true);
@@ -71,11 +76,38 @@ int main()
 	sf::RectangleShape background(sf::Vector2f(1920, 1080));
 	background.setFillColor(sf::Color::Green);
 
+	force downForceRed = force(&o1, vector2(0, 0));
+	force upForceRed = force(&o1, vector2(0, 0));
+	force leftForceRed = force(&o1, vector2(0, 0));
+	force rightForceRed = force(&o1, vector2(0, 0));
+
+	force downForceBlue = force(&o2, vector2(0, 0));
+	force upForceBlue = force(&o2, vector2(0, 0));
+	force leftForceBlue = force(&o2, vector2(0, 0));
+	force rightForceBlue = force(&o2, vector2(0, 0));
+
+	int speed = 1000;
+
 	while (window.isOpen())
 	{
+		window.setKeyRepeatEnabled(false);
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::S) {
+					downForceRed.setVector(vector2(0, speed));
+				}
+				if (event.key.code == sf::Keyboard::W) {
+					downForceRed.setVector(vector2(0, -speed));
+				}
+				if (event.key.code == sf::Keyboard::A) {
+					downForceRed.setVector(vector2(-speed, 0));
+				}
+				if (event.key.code == sf::Keyboard::D) {
+					downForceRed.setVector(vector2(speed, 0));
+				}
+			}
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
@@ -89,7 +121,7 @@ int main()
 		window.draw(object1);
 		window.draw(object2);
 		window.display();
-
+		/*
 		// If o1 is out of screen, wrap it around
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 1920 + o1.getRadius())
@@ -114,43 +146,31 @@ int main()
 		else if (o2Pos.getY() < -o2.getRadius() * 2)
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
 
-		int speed = 1000;
+			*/
+		
 
 		// Applying force to the circle when wasd is pressed
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			force downForce1 = force(&o1, vector2(0, speed));
-		}
+		
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
 			force downForce2 = force(&o2, vector2(0, speed));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		{
-			force upForce1 = force(&o1, vector2(0, -speed));
-		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			force upForce2 = force(&o2, vector2(0, -speed));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		{
-			force downForce1 = force(&o1, vector2(-speed, 0));
-		}
+		
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			force downForce2 = force(&o2, vector2(-speed, 0));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			force downForce1 = force(&o1, vector2(speed, 0));
-		}
+		
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{

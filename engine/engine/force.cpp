@@ -38,7 +38,8 @@ void force::updateMagnitude()
 
 void force::updateObjAcc()
 {
-	obj -> setAcceleration(accelerationVector/obj->getMass());
+	vector2 oldAccel = obj->getAcceleration();
+	obj -> setAcceleration(oldAccel + (accelerationVector/obj->getMass()));
 }
 
 physicalObject* force::getObj()
@@ -73,4 +74,9 @@ void force::setMagnitude(float mag)
 	vector2 newVector = accelerationVector.unit() * mag;
 	
 	setVector(newVector);
+}
+
+void force::remove()
+{
+	setVector(accelerationVector * -1);
 }
