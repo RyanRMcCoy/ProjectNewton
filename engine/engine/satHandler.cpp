@@ -109,7 +109,7 @@ vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj
 	{
 		if (v22 >= v12) // o2 projection partially inside o1 projection (coming from right side also)
 		{ 
-			if (v21 - v12 > (v12 - v11) / 2)
+			if (v21 - v11 > (v12 - v11) / 2)
 				*overhang = true;
 			return o2MinProj - o1MaxProj;
 		}
@@ -215,7 +215,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		{
 			//vector2 vertex = vertices[i];
 			float overlap = o1.getRadius() - (vertices[i] - o1.getPosition()).magnitude();
-			if (overlap < 0)
+			if (overlap > 0)
 			{
 				return ((o1.getPosition() - vertices[i]).unit() * overlap);
 			}

@@ -12,9 +12,9 @@ physicalObject::physicalObject()
 	angularVelocity = 0;
 
 	mass = 0;
-	density = 0;
-	elasticity = 1;
-	mu = 0;
+	density = 1;
+	elasticity = .5;
+	mu = .5;
 
 	anchored = false;
 	colliding = false;
@@ -30,9 +30,9 @@ physicalObject::physicalObject(vector2 pos)
 	angularVelocity = 0;
 
 	mass = 0;
-	density = 0;
-	elasticity = 1;
-	mu = 0;
+	density = 1;
+	elasticity = .5;
+	mu = .5;
 
 	anchored = false;
 	colliding = false;
@@ -48,9 +48,9 @@ physicalObject::physicalObject(vector2 pos, vector2 vel)
 	angularVelocity = 0;
 
 	mass = 0;
-	density = 0;
-	elasticity = 1;
-	mu = 0;
+	density = 1;
+	elasticity = .5;
+	mu = .5;
 
 	anchored = false;
 	colliding = false;
@@ -66,9 +66,9 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 	angularVelocity = 0;
 
 	mass = 0;
-	density = 0;
-	elasticity = 1;
-	mu = 0;
+	density = 1;
+	elasticity = .5;
+	mu = .5;
 
 	anchored = false;
 	colliding = false;

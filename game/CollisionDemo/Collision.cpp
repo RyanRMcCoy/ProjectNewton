@@ -23,7 +23,7 @@ int main()
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(500, -400));
 	o1.setAnchored(false);
-	o1.setElasticity(.75);
+	o1.setElasticity(.7);
 	
 	force f = force(&o1, vector2(0, 980) * o1.getMass());
 	//o1.setAcceleration(vector2(0, 980));
@@ -32,6 +32,7 @@ int main()
 	o2.setVelocity(vector2(-400, -300));
 	o2.setAcceleration(vector2(0, 980));
 	o2.setAnchored(true);
+	o2.setElasticity(.7);
 
 	rectangle ground = rectangle(vector2(400, 100), vector2(400, 640));
 	ground.setAnchored(true);
