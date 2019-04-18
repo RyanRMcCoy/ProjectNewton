@@ -31,15 +31,14 @@ int main()
 	o2.setAcceleration(vector2(0, 0));
 	o2.setMass(5.f);
 
-	int big = 100000;
-	rectangle left = rectangle(1, big);
-	left.setPosition(vector2(0, 0));
-	rectangle right = rectangle(1, big);
-	right.setPosition(vector2(1920, 0));
-	rectangle top = rectangle(big, 1);
-	top.setPosition(vector2(0, 0));
-	rectangle bottom = rectangle(big, 1);
-	bottom.setPosition(vector2(0, 1080));
+	rectangle left = rectangle(100, 1080);
+	left.setPosition(vector2(-50, 590));
+	rectangle right = rectangle(100, 1080);
+	right.setPosition(vector2(1970, 590));
+	rectangle top = rectangle(1920, 100);
+	top.setPosition(vector2(960, -50));
+	rectangle bottom = rectangle(1920, 100);
+	bottom.setPosition(vector2(960, 1130));
 
 	left.setAnchored(true);
 	right.setAnchored(true);
@@ -86,7 +85,7 @@ int main()
 	force leftForceBlue = force(&o2, vector2(0, 0));
 	force rightForceBlue = force(&o2, vector2(0, 0));
 
-	int speed = 1000;
+	int speed = 1;
 
 	while (window.isOpen())
 	{

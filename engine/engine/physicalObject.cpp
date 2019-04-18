@@ -8,8 +8,12 @@ physicalObject::physicalObject()
 	velocity = vector2();
 	acceleration = vector2();
 
+	rotation = 0;
+	angularVelocity = 0;
+
 	mass = 0;
 	density = 0;
+	elasticity = 1;
 	mu = 0;
 
 	anchored = false;
@@ -22,8 +26,12 @@ physicalObject::physicalObject(vector2 pos)
 	velocity = vector2();
 	acceleration = vector2();
 
+	rotation = 0;
+	angularVelocity = 0;
+
 	mass = 0;
 	density = 0;
+	elasticity = 1;
 	mu = 0;
 
 	anchored = false;
@@ -36,9 +44,12 @@ physicalObject::physicalObject(vector2 pos, vector2 vel)
 	velocity = vel;
 	acceleration = vector2();
 
+	rotation = 0;
+	angularVelocity = 0;
 
 	mass = 0;
 	density = 0;
+	elasticity = 1;
 	mu = 0;
 
 	anchored = false;
@@ -51,8 +62,12 @@ physicalObject::physicalObject(vector2 pos, vector2 vel, vector2 acc)
 	velocity = vel;
 	acceleration = acc;
 
+	rotation = 0;
+	angularVelocity = 0;
+
 	mass = 0;
 	density = 0;
+	elasticity = 1;
 	mu = 0;
 
 	anchored = false;
@@ -134,6 +149,26 @@ void physicalObject::setAcceleration(float x, float y)
 	acceleration = vector2(x, y);
 }
 
+float physicalObject::getRotation()
+{
+	return rotation;
+}
+
+void physicalObject::setRotation(float rot)
+{
+	rotation = rot;
+}
+
+float physicalObject::getAngularVelocity()
+{
+	return angularVelocity;
+}
+
+void physicalObject::setAngularVelocity(float angVel)
+{
+	angularVelocity = angVel;
+}
+
 float physicalObject::getMass()
 {
 	return mass;
@@ -142,6 +177,16 @@ float physicalObject::getMass()
 float physicalObject::getDensity()
 {
 	return density;
+}
+
+float physicalObject::getElasticity()
+{
+	return elasticity;
+}
+
+void physicalObject::setElasticity(float e)
+{
+	elasticity = e;
 }
 
 float physicalObject::getFriction()

@@ -5,11 +5,21 @@
 
 collisionHandler::collisionHandler() {}
 
+#define FRICTION_SPEED_THRESHHOLD 1
+
+float min(float n1, float n2)
+{
+	if (n1 < n2)
+		return n1;
+	return n2;
+}
+
 // o2 is anchored, o1 is not
 void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 {
-	float avgFriction = (o1->getFriction() + o2->getFriction()) / 2;
-	force frictionalForce = force(o1, vector2(o1->getAcceleration().getX() * avgFriction, o1->getAcceleration().getY() *avgFriction));
+	float friction = min(o1->getFriction(), o2->getFriction());
+	float elasticity = min(o1->getElasticity(), o2->getElasticity());
+	force frictionalForce = force(o1, vector2(o1->getAcceleration().getX() * friction, o1->getAcceleration().getY() * friction));
 
 	vector2 v1 = o1->getVelocity();
 
@@ -19,7 +29,14 @@ void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *p
 	// Determine velocities
 	o1->setVelocity(o1->getVelocity() - penetration->unit() *
 		(o1->getVelocity().dot(penetration->unit())) * 2);
-	o1->setVelocity(o1->getVelocity() - o1->getVelocity().project(*penetration) * .25);
+	o1->setVelocity(o1->getVelocity() - o1->getVelocity().project(*penetration) * (1 - elasticity));
+
+	// Determine velocities along collision axis to determine whether to apply friction
+	float normalSpeed = o1->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
+	if (normalSpeed < FRICTION_SPEED_THRESHHOLD)
+	{
+		// Apply friction here
+	}
 
 	// Move objects out of each other
 	o1->setPosition(o1->getPosition() + (*penetration));

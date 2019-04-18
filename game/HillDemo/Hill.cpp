@@ -30,12 +30,13 @@ int main()
 	circle ballPH = circle(100.F, vector2(100, 100));
 	ballPH.setVelocity(vector2(200, 100));
 	ballPH.setAcceleration(vector2(0, 1920));
+	ballPH.setElasticity(.1);
 	//ballPH.setAnchored(true);
 
 	physics.addPolygon(groundPH);
 	physics.addPolygon(boxPH);
-	//physics.addPolygon(box2PH);
-	physics.addCircle(ballPH);
+	physics.addPolygon(box2PH);
+	//physics.addCircle(ballPH);
 
 	// sfml graphics for ground
 	sf::ConvexShape ground;
@@ -81,7 +82,7 @@ int main()
 		window.draw(box);
 		window.draw(ground);
 		window.draw(ball);
-		//window.draw(box2);
+		window.draw(box2);
 		window.display();
 
 		// If ball is out of screen, wrap it around

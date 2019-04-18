@@ -23,6 +23,7 @@ int main()
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(500, -400));
 	o1.setAnchored(false);
+	o1.setElasticity(.75);
 	
 	force f = force(&o1, vector2(0, 980) * o1.getMass());
 	//o1.setAcceleration(vector2(0, 980));

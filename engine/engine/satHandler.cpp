@@ -152,14 +152,23 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 
 	for (int i = 0; i < n; i++)
 	{
+		float bubbleRadius = (vertices[i] - o2.getPosition()).magnitude() / 2;
+		vector2 bubbleCenter = o2.getPosition() + ((vertices[i] - o2.getPosition()) / 2);
+		float distance = (o1.getPosition() - bubbleCenter).magnitude() - (o1.getRadius() + bubbleRadius);
+		vector2 overlap = (o1.getPosition() - vertices[i]).unit() * ((o1.getPosition() - vertices[i]).magnitude() + o1.getRadius());
+		if (distance < 0 && overlap.magnitude() < minOverlapMag)
+		{
+			minOverlapMag = overlap.magnitude();
+			minOverlap = overlap;
+		}
+	}
+	if (minOverlapMag == maxFloat)
+		return vector2();
+
+	for (int i = 0; i < n; i++)
+	{
 		// Projection axes are normals(perps) of each side of polygon
 		vector2 projectionAxis = (vertices[(i + 1) % n] - vertices[i]).perpendicular().unit();
-
-		float bubbleRadius = (vertices[i] - o2.getPosition()).magnitude();
-		vector2 bubbleCenter = ((vertices[i] - o2.getPosition()) / 2) + o2.getPosition();
-		float distance = (o1.getPosition() - bubbleCenter).magnitude() - (o1.getRadius() + bubbleRadius);
-		if (distance > 0)
-			return vector2();
 
 		// Get the projections for each shape onto the projectionAxis
 		vector2 o1Proj = o1.getPosition().project(projectionAxis);
@@ -200,7 +209,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 		}
 	}
 
-	if (false)
+	if (overhanging)
 	{
 		for (int i = 0; i < n; i++)
 		{
