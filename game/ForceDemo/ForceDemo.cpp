@@ -88,7 +88,7 @@ int main()
 	force leftForceBlue = force(&o2, vector2(0, 0));
 	force rightForceBlue = force(&o2, vector2(0, 0));
 
-	int speed = 1000;
+	int speed = 3000;
 
 	while (window.isOpen())
 	{
@@ -98,33 +98,48 @@ int main()
 		{
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::S) {
+					o1.setAcceleration(0, 0);
 					downForceRed.setVector(vector2(0, speed));
+					//downForceRed.remove();
 				}
 				if (event.key.code == sf::Keyboard::W) {
+					o1.setAcceleration(0, 0);
 					downForceRed.setVector(vector2(0, -speed));
+					downForceRed.setVector(vector2(0, 0));
 				}
 				if (event.key.code == sf::Keyboard::A) {
+					o1.setAcceleration(0, 0);
 					downForceRed.setVector(vector2(-speed, 0));
+					downForceRed.setVector(vector2(0, 0));
 				}
 				if (event.key.code == sf::Keyboard::D) {
+					o1.setAcceleration(0, 0);
 					downForceRed.setVector(vector2(speed, 0));
+					downForceRed.setVector(vector2(0, 0));
 				}
 				if (event.key.code == sf::Keyboard::Down) {
+					o2.setAcceleration(0, 0);
 					downForceBlue.setVector(vector2(0, speed));
 				}
 				if (event.key.code == sf::Keyboard::Up) {
+					o2.setAcceleration(0, 0);
 					downForceBlue.setVector(vector2(0, -speed));
 				}
 				if (event.key.code == sf::Keyboard::Left) {
+					o2.setAcceleration(0, 0);
 					downForceBlue.setVector(vector2(-speed, 0));
 				}
 				if (event.key.code == sf::Keyboard::Right) {
+					o2.setAcceleration(0, 0);
 					downForceBlue.setVector(vector2(speed, 0));
 				}
 			}
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+
+		
+		
 
 		physics.update(refreshRate);
 		object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
