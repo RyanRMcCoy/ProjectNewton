@@ -48,10 +48,12 @@ int main()
 
 	physics.addCircle(o1);
 	physics.addCircle(o2);
+	/*
 	physics.addPolygon(right);
 	physics.addPolygon(left);
 	physics.addPolygon(top);
 	physics.addPolygon(bottom);
+	*/
 
 	// Drawing initial circles on window
 
@@ -107,6 +109,18 @@ int main()
 				if (event.key.code == sf::Keyboard::D) {
 					downForceRed.setVector(vector2(speed, 0));
 				}
+				if (event.key.code == sf::Keyboard::Down) {
+					downForceBlue.setVector(vector2(0, speed));
+				}
+				if (event.key.code == sf::Keyboard::Up) {
+					downForceBlue.setVector(vector2(0, -speed));
+				}
+				if (event.key.code == sf::Keyboard::Left) {
+					downForceBlue.setVector(vector2(-speed, 0));
+				}
+				if (event.key.code == sf::Keyboard::Right) {
+					downForceBlue.setVector(vector2(speed, 0));
+				}
 			}
 			if (event.type == sf::Event::Closed)
 				window.close();
@@ -121,7 +135,7 @@ int main()
 		window.draw(object1);
 		window.draw(object2);
 		window.display();
-		/*
+		
 		// If o1 is out of screen, wrap it around
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 1920 + o1.getRadius())
@@ -146,36 +160,6 @@ int main()
 		else if (o2Pos.getY() < -o2.getRadius() * 2)
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
 
-			*/
-		
-
-		// Applying force to the circle when wasd is pressed
-		
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			force downForce2 = force(&o2, vector2(0, speed));
-		}
-
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			force upForce2 = force(&o2, vector2(0, -speed));
-		}
-
-		
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			force downForce2 = force(&o2, vector2(-speed, 0));
-		}
-
-		
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			force downForce2 = force(&o2, vector2(speed, 0));
-		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
