@@ -5,45 +5,62 @@
 
 collisionHandler::collisionHandler() {}
 
-// o2 is anchored, o1 is not
-void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *penetration)
+#define FRICTION_SPEED_THRESHHOLD 10
+
+float min(float n1, float n2)
 {
-	float avgFriction = (o1->getFriction() + o2->getFriction()) / 2;
-	force frictionalForce = force(o1, vector2(o1->getAcceleration().getX() * avgFriction, o1->getAcceleration().getY() *avgFriction));
+	if (n1 < n2)
+		return n1;
+	return n2;
+}
+
+// o2 is anchored, o1 is not
+void anchoredResolve(physicalObject *o1, physicalObject *o2, vector2 *penetration, float dt)
+{
+	float friction = min(o1->getFriction(), o2->getFriction());
+	float elasticity = min(o1->getElasticity(), o2->getElasticity());
+	//force frictionalForce = force(o1, vector2(o1->getAcceleration().getX() * friction, o1->getAcceleration().getY() * friction));
 
 	vector2 v1 = o1->getVelocity();
 
-	if (v1.magnitude() <= 0)
-		frictionalForce.remove();
+	//if (v1.magnitude() < 0)
+		//frictionalForce.remove();
 
 	// Determine velocities
 	o1->setVelocity(o1->getVelocity() - penetration->unit() *
 		(o1->getVelocity().dot(penetration->unit())) * 2);
-	o1->setVelocity(o1->getVelocity() - o1->getVelocity().project(*penetration) * .25);
+	o1->setVelocity(o1->getVelocity() - o1->getVelocity().project(*penetration) * (1 - elasticity));
+
+	// Determine velocities along collision axis to determine whether to apply friction
+	float normalSpeed = o1->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
+	if (normalSpeed < FRICTION_SPEED_THRESHHOLD)
+	{
+		//o1->setVelocity(o1->getVelocity() * friction * dt);
+	}
 
 	// Move objects out of each other
 	o1->setPosition(o1->getPosition() + (*penetration));
 
-	frictionalForce.remove();
+	//frictionalForce.remove();
 }
 
-void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
+void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration, float dt)
 {
 	if (o2->getAnchored())
 	{
-		resolveAnchoredCollision(o1, o2, penetration);
+		anchoredResolve(o1, o2, penetration, dt);
 		return;
 	}
 	else if (o1->getAnchored())
 	{
-		resolveAnchoredCollision(o2, o1, penetration);
+		anchoredResolve(o2, o1, penetration, dt);
 		return;
 	}
 
-	float avgFriction = (o1->getFriction() + o2->getFriction()) / 2;
+	float friction = min(o1->getFriction(), o2->getFriction());
 
-	force frictionalForceO1 = force(o1, vector2(o1->getAcceleration().getX() * avgFriction, o1->getAcceleration().getY() *avgFriction));
-	force frictionalForceO2 = force(o2, vector2(o2->getAcceleration().getX() * avgFriction, o2->getAcceleration().getY() *avgFriction));
+	//force frictionalForceO1 = force(o1, vector2(o1->getAcceleration().getX() * friction, o1->getAcceleration().getY() *avgFriction));
+	//force frictionalForceO2 = force(o2, vector2(o2->getAcceleration().getX() * friction, o2->getAcceleration().getY() *avgFriction));
 
 	float totalMass = (o1->getMass() + o2->getMass());
 	float o1Ratio = (o1->getVelocity() * o1->getMass()).magnitude() / 
@@ -56,16 +73,18 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 	vector2 v1 = o1->getVelocity();
 	vector2 v2 = o2->getVelocity();
 
+	/*
 	if (v1.magnitude() <= 0)
 		frictionalForceO1.remove();
 	if (v2.magnitude() <= 0)
 		frictionalForceO2.remove();
+	*/
 
 	float p1 = (v1 * ((o1->getMass() - o2->getMass()) / (totalMass)) + v2 * ((2 * o2->getMass()) / totalMass)).magnitude() * o1->getMass();
 	float p2 = totalMomentum - p1;
 
-	p1 *= .75;
-	p2 *= .75;
+	p1 *= o1->getElasticity();
+	p2 *= o2->getElasticity();
 
 	// Determine velocities
 	o1->setVelocity(
@@ -83,8 +102,8 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 	o1->setPosition(o1->getPosition() + (*penetration) * o1Ratio);
 	o2->setPosition(o2->getPosition() + (*penetration) * o2Ratio);
 	
-	frictionalForceO1.remove();
-	frictionalForceO2.remove();
+	//frictionalForceO1.remove();
+	//frictionalForceO2.remove();
 }
 
 /* 
@@ -94,22 +113,22 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration)
 	|||
 	vvv
 */
-void collisionHandler::resolveCollision(circle *o1, circle *o2, vector2 *penetration)
+void collisionHandler::resolveCollision(circle *o1, circle *o2, vector2 *penetration, float dt)
 {
-	resolve(o1, o2, penetration);
+	resolve(o1, o2, penetration, dt);
 }
 
-void collisionHandler::resolveCollision(circle *o1, polygon *o2, vector2 *penetration)
+void collisionHandler::resolveCollision(circle *o1, polygon *o2, vector2 *penetration, float dt)
 {
-	resolve(o1, o2, penetration);
+	resolve(o1, o2, penetration, dt);
 }
 
-void collisionHandler::resolveCollision(polygon *o1, circle *o2, vector2 *penetration)
+void collisionHandler::resolveCollision(polygon *o1, circle *o2, vector2 *penetration, float dt)
 {
-	resolve(o1, o2, penetration);
+	resolve(o1, o2, penetration, dt);
 }
 
-void collisionHandler::resolveCollision(polygon *o1, polygon *o2, vector2 *penetration)
+void collisionHandler::resolveCollision(polygon *o1, polygon *o2, vector2 *penetration, float dt)
 {
-	resolve(o1, o2, penetration);
+	resolve(o1, o2, penetration, dt);
 }

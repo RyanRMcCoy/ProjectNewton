@@ -19,7 +19,7 @@ void offsetVertices(int s, vector2 v[], vector2 relativeV[], vector2 pos)
 	for (int i = 0; i < s; i++)
 	{
 		//cout << v[i].toString() << endl;
-		v[i] = pos + relativeV[i];
+		v[i] = pos + relativeV[i]; // Also calculate points after rotation here
 	}
 }
 
