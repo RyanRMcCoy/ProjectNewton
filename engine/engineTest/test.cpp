@@ -448,6 +448,16 @@ TEST(forceTest, setMag) {
 	EXPECT_EQ(obj.getMagnitude(), 5);
 }
 
+/*TEST(forceTest, getVector) {
+	force obj(&circle(2, vector2(5, 5)), vector2(3, 4));
+	EXPECT_EQ(obj.getVector(), vector2(3, 4));
+}*/
+	
+/*TEST(forceTest, remove) {
+	force obj(&circle(2, vector2(5, 5)), vector2(3, 4));
+	EXPECT_EQ(obj.getObj()->getAcceleration(), vector2(0, 0));
+}*/
+
 // Start of SatHandler circle tests
 TEST(satHandlerTest, circle_circle_Overlap) {
 	satHandler collisionHandler;

@@ -13,7 +13,7 @@ void resolveAnchoredCollision(physicalObject *o1, physicalObject *o2, vector2 *p
 
 	vector2 v1 = o1->getVelocity();
 
-	if (v1.magnitude() < 0)
+	if (v1.magnitude() <= 0)
 		frictionalForce.remove();
 
 	// Determine velocities
