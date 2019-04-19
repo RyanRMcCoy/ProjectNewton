@@ -164,7 +164,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 	}
 	if (minOverlapMag == maxFloat)
 		return vector2();
-
+	
 	for (int i = 0; i < n; i++)
 	{
 		// Projection axes are normals(perps) of each side of polygon
@@ -194,9 +194,13 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 
 		vector2 overlap = determineOverlap(o1MinProj, o1MaxProj, o2MinProj, o2MaxProj, &overhang);
 		
+		/*
 		if (lastOverhang && overhang)
 			overhanging = true;
 		lastOverhang = overhang;
+		*/
+		if (!overhang)
+			overhanging = false;
 
 		// If there was no overlap found, then return zero vector
 		if (overlap.getX() == maxFloat)
@@ -216,9 +220,7 @@ vector2 satHandler::overlapping(circle o1, polygon o2)
 			//vector2 vertex = vertices[i];
 			float overlap = o1.getRadius() - (vertices[i] - o1.getPosition()).magnitude();
 			if (overlap > 0)
-			{
 				return ((o1.getPosition() - vertices[i]).unit() * overlap);
-			}
 		}
 		return vector2();
 	}

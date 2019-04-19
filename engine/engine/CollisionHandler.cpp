@@ -35,8 +35,7 @@ void anchoredResolve(physicalObject *o1, physicalObject *o2, vector2 *penetratio
 	float normalSpeed = o1->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
 	if (normalSpeed < FRICTION_SPEED_THRESHHOLD)
 	{
-		cout << "Applying friction\n";
-		o1->setVelocity(o1->getVelocity() * friction * dt);
+		//o1->setVelocity(o1->getVelocity() * friction * dt);
 	}
 
 	// Move objects out of each other

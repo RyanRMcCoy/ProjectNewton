@@ -12,20 +12,8 @@
 using namespace std;
 
 void limitSpeed(physicalObject &object, int speed) {
-	if (object.getXvel() > speed) {
-		object.setVelocity(vector2(speed, object.getYvel()));
-	}
-
-	if (object.getYvel() > speed) {
-		object.setVelocity(vector2(object.getXvel(), speed));
-	}
-
-	if (object.getXvel() < -speed) {
-		object.setVelocity(vector2(-speed, object.getYvel()));
-	}
-
-	if (object.getYvel() < -speed) {
-		object.setVelocity(vector2(object.getXvel(), -speed));
+	if (object.getVelocity().magnitude() > speed) {
+		object.setVelocity(object.getVelocity().unit() * speed);
 	}
 }
 
@@ -39,25 +27,24 @@ int main()
 	engine physics = engine();
 
 	// Adding circles to the engine
-	circle o1 = circle(100.f);
+	circle o1 = circle(100);
 	o1.setVelocity(vector2(0, 0));
 	o1.setAcceleration(vector2(0, 0));
-	o1.setMass(5.f);
+	o1.setMass(5);
 
-	circle o2 = circle(100.f);
+	circle o2 = circle(100);
 	o2.setVelocity(vector2(0, 0));
 	o2.setAcceleration(vector2(0, 0));
-	o2.setMass(5.f);
+	o2.setMass(5);
 
-	int big = 100000;
-	rectangle left = rectangle(1, big);
-	left.setPosition(vector2(0, 0));
-	rectangle right = rectangle(1, big);
-	right.setPosition(vector2(1920, 0));
-	rectangle top = rectangle(big, 1);
-	top.setPosition(vector2(0, 0));
-	rectangle bottom = rectangle(big, 1);
-	bottom.setPosition(vector2(0, 1080));
+	rectangle left = rectangle(100, 1080);
+	left.setPosition(vector2(-50, 590));
+	rectangle right = rectangle(100, 1080);
+	right.setPosition(vector2(1970, 590));
+	rectangle top = rectangle(1920, 100);
+	top.setPosition(vector2(960, -50));
+	rectangle bottom = rectangle(1920, 100);
+	bottom.setPosition(vector2(960, 1130));
 
 	left.setAnchored(true);
 	right.setAnchored(true);
@@ -117,17 +104,14 @@ int main()
 				if (event.key.code == sf::Keyboard::S) {
 					downForceRed.remove();
 					downForceRed.setVector(vector2(0, speed));
-					
 				}
 				if (event.key.code == sf::Keyboard::W) {
 					downForceRed.remove();
 					downForceRed.setVector(vector2(0, -speed));
-					
 				}
 				if (event.key.code == sf::Keyboard::A) {
 					downForceRed.remove();
 					downForceRed.setVector(vector2(-speed, 0));
-					
 				}
 				if (event.key.code == sf::Keyboard::D) {
 					downForceRed.remove();

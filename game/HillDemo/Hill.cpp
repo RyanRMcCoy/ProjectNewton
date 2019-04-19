@@ -20,7 +20,7 @@ int main()
 	polygon groundPH = polygon(3, groundPoints);
 	groundPH.setAnchored(true);
 
-	rectangle boxPH = rectangle(vector2(200, 150), vector2(400, 0));
+	rectangle boxPH = rectangle(vector2(200, 250), vector2(400, 0));
 	boxPH.setAnchored(true);
 
 	rectangle box2PH = rectangle(vector2(100, 100), vector2(250, 100));
@@ -82,7 +82,7 @@ int main()
 		window.draw(box);
 		window.draw(ground);
 		window.draw(ball);
-		window.draw(box2);
+		//window.draw(box2);
 		window.display();
 
 		// If ball is out of screen, wrap it around

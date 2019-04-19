@@ -13,51 +13,48 @@
 
 int main()
 {
+	bool hasStarted = false;
+
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Irregular Polygon Demo");
-	int points = 10;
-	sf::VertexArray triangleStrip(sf::TriangleStrip, points);
-
-	triangleStrip[0].position = sf::Vector2f(10.f, 10.f);
-	triangleStrip[1].position = sf::Vector2f(10.f, 100.f);
-	triangleStrip[2].position = sf::Vector2f(100.f, 10.f);
-	triangleStrip[3].position = sf::Vector2f(100.f, 100.f);
-	triangleStrip[4].position = sf::Vector2f(160.f, 50.f);
-	triangleStrip[5].position = sf::Vector2f(160.f, 140.f);
-	triangleStrip[6].position = sf::Vector2f(225.f, 50.f);
-	triangleStrip[7].position = sf::Vector2f(225.f, 140.f);
-	triangleStrip[8].position = sf::Vector2f(300.f, 90.f);
-	triangleStrip[9].position = sf::Vector2f(300.f, 180.f);
-
-	triangleStrip[0].color = sf::Color::Red;
-	triangleStrip[1].color = sf::Color::Cyan;
-	triangleStrip[2].color = sf::Color::Blue;
-	triangleStrip[3].color = sf::Color::Green;
-	triangleStrip[4].color = sf::Color::Magenta;
-	triangleStrip[5].color = sf::Color::Red;
-	triangleStrip[6].color = sf::Color::Red;
-	triangleStrip[7].color = sf::Color::Red;
-	triangleStrip[8].color = sf::Color::Red;
-	triangleStrip[9].color = sf::Color::Red;
 
 	engine physics = engine();
 	int refreshRate = 120;
 
 	vector2 pointsArray[] = {
-		vector2(10.f, 10.f),
-		vector2(10.f, 100.f),
-		vector2(100.f, 10.f),
-		vector2(100.f, 100.f),
-		vector2(160.f, 50.f),
-		vector2(160.f, 140.f),
-		vector2(225.f, 50.f),
-		vector2(225.f, 140.f),
-		vector2(300.f, 90.f),
-		vector2(300.f, 180.f)
+		vector2(0, 0),
+		vector2(120, 40),
+		vector2(200, 120),
+		vector2(260, 200),
+		vector2(240, 240),
+		vector2(-20, 260),
 	};
 
-	polygon physicsObject = polygon(points, pointsArray, vector2(0, 0));
-	physicsObject.setMass(100.f);
-	physics.addPolygon(physicsObject);
+	sf::CircleShape object1(50);
+	object1.setFillColor(sf::Color::Red);
+	object1.setPosition(0, 0);
+
+	sf::ConvexShape ground;
+	ground.setFillColor(sf::Color::Green);
+	ground.setPointCount(6);
+	ground.setPoint(0, sf::Vector2f(0, 0));
+	ground.setPoint(1, sf::Vector2f(120, 40));
+	ground.setPoint(2, sf::Vector2f(200, 120));
+	ground.setPoint(3, sf::Vector2f(260, 200));
+	ground.setPoint(4, sf::Vector2f(240, 240));
+	ground.setPoint(5, sf::Vector2f(-20, 260));
+	ground.setPosition(50, 250);
+
+	circle o1 = circle(50, vector2(50, 50));
+
+	polygon o2 = polygon(6, pointsArray, vector2(50, 200));
+	o2.setMass(100.f);
+	o2.setAnchored(true);
+
+	physics.addCircle(o1);
+	physics.addPolygon(o2);
+
+	force f = force(&o1, vector2(0, 1920) * o1.getMass());
+	force controlForce;
 
 	while (window.isOpen())
 	{
@@ -68,38 +65,78 @@ int main()
 				window.close();
 		}
 
-		physics.update(refreshRate);
-		vector2 *vertices = physicsObject.getVertices();
-
-		for (int i = 0; i < (int)triangleStrip.getVertexCount(); ++i) {
-			triangleStrip[i].position = sf::Vector2f(vertices[i].getX(), vertices[i].getY());
-		}
-
 		window.clear();
-		window.draw(triangleStrip);
+		window.draw(ground);
+		window.draw(object1);
 		window.display();
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-			force upForce = force(&physicsObject, vector2(0.f, -100.f));
+		vector2 o1Pos = o1.getPosition();
+		if (o1Pos.getX() > 800 - o1.getRadius())
+		{
+			o1.setPosition(vector2(800 - o1.getRadius(), o1Pos.getY()));
+			o1.setVelocity(o1.getVelocity() * vector2(-1, 1));
+		}
+		else if (o1Pos.getX() < o1.getRadius())
+		{
+			o1.setPosition(vector2(o1.getRadius(), o1Pos.getY()));
+			o1.setVelocity(o1.getVelocity() * vector2(-1, 1));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-			force leftForce = force(&physicsObject, vector2(-100.f, 0.f));
+		if (o1Pos.getY() > 600 - o1.getRadius())
+		{
+			o1.setPosition(vector2(o1Pos.getX(), 600 - o1.getRadius()));
+			o1.setVelocity(o1.getVelocity() * vector2(1, -1));
+		}
+		else if (o1Pos.getY() < o1.getRadius())
+		{
+			o1.setPosition(vector2(o1Pos.getX(), o1.getRadius()));
+			o1.setVelocity(o1.getVelocity() * vector2(1, -1));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			force downForce = force(&physicsObject, vector2(0.f, 100.f));
+		if (hasStarted)
+		{
+			physics.update(refreshRate);
+			object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
+			ground.setPosition(o2.getXpos(), o2.getYpos());
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			force rightForce = force(&physicsObject, vector2(100.f, 0.f));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		{
+			controlForce.remove();
+			controlForce = force(&o1, vector2(0.f, -10.f) * o1.getMass());
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			controlForce.remove();
+			controlForce = force(&o1, vector2(-10.f, 0.f) * o1.getMass());
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			controlForce.remove();
+			controlForce = force(&o1, vector2(0.f, 10.f) * o1.getMass());
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			controlForce.remove();
+			controlForce = force(&o1, vector2(10.f, 0.f) * o1.getMass());
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			hasStarted = true;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			o1.setPosition(vector2(50, 50));
+			o1.setVelocity(vector2());
+			hasStarted = false;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		{
 			window.close();
-		}
 	}
-
+	
 	return 0;
 }
