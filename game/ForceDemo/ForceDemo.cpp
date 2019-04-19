@@ -11,11 +11,29 @@
 
 using namespace std;
 
+void limitSpeed(physicalObject &object, int speed) {
+	if (object.getXvel() > speed) {
+		object.setVelocity(vector2(speed, object.getYvel()));
+	}
+
+	if (object.getYvel() > speed) {
+		object.setVelocity(vector2(object.getXvel(), speed));
+	}
+
+	if (object.getXvel() < -speed) {
+		object.setVelocity(vector2(-speed, object.getYvel()));
+	}
+
+	if (object.getYvel() < -speed) {
+		object.setVelocity(vector2(object.getXvel(), -speed));
+	}
+}
+
 int main()
 {
 	int refreshRate = 120;
 
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Default);
 
 	// Create instance of engine
 	engine physics = engine();
@@ -48,12 +66,11 @@ int main()
 
 	physics.addCircle(o1);
 	physics.addCircle(o2);
-	/*
+	
 	physics.addPolygon(right);
 	physics.addPolygon(left);
 	physics.addPolygon(top);
 	physics.addPolygon(bottom);
-	*/
 
 	// Drawing initial circles on window
 
@@ -98,24 +115,23 @@ int main()
 		{
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::S) {
-					o1.setAcceleration(0, 0);
+					downForceRed.remove();
 					downForceRed.setVector(vector2(0, speed));
-					//downForceRed.remove();
+					
 				}
 				if (event.key.code == sf::Keyboard::W) {
-					o1.setAcceleration(0, 0);
+					downForceRed.remove();
 					downForceRed.setVector(vector2(0, -speed));
-					downForceRed.setVector(vector2(0, 0));
+					
 				}
 				if (event.key.code == sf::Keyboard::A) {
-					o1.setAcceleration(0, 0);
+					downForceRed.remove();
 					downForceRed.setVector(vector2(-speed, 0));
-					downForceRed.setVector(vector2(0, 0));
+					
 				}
 				if (event.key.code == sf::Keyboard::D) {
-					o1.setAcceleration(0, 0);
+					downForceRed.remove();
 					downForceRed.setVector(vector2(speed, 0));
-					downForceRed.setVector(vector2(0, 0));
 				}
 				if (event.key.code == sf::Keyboard::Down) {
 					o2.setAcceleration(0, 0);
@@ -137,9 +153,10 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
+		std::cout << o1.getXvel() << std::endl;
 		
-		
+		limitSpeed(o1, 666);
+		limitSpeed(o2, 666);
 
 		physics.update(refreshRate);
 		object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
@@ -184,3 +201,4 @@ int main()
 
 	return 0;
 }
+
