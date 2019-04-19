@@ -115,7 +115,7 @@ int main()
 		else if (o1Pos.getY() < -o1.getRadius())
 			o1.setPosition(vector2(o1Pos.getX(), 600 + o1.getRadius()));
 
-		vector2 o1Pos = o1.getPosition();
+		o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 800 - o1.getRadius())
 		{
 			o1.setPosition(vector2(800 - o1.getRadius(), o1Pos.getY()));
