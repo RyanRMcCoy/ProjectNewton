@@ -37,6 +37,7 @@ int main()
 	o2.setAcceleration(vector2(0, 0));
 	o2.setMass(5);
 
+	//Adding a border to the screen
 	rectangle left = rectangle(100, 1080);
 	left.setPosition(vector2(-50, 590));
 	rectangle right = rectangle(100, 1080);
@@ -46,11 +47,13 @@ int main()
 	rectangle bottom = rectangle(1920, 100);
 	bottom.setPosition(vector2(960, 1130));
 
+	//Set the border to never move
 	left.setAnchored(true);
 	right.setAnchored(true);
 	top.setAnchored(true);
 	bottom.setAnchored(true);
 
+	//Add objects to the engine
 	physics.addCircle(o1);
 	physics.addCircle(o2);
 	
@@ -72,16 +75,13 @@ int main()
 	object2.setFillColor(sf::Color::Blue);
 	o2.setPosition(vector2(1400, 540));
 	object2.setPosition(o2.getXpos(), o2.getYpos());
-
-	sf::RectangleShape leftDis(sf::Vector2f(left.getSideX(), left.getSideY()));
-	leftDis.setPosition(left.getXpos() - left.getSideX() / 2, left.getYpos() - left.getSideY() / 2);
-	leftDis.setFillColor(sf::Color::Magenta);
 	
 
 	// Drawing background
 	sf::RectangleShape background(sf::Vector2f(1920, 1080));
 	background.setFillColor(sf::Color::Green);
 
+	//Initialize the forces
 	force downForceRed = force(&o1, vector2(0, 0));
 	force upForceRed = force(&o1, vector2(0, 0));
 	force leftForceRed = force(&o1, vector2(0, 0));
@@ -94,6 +94,8 @@ int main()
 
 	int speed = 3000;
 
+	//While the window is open it will poll for key events and apply the 
+	//correct force to the correct ball in the correct direction
 	while (window.isOpen())
 	{
 		window.setKeyRepeatEnabled(true);
@@ -137,11 +139,12 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		std::cout << o1.getXvel() << std::endl;
 		
+		//Make a speed limit
 		limitSpeed(o1, 666);
 		limitSpeed(o2, 666);
 
+		//Update the graphics with the position of the ball in the engine
 		physics.update(refreshRate);
 		object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
 		object2.setPosition(o2.getXpos() - o2.getRadius(), o2.getYpos() - o2.getRadius());
