@@ -33,7 +33,7 @@
     <TestDuration Test="forceTest.fullConstructor" Duration="1" />
     <TestDuration Test="physicalObjectTest.constructorFull" Duration="1" />
     <TestDuration Test="forceTest.setObj" Duration="1" />
-    <TestDuration Test="forceTest.setVector" Duration="1" />
+    <TestDuration Test="forceTest.setVector" Duration="55" />
     <TestDuration Test="forceTest.SetMag" Duration="24" />
     <TestDuration Test="forceTest.setMag" Duration="1" />
     <TestDuration Test="vector2Test.operatorPlus" Duration="1" />
@@ -81,6 +81,6 @@
     <TestDuration Test="materialTest.polySetMass" Duration="1" />
     <TestDuration Test="materialTest.heron" Duration="1" />
     <TestDuration Test="materialTest.polyArea" Duration="1" />
-    <TestDuration Test="satHandlerTest.triangle_circle_Overlap" Duration="5" />
+    <TestDuration Test="satHandlerTest.triangle_circle_Overlap" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
