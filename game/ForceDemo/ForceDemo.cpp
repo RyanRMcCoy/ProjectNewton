@@ -11,11 +11,29 @@
 
 using namespace std;
 
+void limitSpeed(physicalObject &object, int speed) {
+	if (object.getXvel() > speed) {
+		object.setVelocity(vector2(speed, object.getYvel()));
+	}
+
+	if (object.getYvel() > speed) {
+		object.setVelocity(vector2(object.getXvel(), speed));
+	}
+
+	if (object.getXvel() < -speed) {
+		object.setVelocity(vector2(-speed, object.getYvel()));
+	}
+
+	if (object.getYvel() < -speed) {
+		object.setVelocity(vector2(object.getXvel(), -speed));
+	}
+}
+
 int main()
 {
 	int refreshRate = 120;
 
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Default);
 
 	// Create instance of engine
 	engine physics = engine();
@@ -31,14 +49,15 @@ int main()
 	o2.setAcceleration(vector2(0, 0));
 	o2.setMass(5.f);
 
-	rectangle left = rectangle(100, 1080);
-	left.setPosition(vector2(-50, 590));
-	rectangle right = rectangle(100, 1080);
-	right.setPosition(vector2(1970, 590));
-	rectangle top = rectangle(1920, 100);
-	top.setPosition(vector2(960, -50));
-	rectangle bottom = rectangle(1920, 100);
-	bottom.setPosition(vector2(960, 1130));
+	int big = 100000;
+	rectangle left = rectangle(1, big);
+	left.setPosition(vector2(0, 0));
+	rectangle right = rectangle(1, big);
+	right.setPosition(vector2(1920, 0));
+	rectangle top = rectangle(big, 1);
+	top.setPosition(vector2(0, 0));
+	rectangle bottom = rectangle(big, 1);
+	bottom.setPosition(vector2(0, 1080));
 
 	left.setAnchored(true);
 	right.setAnchored(true);
@@ -47,6 +66,7 @@ int main()
 
 	physics.addCircle(o1);
 	physics.addCircle(o2);
+	
 	physics.addPolygon(right);
 	physics.addPolygon(left);
 	physics.addPolygon(top);
@@ -85,7 +105,7 @@ int main()
 	force leftForceBlue = force(&o2, vector2(0, 0));
 	force rightForceBlue = force(&o2, vector2(0, 0));
 
-	int speed = 1;
+	int speed = 3000;
 
 	while (window.isOpen())
 	{
@@ -95,21 +115,48 @@ int main()
 		{
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::S) {
+					downForceRed.remove();
 					downForceRed.setVector(vector2(0, speed));
+					
 				}
 				if (event.key.code == sf::Keyboard::W) {
+					downForceRed.remove();
 					downForceRed.setVector(vector2(0, -speed));
+					
 				}
 				if (event.key.code == sf::Keyboard::A) {
+					downForceRed.remove();
 					downForceRed.setVector(vector2(-speed, 0));
+					
 				}
 				if (event.key.code == sf::Keyboard::D) {
+					downForceRed.remove();
 					downForceRed.setVector(vector2(speed, 0));
+				}
+				if (event.key.code == sf::Keyboard::Down) {
+					o2.setAcceleration(0, 0);
+					downForceBlue.setVector(vector2(0, speed));
+				}
+				if (event.key.code == sf::Keyboard::Up) {
+					o2.setAcceleration(0, 0);
+					downForceBlue.setVector(vector2(0, -speed));
+				}
+				if (event.key.code == sf::Keyboard::Left) {
+					o2.setAcceleration(0, 0);
+					downForceBlue.setVector(vector2(-speed, 0));
+				}
+				if (event.key.code == sf::Keyboard::Right) {
+					o2.setAcceleration(0, 0);
+					downForceBlue.setVector(vector2(speed, 0));
 				}
 			}
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		std::cout << o1.getXvel() << std::endl;
+		
+		limitSpeed(o1, 666);
+		limitSpeed(o2, 666);
 
 		physics.update(refreshRate);
 		object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
@@ -120,7 +167,7 @@ int main()
 		window.draw(object1);
 		window.draw(object2);
 		window.display();
-		/*
+		
 		// If o1 is out of screen, wrap it around
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 1920 + o1.getRadius())
@@ -145,36 +192,6 @@ int main()
 		else if (o2Pos.getY() < -o2.getRadius() * 2)
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
 
-			*/
-		
-
-		// Applying force to the circle when wasd is pressed
-		
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			force downForce2 = force(&o2, vector2(0, speed));
-		}
-
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			force upForce2 = force(&o2, vector2(0, -speed));
-		}
-
-		
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			force downForce2 = force(&o2, vector2(-speed, 0));
-		}
-
-		
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			force downForce2 = force(&o2, vector2(speed, 0));
-		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
@@ -184,3 +201,4 @@ int main()
 
 	return 0;
 }
+
