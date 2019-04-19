@@ -33,7 +33,7 @@ int main()
 {
 	int refreshRate = 120;
 
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Default);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Fullscreen);
 
 	// Create instance of engine
 	engine physics = engine();
@@ -50,14 +50,14 @@ int main()
 	o2.setMass(5.f);
 
 	int big = 100000;
-	rectangle left = rectangle(50, big);
-	left.setPosition(vector2(-50, 0));
-	rectangle right = rectangle(50, big);
-	right.setPosition(vector2(1920, 0));
-	rectangle top = rectangle(big, 50);
-	top.setPosition(vector2(0, -50));
-	rectangle bottom = rectangle(big, 50);
-	bottom.setPosition(vector2(0, 1080));
+	rectangle left = rectangle(-500, big);
+	left.setPosition(vector2(-100, 0));
+	rectangle right = rectangle(500, big);
+	right.setPosition(vector2(2020, 0));
+	rectangle top = rectangle(big, 500);
+	top.setPosition(vector2(0, -200));
+	rectangle bottom = rectangle(big, 500);
+	bottom.setPosition(vector2(0, 1180));
 
 	left.setAnchored(true);
 	right.setAnchored(true);
@@ -83,7 +83,7 @@ int main()
 	//Circle 2
 	sf::CircleShape object2(o2.getRadius());
 	object2.setFillColor(sf::Color::Blue);
-	o2.setPosition(vector2(1000, 540));
+	o2.setPosition(vector2(1400, 540));
 	object2.setPosition(o2.getXpos(), o2.getYpos());
 
 	sf::RectangleShape leftDis(sf::Vector2f(left.getSideX(), left.getSideY()));
@@ -167,7 +167,7 @@ int main()
 		window.draw(object1);
 		window.draw(object2);
 		window.display();
-		
+		/*
 		// If o1 is out of screen, wrap it around
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 1920 + o1.getRadius())
@@ -191,7 +191,7 @@ int main()
 			o2.setPosition(vector2(o2Pos.getX(), -o2.getRadius() * 2));
 		else if (o2Pos.getY() < -o2.getRadius() * 2)
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
-
+*/
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
