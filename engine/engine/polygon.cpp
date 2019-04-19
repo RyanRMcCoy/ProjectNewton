@@ -1,4 +1,5 @@
 #include <iterator>
+#include <cmath>
 #include "pch.h"
 #include "polygon.h"
 #include "vector2.h"
@@ -14,12 +15,14 @@
 using namespace std;
 
 // Helper function to adjust relativeVertices
-void offsetVertices(int s, vector2 v[], vector2 relativeV[], vector2 pos)
+void offsetVertices(int s, vector2 v[], vector2 relativeV[], vector2 pos, float rot)
 {
 	for (int i = 0; i < s; i++)
 	{
-		//cout << v[i].toString() << endl;
-		v[i] = pos + relativeV[i]; // Also calculate points after rotation here
+		vector2 tempV = relativeV[i];
+		tempV = vector2(tempV.getX() * cos(rot) - tempV.getY() * sin(rot), 
+			tempV.getY() * cos(rot) + tempV.getX() * sin(rot));
+		v[i] = tempV + pos; // Also calculate points after rotation here
 	}
 }
 
@@ -38,7 +41,7 @@ polygon::polygon(int s) : sides(s), vertices(new vector2[s]), relativeVertices(n
 polygon::polygon(int s, vector2 v[]) : sides(s), vertices(new vector2[s]), relativeVertices(new vector2[s]), physicalObject()
 {
 	copy(v, v + s, relativeVertices);
-	offsetVertices(sides, vertices, relativeVertices, getPosition());
+	offsetVertices(sides, vertices, relativeVertices, getPosition(), getRotation());
 	setDefaultMat();
 }
 
@@ -53,7 +56,13 @@ polygon::polygon(int s, vector2 v[], vector2 pos) : sides(s), vertices(new vecto
 void polygon::setPosition(vector2 pos)
 {
 	__super::setPosition(pos);
-	offsetVertices(sides, vertices, relativeVertices, pos);
+	offsetVertices(sides, vertices, relativeVertices, pos, getRotation());
+}
+
+void polygon::setRotation(float rot)
+{
+	__super::setRotation(rot);
+	offsetVertices(sides, vertices, relativeVertices, getPosition(), rot);
 }
 
 int polygon::numSides()
@@ -117,5 +126,5 @@ void polygon::updateDensity()
 void polygon::setVertices(vector2 v[])
 {
 	copy(v, v + sides, relativeVertices);
-	offsetVertices(sides, vertices, relativeVertices, getPosition());
+	offsetVertices(sides, vertices, relativeVertices, getPosition(), getRotation());
 }
