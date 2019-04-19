@@ -22,38 +22,76 @@ int main()
 
 	vector2 pointsArray[] = {
 		vector2(0, 0),
-		vector2(120, 40),
-		vector2(200, 120),
-		vector2(260, 200),
-		vector2(240, 240),
-		vector2(-20, 260),
+		vector2(200, 0),
+		vector2(185, 75),
+		vector2(150, 150),
+		vector2(0, 200),
+		vector2(-50, 100)
 	};
 
 	sf::CircleShape object1(50);
 	object1.setFillColor(sf::Color::Red);
 	object1.setPosition(0, 0);
 
+	sf::CircleShape object2(50);
+	object2.setFillColor(sf::Color::Blue);
+	object2.setPosition(700, 0);
+
 	sf::ConvexShape ground;
 	ground.setFillColor(sf::Color::Green);
 	ground.setPointCount(6);
 	ground.setPoint(0, sf::Vector2f(0, 0));
-	ground.setPoint(1, sf::Vector2f(120, 40));
-	ground.setPoint(2, sf::Vector2f(200, 120));
-	ground.setPoint(3, sf::Vector2f(260, 200));
-	ground.setPoint(4, sf::Vector2f(240, 240));
-	ground.setPoint(5, sf::Vector2f(-20, 260));
-	ground.setPosition(50, 250);
+	ground.setPoint(1, sf::Vector2f(200, 0));
+	ground.setPoint(2, sf::Vector2f(185, 75));
+	ground.setPoint(3, sf::Vector2f(150, 150));
+	ground.setPoint(4, sf::Vector2f(0, 200));
+	ground.setPoint(5, sf::Vector2f(-50, 100));
+	ground.setPosition(300, 200);
 
 	circle o1 = circle(50, vector2(50, 50));
+	o1.setVelocity(vector2(250, 0));
+	o1.setElasticity(1);
 
-	polygon o2 = polygon(6, pointsArray, vector2(50, 200));
-	o2.setMass(100.f);
-	o2.setAnchored(true);
+	circle o2 = circle(50, vector2(750, 50));
+	o2.setVelocity(vector2(-250, 0));
+	o2.setElasticity(1);
+
+	polygon o3 = polygon(6, pointsArray, vector2(300, 200));
+	o3.setMass(100.f);
+	o3.setAnchored(true);
+	o3.setElasticity(1);
 
 	physics.addCircle(o1);
-	physics.addPolygon(o2);
+	physics.addCircle(o2);
+	physics.addPolygon(o3);
 
-	force f = force(&o1, vector2(0, 1920) * o1.getMass());
+	rectangle left = rectangle(100, 600);
+	left.setPosition(vector2(-50, 300));
+	left.setAnchored(true);
+	left.setElasticity(1);
+
+	rectangle right = rectangle(100, 600);
+	right.setPosition(vector2(850, 300));
+	right.setAnchored(true);
+	right.setElasticity(1);
+
+	rectangle top = rectangle(800, 100);
+	top.setPosition(vector2(400, -50));
+	top.setAnchored(true);
+	top.setElasticity(1);
+
+	rectangle bottom = rectangle(800, 100);
+	bottom.setPosition(vector2(400, 650));
+	bottom.setAnchored(true);
+	bottom.setElasticity(1);
+
+	physics.addPolygon(right);
+	physics.addPolygon(left);
+	physics.addPolygon(top);
+	physics.addPolygon(bottom);
+
+	force f1 = force(&o1, vector2(0, 1920) * o1.getMass());
+	force f2 = force(&o2, vector2(0, 1920) * o1.getMass());
 	force controlForce;
 
 	while (window.isOpen())
@@ -68,36 +106,15 @@ int main()
 		window.clear();
 		window.draw(ground);
 		window.draw(object1);
+		window.draw(object2);
 		window.display();
-
-		vector2 o1Pos = o1.getPosition();
-		if (o1Pos.getX() > 800 - o1.getRadius())
-		{
-			o1.setPosition(vector2(800 - o1.getRadius(), o1Pos.getY()));
-			o1.setVelocity(o1.getVelocity() * vector2(-1, 1));
-		}
-		else if (o1Pos.getX() < o1.getRadius())
-		{
-			o1.setPosition(vector2(o1.getRadius(), o1Pos.getY()));
-			o1.setVelocity(o1.getVelocity() * vector2(-1, 1));
-		}
-
-		if (o1Pos.getY() > 600 - o1.getRadius())
-		{
-			o1.setPosition(vector2(o1Pos.getX(), 600 - o1.getRadius()));
-			o1.setVelocity(o1.getVelocity() * vector2(1, -1));
-		}
-		else if (o1Pos.getY() < o1.getRadius())
-		{
-			o1.setPosition(vector2(o1Pos.getX(), o1.getRadius()));
-			o1.setVelocity(o1.getVelocity() * vector2(1, -1));
-		}
 
 		if (hasStarted)
 		{
 			physics.update(refreshRate);
 			object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
-			ground.setPosition(o2.getXpos(), o2.getYpos());
+			object2.setPosition(o2.getXpos() - o2.getRadius(), o2.getYpos() - o2.getRadius());
+			ground.setPosition(o3.getXpos(), o3.getYpos());
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))

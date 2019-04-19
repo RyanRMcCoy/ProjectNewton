@@ -115,9 +115,9 @@ vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj
 		}
 		else // o2 projection completely inside o1 projection
 			if (abs(v12 - v21) < abs(v11 - v22))
-				return o1MaxProj - o2MinProj;
+				return o2MinProj - o1MaxProj;
 			else
-				return o1MinProj - o2MaxProj;
+				return o2MaxProj - o1MinProj;
 	}
 	return vector2(maxFloat, 0);
 }
