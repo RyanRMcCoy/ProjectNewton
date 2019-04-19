@@ -34,7 +34,7 @@ void anchoredResolve(physicalObject *o1, physicalObject *o2, vector2 *penetratio
 	// Determine velocities along collision axis to determine whether to apply friction
 	float normalSpeed = o1->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
 	vector2 norm = vector2(0, o1->getMass() * -1920).project(penetration->unit());
-	if (normalSpeed < FRICTION_SPEED_THRESHHOLD)
+	if (normalSpeed > FRICTION_SPEED_THRESHHOLD)
 	{
 		o1->setVelocity(o1->getVelocity() - ((norm / o1->getMass()) * friction * dt));
 	}
@@ -94,6 +94,16 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration, float
 	o2->setVelocity(
 		v2 * ((o2->getMass() - o1->getMass()) / (totalMass)) +
 		v1 * ((2 * o1->getMass()) / totalMass));
+
+	float normalSpeedO1 = o1->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
+	vector2 normO1 = vector2(0, o1->getMass() * -1920).project(penetration->unit());
+	float normalSpeedO2 = o2->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
+	vector2 normO2 = vector2(0, o2->getMass() * -1920).project(penetration->unit());
+	if (normalSpeedO1 > FRICTION_SPEED_THRESHHOLD || normalSpeedO2 > FRICTION_SPEED_THRESHHOLD)
+	{
+		o1->setVelocity(o1->getVelocity() - ((normO1 / o1->getMass()) * friction * dt));
+		o2->setVelocity(o2->getVelocity() - ((normO2 / o2->getMass()) * friction * dt));
+	}
 
 	// Move objects out of each other
 	cout << "Penetration: " << penetration->toString() << std::endl;
