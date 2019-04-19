@@ -50,13 +50,13 @@ int main()
 	o2.setMass(5.f);
 
 	int big = 100000;
-	rectangle left = rectangle(1, big);
-	left.setPosition(vector2(0, 0));
-	rectangle right = rectangle(1, big);
+	rectangle left = rectangle(50, big);
+	left.setPosition(vector2(-50, 0));
+	rectangle right = rectangle(50, big);
 	right.setPosition(vector2(1920, 0));
-	rectangle top = rectangle(big, 1);
-	top.setPosition(vector2(0, 0));
-	rectangle bottom = rectangle(big, 1);
+	rectangle top = rectangle(big, 50);
+	top.setPosition(vector2(0, -50));
+	rectangle bottom = rectangle(big, 50);
 	bottom.setPosition(vector2(0, 1080));
 
 	left.setAnchored(true);
