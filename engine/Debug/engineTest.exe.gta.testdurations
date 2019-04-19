@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Executable>C:\Users\ryanr\source\repos\ProjectNewton\engine\Debug\engineTest.exe</Executable>
+  <Executable>C:\Users\Tyler\source\repos\RyanRMcCoy\ProjectNewton\engine\Debug\engineTest.exe</Executable>
   <TestDurations>
     <TestDuration Test="TestCaseName.TestName" Duration="1" />
     <TestDuration Test="physicalObjectTest.deaultConstructor" Duration="1" />
@@ -33,7 +33,7 @@
     <TestDuration Test="forceTest.fullConstructor" Duration="1" />
     <TestDuration Test="physicalObjectTest.constructorFull" Duration="1" />
     <TestDuration Test="forceTest.setObj" Duration="1" />
-    <TestDuration Test="forceTest.setVector" Duration="1" />
+    <TestDuration Test="forceTest.setVector" Duration="55" />
     <TestDuration Test="forceTest.SetMag" Duration="24" />
     <TestDuration Test="forceTest.setMag" Duration="1" />
     <TestDuration Test="vector2Test.operatorPlus" Duration="1" />
@@ -66,7 +66,7 @@
     <TestDuration Test="satHandlerTest.rectangle_rectangle_NoOverlap" Duration="1" />
     <TestDuration Test="physicalObjectTest.massGetterTest" Duration="1" />
     <TestDuration Test="physicalObjectTest.densityGetterTest" Duration="1" />
-    <TestDuration Test="materialTest.circleDensityConstruct" Duration="1" />
+    <TestDuration Test="materialTest.circleDensityConstruct" Duration="2" />
     <TestDuration Test="materialTest.circleSetDensity" Duration="1" />
     <TestDuration Test="materialTest.circleSetMass" Duration="1" />
     <TestDuration Test="materialTest.RectDensityConstruct" Duration="1" />
@@ -81,6 +81,6 @@
     <TestDuration Test="materialTest.polySetMass" Duration="1" />
     <TestDuration Test="materialTest.heron" Duration="1" />
     <TestDuration Test="materialTest.polyArea" Duration="1" />
-    <TestDuration Test="satHandlerTest.triangle_circle_Overlap" Duration="5" />
+    <TestDuration Test="satHandlerTest.triangle_circle_Overlap" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

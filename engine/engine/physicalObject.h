@@ -10,10 +10,12 @@ class physicalObject
 {
 private:
 	vector2 position, velocity, acceleration;
+	float rotation, angularVelocity;
 	bool colliding;
 protected:
 	float mass;
 	float density;
+	float elasticity;
 	float mu;
 	bool anchored;
 public:
@@ -39,8 +41,15 @@ public:
 	void setAcceleration(vector2 acc);
 	void setAcceleration(float x, float y);
 
+	float getRotation();
+	void setRotation(float rot);
+	float getAngularVelocity();
+	void setAngularVelocity(float vel);
+
 	float getMass();
 	float getDensity();
+	float getElasticity();
+	void setElasticity(float e);
 	float getFriction();
 
 	bool getAnchored();

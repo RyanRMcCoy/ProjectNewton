@@ -12,20 +12,8 @@
 using namespace std;
 
 void limitSpeed(physicalObject &object, int speed) {
-	if (object.getXvel() > speed) {
-		object.setVelocity(vector2(speed, object.getYvel()));
-	}
-
-	if (object.getYvel() > speed) {
-		object.setVelocity(vector2(object.getXvel(), speed));
-	}
-
-	if (object.getXvel() < -speed) {
-		object.setVelocity(vector2(-speed, object.getYvel()));
-	}
-
-	if (object.getYvel() < -speed) {
-		object.setVelocity(vector2(object.getXvel(), -speed));
+	if (object.getVelocity().magnitude() > speed) {
+		object.setVelocity(object.getVelocity().unit() * speed);
 	}
 }
 
@@ -33,31 +21,30 @@ int main()
 {
 	int refreshRate = 120;
 
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Default);
 
 	// Create instance of engine
 	engine physics = engine();
 
 	// Adding circles to the engine
-	circle o1 = circle(100.f);
+	circle o1 = circle(100);
 	o1.setVelocity(vector2(0, 0));
 	o1.setAcceleration(vector2(0, 0));
-	o1.setMass(5.f);
+	o1.setMass(5);
 
-	circle o2 = circle(100.f);
+	circle o2 = circle(100);
 	o2.setVelocity(vector2(0, 0));
 	o2.setAcceleration(vector2(0, 0));
-	o2.setMass(5.f);
+	o2.setMass(5);
 
-	int big = 100000;
-	rectangle left = rectangle(-500, big);
-	left.setPosition(vector2(-100, 0));
-	rectangle right = rectangle(500, big);
-	right.setPosition(vector2(2020, 0));
-	rectangle top = rectangle(big, 500);
-	top.setPosition(vector2(0, -200));
-	rectangle bottom = rectangle(big, 500);
-	bottom.setPosition(vector2(0, 1180));
+	rectangle left = rectangle(100, 1080);
+	left.setPosition(vector2(-50, 590));
+	rectangle right = rectangle(100, 1080);
+	right.setPosition(vector2(1970, 590));
+	rectangle top = rectangle(1920, 100);
+	top.setPosition(vector2(960, -50));
+	rectangle bottom = rectangle(1920, 100);
+	bottom.setPosition(vector2(960, 1130));
 
 	left.setAnchored(true);
 	right.setAnchored(true);
@@ -83,7 +70,7 @@ int main()
 	//Circle 2
 	sf::CircleShape object2(o2.getRadius());
 	object2.setFillColor(sf::Color::Blue);
-	o2.setPosition(vector2(1400, 540));
+	o2.setPosition(vector2(1000, 540));
 	object2.setPosition(o2.getXpos(), o2.getYpos());
 
 	sf::RectangleShape leftDis(sf::Vector2f(left.getSideX(), left.getSideY()));
@@ -117,17 +104,14 @@ int main()
 				if (event.key.code == sf::Keyboard::S) {
 					downForceRed.remove();
 					downForceRed.setVector(vector2(0, speed));
-					
 				}
 				if (event.key.code == sf::Keyboard::W) {
 					downForceRed.remove();
 					downForceRed.setVector(vector2(0, -speed));
-					
 				}
 				if (event.key.code == sf::Keyboard::A) {
 					downForceRed.remove();
 					downForceRed.setVector(vector2(-speed, 0));
-					
 				}
 				if (event.key.code == sf::Keyboard::D) {
 					downForceRed.remove();
@@ -167,7 +151,7 @@ int main()
 		window.draw(object1);
 		window.draw(object2);
 		window.display();
-		/*
+		
 		// If o1 is out of screen, wrap it around
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 1920 + o1.getRadius())
@@ -191,7 +175,7 @@ int main()
 			o2.setPosition(vector2(o2Pos.getX(), -o2.getRadius() * 2));
 		else if (o2Pos.getY() < -o2.getRadius() * 2)
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
-*/
+
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{

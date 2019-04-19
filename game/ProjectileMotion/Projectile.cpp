@@ -68,7 +68,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
+		
 		//draw the objects 
 		window.clear();
 		window.draw(sky);

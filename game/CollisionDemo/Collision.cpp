@@ -23,6 +23,7 @@ int main()
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(500, -400));
 	o1.setAnchored(false);
+	o1.setElasticity(.7);
 	
 	force f = force(&o1, vector2(0, 980) * o1.getMass());
 	//o1.setAcceleration(vector2(0, 980));
@@ -31,8 +32,9 @@ int main()
 	o2.setVelocity(vector2(-400, -300));
 	o2.setAcceleration(vector2(0, 980));
 	o2.setAnchored(true);
+	o2.setElasticity(.7);
 
-	rectangle ground = rectangle(vector2(400, 100), vector2(400, 640));
+	rectangle ground = rectangle(vector2(400, 400), vector2(380, 640));
 	ground.setAnchored(true);
 
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
@@ -62,7 +64,7 @@ int main()
 	object2.setPosition(o2.getXpos() - o1.getRadius(), o2.getYpos() - o1.getRadius());
 
 	// Ground
-	sf::RectangleShape object3(sf::Vector2f(400, 100));
+	sf::RectangleShape object3(sf::Vector2f(400, 400));
 	object3.setFillColor(sf::Color::Cyan);
 	object3.setPosition(200, 590);
 
@@ -101,7 +103,7 @@ int main()
 		window.display();
 
 		// If o1 is out of screen, wrap it around
-		/*
+
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 800 + o1.getRadius())
 			o1.setPosition(vector2(-o1.getRadius(), o1Pos.getY()));
@@ -112,7 +114,6 @@ int main()
 			o1.setPosition(vector2(o1Pos.getX(), -o1.getRadius()));
 		else if (o1Pos.getY() < -o1.getRadius())
 			o1.setPosition(vector2(o1Pos.getX(), 600 + o1.getRadius()));
-		*/
 
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 800 - o1.getRadius())

@@ -78,7 +78,7 @@ bool engine::update(int refreshRate)
 					{
 						overlap = collisionDetector.overlapping(*circles.at(i), *circles.at(j));
 						if (overlap != vector2())
-							collisionResolver.resolveCollision(circles.at(i), circles.at(j), &overlap);
+							collisionResolver.resolveCollision(circles.at(i), circles.at(j), &overlap, dt);
 					}
 				}
 				else if (i < circles.size() && j >= circles.size())
@@ -87,7 +87,7 @@ bool engine::update(int refreshRate)
 					{
 						overlap = collisionDetector.overlapping(*circles.at(i), *polygons.at(j - circles.size()));
 						if (overlap != vector2())
-							collisionResolver.resolveCollision(circles.at(i), polygons.at(j - circles.size()), &overlap);
+							collisionResolver.resolveCollision(circles.at(i), polygons.at(j - circles.size()), &overlap, dt);
 					}
 				}
 				else
@@ -96,7 +96,7 @@ bool engine::update(int refreshRate)
 					{
 						overlap = collisionDetector.overlapping(*polygons.at(i - circles.size()), *polygons.at(j - circles.size()));
 						if (overlap != vector2())
-							collisionResolver.resolveCollision(polygons.at(i - circles.size()), polygons.at(j - circles.size()), &overlap);
+							collisionResolver.resolveCollision(polygons.at(i - circles.size()), polygons.at(j - circles.size()), &overlap, dt);
 					}
 				}
 			}
