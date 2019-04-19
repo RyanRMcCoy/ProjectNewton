@@ -21,7 +21,7 @@ int main()
 {
 	int refreshRate = 120;
 
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Default);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Fullscreen);
 
 	// Create instance of engine
 	engine physics = engine();
@@ -70,7 +70,7 @@ int main()
 	//Circle 2
 	sf::CircleShape object2(o2.getRadius());
 	object2.setFillColor(sf::Color::Blue);
-	o2.setPosition(vector2(1000, 540));
+	o2.setPosition(vector2(1400, 540));
 	object2.setPosition(o2.getXpos(), o2.getYpos());
 
 	sf::RectangleShape leftDis(sf::Vector2f(left.getSideX(), left.getSideY()));
@@ -96,7 +96,7 @@ int main()
 
 	while (window.isOpen())
 	{
-		window.setKeyRepeatEnabled(false);
+		window.setKeyRepeatEnabled(true);
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
