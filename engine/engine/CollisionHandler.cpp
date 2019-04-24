@@ -99,6 +99,7 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration, float
 	vector2 normO1 = vector2(0, o1->getMass() * -1920).project(penetration->unit());
 	float normalSpeedO2 = o2->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
 	vector2 normO2 = vector2(0, o2->getMass() * -1920).project(penetration->unit());
+	
 	if (normalSpeedO1 > FRICTION_SPEED_THRESHHOLD || normalSpeedO2 > FRICTION_SPEED_THRESHHOLD)
 	{
 		o1->setVelocity(o1->getVelocity() - ((normO1 / o1->getMass()) * friction * dt));

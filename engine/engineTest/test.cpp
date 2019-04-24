@@ -109,12 +109,12 @@ TEST(physicalObjectTest, massGetterTest) {
 
 TEST(physicalObjectTest, densityGetterTest) {
 	physicalObject obj;
-	EXPECT_EQ(obj.getDensity(), 0);
+	EXPECT_EQ(obj.getDensity(), 1);
 }
 
 TEST(physicalObjectTest, frictionGetterTest) {
 	physicalObject obj;
-	EXPECT_EQ(obj.getFriction(), 0);
+	EXPECT_EQ(obj.getFriction(), 0.5);
 }
 
 //Start of material properties tests 
