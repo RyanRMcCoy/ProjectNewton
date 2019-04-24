@@ -14,6 +14,7 @@ public:
 	polygon(int s, vector2 v[], vector2 pos);
 
 	void setPosition(vector2 pos);
+	void setRotation(float rot);
 
 	int numSides();
 	vector2* getVertices();

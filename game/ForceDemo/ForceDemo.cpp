@@ -158,25 +158,25 @@ int main()
 		// If o1 is out of screen, wrap it around
 		vector2 o1Pos = o1.getPosition();
 		if (o1Pos.getX() > 1920 + o1.getRadius())
-			o1.setPosition(vector2(-o1.getRadius() * 2, o1Pos.getY()));
-		else if (o1Pos.getX() < -o1.getRadius() * 2)
+			o1.setPosition(vector2(-o1.getRadius(), o1Pos.getY()));
+		else if (o1Pos.getX() < -o1.getRadius())
 			o1.setPosition(vector2(1920 + o1.getRadius(), o1Pos.getY()));
 
 		if (o1Pos.getY() > 1080 + o1.getRadius())
-			o1.setPosition(vector2(o1Pos.getX(), -o1.getRadius() * 2));
-		else if (o1Pos.getY() < -o1.getRadius() * 2)
+			o1.setPosition(vector2(o1Pos.getX(), -o1.getRadius()));
+		else if (o1Pos.getY() < -o1.getRadius())
 			o1.setPosition(vector2(o1Pos.getX(), 1080 + o1.getRadius()));
 
 		// If o1 is out of screen, wrap it around
 		vector2 o2Pos = o2.getPosition();
 		if (o2Pos.getX() > 1920 + o2.getRadius())
-			o2.setPosition(vector2(-o2.getRadius() * 2, o2Pos.getY()));
-		else if (o2Pos.getX() < -o2.getRadius() * 2)
+			o2.setPosition(vector2(-o2.getRadius(), o2Pos.getY()));
+		else if (o2Pos.getX() < -o2.getRadius())
 			o2.setPosition(vector2(1920 + o2.getRadius(), o2Pos.getY()));
 
 		if (o2Pos.getY() > 1080 + o2.getRadius())
-			o2.setPosition(vector2(o2Pos.getX(), -o2.getRadius() * 2));
-		else if (o2Pos.getY() < -o2.getRadius() * 2)
+			o2.setPosition(vector2(o2Pos.getX(), -o2.getRadius()));
+		else if (o2Pos.getY() < -o2.getRadius())
 			o2.setPosition(vector2(o2Pos.getX(), 1080 + o2.getRadius()));
 
 

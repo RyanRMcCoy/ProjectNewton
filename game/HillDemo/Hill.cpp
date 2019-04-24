@@ -1,11 +1,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 #include "../../../../engine/engine/engine.h"
 #include "../../../../engine/engine/vector2.h"
 #include "../../../../engine/engine/physicalObject.h"
 #include "../../../../engine/engine/circle.h"
 #include "../../../../engine/engine/force.h"
+
+#define PI 3.1415926535897932
 
 using namespace std;
 
@@ -22,9 +25,11 @@ int main()
 
 	rectangle boxPH = rectangle(vector2(200, 250), vector2(400, 0));
 	boxPH.setAnchored(true);
+	boxPH.setRotation(PI / 2);
 
 	rectangle box2PH = rectangle(vector2(100, 100), vector2(250, 100));
 	box2PH.setAcceleration(vector2(0, 1920));
+	box2PH.setRotation(0);
 	//boxPH.setAnchored(true);
 
 	circle ballPH = circle(100.F, vector2(100, 100));
