@@ -21,7 +21,7 @@ int main()
 {
 	int refreshRate = 120;
 
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Force", sf::Style::Default);
 
 	// Create instance of engine
 	engine physics = engine();
