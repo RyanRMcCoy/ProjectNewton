@@ -64,9 +64,9 @@ int main()
 	// Ground
 	sf::RectangleShape object3(sf::Vector2f(10000, 25));
 	object3.setFillColor(sf::Color::Green);
-	object3.setPosition(-100, 575);
+	object3.setPosition(-100, 587);
 
-	rectangle ground = rectangle(vector2(10000, 25), vector2(-100, 575));
+	rectangle ground = rectangle(vector2(10000, 25), vector2(-100, 600));
 	ground.setAnchored(true);
 
 	physics.addPolygon(ground);
@@ -95,7 +95,7 @@ int main()
 			physics.update(refreshRate);
 			object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
 			object2.setPosition(o2.getXpos() - o2.getRadius(), o2.getYpos() - o2.getRadius());
-			//object3.setPosition(ground.getXpos() - ground.getSideX() / 2, ground.getYpos() - ground.getSideY() / 2);
+			object3.setPosition(ground.getXpos() - ground.getSideX() / 2, ground.getYpos() - ground.getSideY() / 2);
 		}
 
 		window.clear();
