@@ -62,7 +62,7 @@ int main()
 	o3.setElasticity(1);
 
 	physics.addCircle(o1);
-	physics.addCircle(o2);
+	//physics.addCircle(o2);
 	physics.addPolygon(o3);
 
 	rectangle left = rectangle(100, 600);
@@ -106,7 +106,7 @@ int main()
 		window.clear();
 		window.draw(ground);
 		window.draw(object1);
-		window.draw(object2);
+		//window.draw(object2);
 		window.display();
 
 		if (hasStarted)
@@ -141,7 +141,7 @@ int main()
 			controlForce = force(&o1, vector2(10.f, 0.f) * o1.getMass());
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			hasStarted = true;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))

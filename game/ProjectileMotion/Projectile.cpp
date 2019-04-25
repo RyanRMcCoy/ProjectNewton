@@ -36,7 +36,7 @@ int main()
 	physics.addPolygon(rect2);
 
 	//SFML Graphics Setup
-	sf::RenderWindow window(sf::VideoMode(600, 400), "Projectile Motion", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mass Demo", sf::Style::Fullscreen);
 	sf::CircleShape circle1(circ1.getRadius());
 	sf::CircleShape circle2(circ2.getRadius());
 	circle1.setFillColor(sf::Color::Red);
