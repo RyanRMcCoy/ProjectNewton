@@ -31,6 +31,7 @@
     <ProjectGuid>{69A228A3-5E95-43C6-A0EC-3179DCDF6FEC}</ProjectGuid>
     <RootNamespace>ProjectileMotion</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>MassDemo</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
