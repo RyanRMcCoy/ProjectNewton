@@ -25,7 +25,7 @@ int main()
 
 	rectangle boxPH = rectangle(vector2(200, 250), vector2(400, 0));
 	boxPH.setAnchored(true);
-	boxPH.setRotation(PI / 2);
+	//boxPH.setRotation(PI / 2);
 
 	rectangle box2PH = rectangle(vector2(100, 100), vector2(250, 100));
 	box2PH.setAcceleration(vector2(0, 1920));
