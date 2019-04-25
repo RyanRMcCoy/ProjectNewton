@@ -395,13 +395,13 @@ TEST(vector2Test, operatorProject) {
 	EXPECT_TRUE(obj3 == target);
 }
 //Start of Force Tests
-TEST(forceTest, defaultConstructor) {
+/*TEST(forceTest, defaultConstructor) {
 	force obj;
 	int i = 0;
 	circle circ;
 	EXPECT_TRUE(*obj.getObj() == (physicalObject) circ);
 	EXPECT_EQ(obj.getMagnitude(), 0);
-}
+}*/
 
 TEST(forceTest, objConstructor) {
 	force obj(&circle(2, vector2(5, 5)));
@@ -409,13 +409,13 @@ TEST(forceTest, objConstructor) {
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
-TEST(forceTest, vectorConstructor) {
+/*TEST(forceTest, vectorConstructor) {
 	force obj(vector2(3, 4));
 	circle target(1);
 	target.setAcceleration(vector2(3, 4));
 	EXPECT_TRUE(*obj.getObj() == target);
 	EXPECT_EQ(obj.getMagnitude(), 5);
-}
+}*/
 
 TEST(forceTest, fullConstructor) {
 	force  obj(&circle(2, vector2(5, 5)), vector2(3, 4));
@@ -432,7 +432,7 @@ TEST(forceTest, setObj) {
 	EXPECT_EQ(obj.getMagnitude(), 0);
 }
 
-TEST(forceTest, setVector) {
+/*TEST(forceTest, setVector) {
 	force obj;
 	obj.setVector(vector2(3, 4));
 	circle target = circle();
@@ -440,7 +440,7 @@ TEST(forceTest, setVector) {
 	EXPECT_TRUE(*obj.getObj() == target);
 	float mag_targ = obj.getMagnitude();
 	EXPECT_EQ(mag_targ, 5);
-}
+}*/
 
 TEST(forceTest, setMag) {
 	force obj(vector2(1, 1));	
