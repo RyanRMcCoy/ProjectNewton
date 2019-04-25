@@ -141,7 +141,7 @@ int main()
 			controlForce = force(&o1, vector2(10.f, 0.f) * o1.getMass());
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			hasStarted = true;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))

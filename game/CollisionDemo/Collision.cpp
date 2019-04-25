@@ -34,8 +34,7 @@ int main()
 	o2.setAnchored(true);
 	o2.setElasticity(.7);
 
-	rectangle ground = rectangle(vector2(400, 400), vector2(380, 640));
-	ground.setAnchored(true);
+
 
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
 	//vector2 vertices[4] = { vector2(0, 550), vector2(800, 550), vector2(800, 650), vector2(0, 650) };
@@ -45,7 +44,6 @@ int main()
 
 	physics.addCircle(o1);
 	physics.addCircle(o2);
-	physics.addPolygon(ground);
 
 	// Drawing initial circles on window
 
@@ -64,13 +62,18 @@ int main()
 	object2.setPosition(o2.getXpos() - o1.getRadius(), o2.getYpos() - o1.getRadius());
 
 	// Ground
-	sf::RectangleShape object3(sf::Vector2f(400, 400));
-	object3.setFillColor(sf::Color::Cyan);
-	object3.setPosition(200, 590);
+	sf::RectangleShape object3(sf::Vector2f(10000, 25));
+	object3.setFillColor(sf::Color::Green);
+	object3.setPosition(-100, 575);
+
+	rectangle ground = rectangle(vector2(10000, 25), vector2(-100, 575));
+	ground.setAnchored(true);
+
+	physics.addPolygon(ground);
 
 	// Drawing background
 	sf::RectangleShape background(sf::Vector2f(800, 600));
-	background.setFillColor(sf::Color::Green);
+	background.setFillColor(sf::Color::Cyan);
 
 	bool hasStarted = false;
 
@@ -92,7 +95,7 @@ int main()
 			physics.update(refreshRate);
 			object1.setPosition(o1.getXpos() - o1.getRadius(), o1.getYpos() - o1.getRadius());
 			object2.setPosition(o2.getXpos() - o2.getRadius(), o2.getYpos() - o2.getRadius());
-			object3.setPosition(ground.getXpos() - ground.getSideX() / 2, ground.getYpos() - ground.getSideY() / 2);
+			//object3.setPosition(ground.getXpos() - ground.getSideX() / 2, ground.getYpos() - ground.getSideY() / 2);
 		}
 
 		window.clear();
