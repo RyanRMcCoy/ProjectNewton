@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <deque>
+#include <string>
 
 void createPipe(engine *physicsEngine, deque<sf::RectangleShape*> *pipes, deque<rectangle*> *pipeConstraints,
 	int pipeThickness, int lipThickness, int lipHeight, int gapSize, int groundHeight, int gapStart, 
@@ -77,12 +78,13 @@ int main()
 	const int PIPE_THICKNESS = 100;
 	const int LIP_THICKNESS = 15;
 	const int LIP_HEIGHT = 50;
-	const int GAP_SIZE = 200;
-	const int PIPE_MARGIN = 100;
+	const int GAP_SIZE = 180;
+	const int PIPE_MARGIN = 60;
 	const int JUMP_VELOCITY = 500;
 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "ELON");
 
+	int score = 0;
 	bool running = false, titleUp = false, alive = true, jumpKey = false;
 	double frameCount = 0, lastPipe = 0;
 	engine physicsEngine = engine();
@@ -93,17 +95,22 @@ int main()
 	// Load textures
 	sf::Texture titleText, elonTexture, backgroundTexture, groundTexture, pipeTexture, pipeLipTexture;
 	if (!titleText.loadFromFile("images/TitleText.png"))
-		std::cout << "Load Failed" << std::endl;
+		std::cout << "Texture Load Failed" << std::endl;
 	if (!elonTexture.loadFromFile("images/ELON.png"))
-		std::cout << "Load Failed" << std::endl;
+		std::cout << "Texture Load Failed" << std::endl;
 	if (!backgroundTexture.loadFromFile("images/background.png"))
-		std::cout << "Load Failed" << std::endl;
+		std::cout << "Texture Load Failed" << std::endl;
 	if (!groundTexture.loadFromFile("images/ground.png"))
-		std::cout << "Load Failed" << std::endl;
+		std::cout << "Texture Load Failed" << std::endl;
 	if (!pipeTexture.loadFromFile("images/pipe.png"))
-		std::cout << "Load Failed" << std::endl;
+		std::cout << "Texture Load Failed" << std::endl;
 	if (!pipeLipTexture.loadFromFile("images/pipeLip.png"))
-		std::cout << "Load Failed" << std::endl;
+		std::cout << "Texture Load Failed" << std::endl;
+
+	// Load font
+	sf::Font flappyFont;
+	if (!flappyFont.loadFromFile("font/FlappyBirdy.ttf"))
+		std::cout << "Font Load Failed" << std::endl;
 
 	// Set random seed
 	srand(time(0));
@@ -143,18 +150,23 @@ int main()
 	sf::CircleShape elonImage(elon.getRadius());
 	elonImage.setOrigin(elon.getRadius(), elon.getRadius());
 	elonImage.setPosition(elon.getXpos(), elon.getYpos());
-	//elonImage.setFillColor(sf::Color(255, 69, 0));
 	elonImage.setTexture(&elonTexture);
 
 	sf::RectangleShape background(sf::Vector2f(800, 600));
-	//background.setFillColor(sf::Color(69, 179, 224));
 	background.setTexture(&backgroundTexture);
 
 	sf::RectangleShape sfGround(sf::Vector2f(ground.getSideX(), GROUND_HEIGHT));
 	sfGround.setOrigin(ground.getSideX() / 2, ground.getSideY() / 2);
 	sfGround.setPosition(ground.getXpos(), ground.getYpos());
-	//sfGround.setFillColor(sf::Color(111, 227, 0));
 	sfGround.setTexture(&groundTexture);
+
+	sf::Text scoreText;
+	scoreText.setFont(flappyFont);
+	scoreText.setString("0");
+	scoreText.setCharacterSize(128);
+	scoreText.setOrigin(scoreText.getLocalBounds().width / 2, scoreText.getLocalBounds().height / 2);
+	scoreText.setPosition(400, 0);
+	scoreText.setFillColor(sf::Color(255, 255, 255));
 
 	while (window.isOpen())
 	{
@@ -164,6 +176,10 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		
+		scoreText.setString(std::to_string(score));
+		scoreText.setOrigin(scoreText.getLocalBounds().width / 2, scoreText.getLocalBounds().height / 2);
+		scoreText.setPosition(400, 0);
 
 		window.clear();
 		window.draw(background);
@@ -175,9 +191,10 @@ int main()
 			//cout << pipe->getLocalBounds().height << endl;
 		}
 		window.draw(elonImage);
+		window.draw(scoreText);
 		window.display();
 
-		if (title.getPosition().x > -500)
+		if (title.getPosition().x > -500 && alive)
 		{
 			if (title.getPosition().y <= 170)
 				titleUp = false;
@@ -186,14 +203,16 @@ int main()
 
 			//cout << titleUp << endl;
 			if (titleUp)
-				title.setPosition(title.getPosition() - sf::Vector2f(0, PIPE_SPEED / 100));
+				title.setPosition(title.getPosition() - sf::Vector2f(0, PIPE_SPEED / 400));
 			else
-				title.setPosition(title.getPosition() + sf::Vector2f(0, PIPE_SPEED / 100));
+				title.setPosition(title.getPosition() + sf::Vector2f(0, PIPE_SPEED / 400));
 		}
 
 		// Check if engine is running and if a frame has passed yet
 		if (running && physicsEngine.update(FRAME_RATE))
 		{
+			double rotation = 70 * (1 - abs((elon.getVelocity().getY() - (JUMP_VELOCITY * 2)) / (JUMP_VELOCITY * 2))) + 30;
+			elonImage.setRotation(rotation);
 			if (elon.getPosition().getY() < -elon.getRadius())
 			{
 				elon.setPosition(vector2(elon.getXpos(), -elon.getRadius()));
@@ -202,7 +221,7 @@ int main()
 			elonImage.setPosition(elon.getXpos(), elon.getYpos());
 			sfGround.setPosition(ground.getXpos(), ground.getYpos());
 
-			if (title.getPosition().x > -500)
+			if (alive && title.getPosition().x > -500)
 				title.setPosition(title.getPosition() - sf::Vector2f(PIPE_SPEED, 0));
 
 			frameCount++;
@@ -243,6 +262,8 @@ int main()
 
 				if (time - lastPipe > PIPE_FREQUENCY)
 				{
+					if (lastPipe >= 2 * PIPE_FREQUENCY)
+						score++;
 					lastPipe = time;
 					createPipe(&physicsEngine, pipes, pipeConstraints, PIPE_THICKNESS,
 						LIP_THICKNESS, LIP_HEIGHT, GAP_SIZE, GROUND_HEIGHT,
