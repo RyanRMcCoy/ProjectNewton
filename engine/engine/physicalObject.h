@@ -54,6 +54,8 @@ public:
 
 	bool getAnchored();
 	void setAnchored(bool);
+	bool getColliding();
+	void setColliding(bool);
 
 	bool operator == (physicalObject o);
 };

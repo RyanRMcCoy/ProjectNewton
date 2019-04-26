@@ -23,6 +23,7 @@
     <ProjectGuid>{C3CDD0C4-E4FA-4924-97CE-BB1C2BC73914}</ProjectGuid>
     <RootNamespace>MaterialPropertyDemo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>ElonDemo</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -123,7 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MaterialPropertyDemo.cpp" />
+    <ClCompile Include="ElonDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\engine\engine\engine.vcxproj">

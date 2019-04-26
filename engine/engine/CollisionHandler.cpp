@@ -47,6 +47,9 @@ void anchoredResolve(physicalObject *o1, physicalObject *o2, vector2 *penetratio
 
 void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration, float dt)
 {
+	o1->setColliding(true);
+	o2->setColliding(true);
+
 	if (o2->getAnchored())
 	{
 		anchoredResolve(o1, o2, penetration, dt);
@@ -107,10 +110,11 @@ void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration, float
 	}
 
 	// Move objects out of each other
-	cout << "Penetration: " << penetration->toString() << std::endl;
-	cout << "o1Ratio: " << o1Ratio << endl;
-	cout << "Current Position: " << o1->getPosition().toString() << endl;
-	cout << "Resolution Position: " << (o1->getPosition() + (*penetration) * o1Ratio).toString() << endl;
+	if (o1Ratio + o2Ratio <= 1)
+	{
+		o1Ratio *= 1.0001;
+		o2Ratio *= 1.0001;
+	}
 	o1->setPosition(o1->getPosition() + (*penetration) * o1Ratio);
 	o2->setPosition(o2->getPosition() + (*penetration) * o2Ratio);
 	

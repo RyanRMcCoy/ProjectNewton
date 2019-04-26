@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MaterialPropertyDemo.cpp">
+    <ClCompile Include="ElonDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

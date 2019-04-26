@@ -124,6 +124,9 @@ vector2 determineOverlap(vector2 o1MinProj, vector2 o1MaxProj, vector2 o2MinProj
 
 vector2 satHandler::overlapping(circle o1, circle o2)
 {
+	if (o1.getAnchored() && o2.getAnchored())
+		return vector2();
+
 	vector2 overlap = o2.getPosition() - o1.getPosition();
 	float distance = overlap.magnitude() - (o1.getRadius() + o2.getRadius());
 	if (distance < 0)
@@ -141,6 +144,9 @@ vector2 satHandler::overlapping(circle o1, circle o2)
 */
 vector2 satHandler::overlapping(circle o1, polygon o2)
 {
+	if (o1.getAnchored() && o2.getAnchored())
+		return vector2();
+
 	int n = o2.numSides();
 	vector2 *vertices = o2.getVertices();
 
@@ -235,6 +241,9 @@ vector2 satHandler::overlapping(polygon o1, circle o2)
 
 vector2 satHandler::overlapping(polygon o1, polygon o2)
 {
+	if (o1.getAnchored() && o2.getAnchored())
+		return vector2();
+
 	int n1 = o1.numSides();
 	vector2 *vertices1 = o1.getVertices();
 	int n2 = o2.numSides();

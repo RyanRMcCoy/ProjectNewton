@@ -204,6 +204,16 @@ void physicalObject::setAnchored(bool anchor)
 	anchored = anchor;
 }
 
+bool physicalObject::getColliding()
+{
+	return colliding;
+}
+
+void physicalObject::setColliding(bool collide)
+{
+	colliding = collide;
+}
+
 bool physicalObject::operator == (physicalObject o)
 {
 	return  position == o.getPosition() &&
