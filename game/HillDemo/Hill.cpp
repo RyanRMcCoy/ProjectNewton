@@ -23,7 +23,7 @@ int main()
 	polygon groundPH = polygon(3, groundPoints);
 	groundPH.setAnchored(true);
 
-	rectangle boxPH = rectangle(vector2(200, 250), vector2(400, 0));
+	rectangle boxPH = rectangle(vector2(200, 250), vector2(420, 0));
 	boxPH.setAnchored(true);
 	//boxPH.setRotation(PI / 2);
 

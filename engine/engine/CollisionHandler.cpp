@@ -5,7 +5,7 @@
 
 collisionHandler::collisionHandler() {}
 
-#define FRICTION_SPEED_THRESHHOLD 25
+#define FRICTION_SPEED_THRESHHOLD 50
 
 float min(float n1, float n2)
 {
@@ -27,9 +27,9 @@ void anchoredResolve(physicalObject *o1, physicalObject *o2, vector2 *penetratio
 		//frictionalForce.remove();
 
 	// Determine velocities
-	o1->setVelocity(o1->getVelocity() - penetration->unit() *
-		(o1->getVelocity().dot(penetration->unit())) * 2);
-	o1->setVelocity(o1->getVelocity() - o1->getVelocity().project(*penetration) * (1 - elasticity));
+	o1->setVelocity((v1 - penetration->unit() * v1.dot(penetration->unit()) * 2));
+	v1 = o1->getVelocity();
+	o1->setVelocity(v1 - v1.project(*penetration) * (1 - elasticity));
 
 	// Determine velocities along collision axis to determine whether to apply friction
 	float normalSpeed = o1->getVelocity().project(*penetration).magnitude(); // Speed along normal (penetration axis)
