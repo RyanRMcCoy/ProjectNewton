@@ -12,7 +12,7 @@
 
 void createPipe(engine *physicsEngine, deque<sf::RectangleShape*> *pipes, deque<rectangle*> *pipeConstraints,
 	int pipeThickness, int lipThickness, int lipHeight, int gapSize, int groundHeight, int gapStart, 
-	sf::Texture *pipeTexture, sf::Texture *pipeLipTexture)
+	sf::Texture *pipeTexture, sf::Texture *pipeLipTexture, sf::Color overlayColor)
 {
 	rectangle *upper = new rectangle(vector2(pipeThickness, gapStart), 
 		vector2(800 + pipeThickness / 2, gapStart / 2));
@@ -34,22 +34,22 @@ void createPipe(engine *physicsEngine, deque<sf::RectangleShape*> *pipes, deque<
 
 	sf::RectangleShape *sfUpper = new sf::RectangleShape(sf::Vector2f(upper->getSideX(), upper->getSideY()));
 	sfUpper->setOrigin(upper->getSideX() / 2, upper->getSideY() / 2);
-	//sfUpper->setFillColor(sf::Color(95, 136, 40));
+	sfUpper->setFillColor(overlayColor);
 	sfUpper->setPosition(upper->getXpos(), upper->getYpos());
 	sfUpper->setTexture(pipeTexture);
 	sf::RectangleShape *sfUpperLip = new sf::RectangleShape(sf::Vector2f(upperLip->getSideX(), upperLip->getSideY()));
 	sfUpperLip->setOrigin(upperLip->getSideX() / 2, upperLip->getSideY() / 2);
-	//sfUpperLip->setFillColor(sf::Color(95, 136, 40));
+	sfUpperLip->setFillColor(overlayColor);
 	sfUpperLip->setPosition(upperLip->getXpos(), upperLip->getYpos());
 	sfUpperLip->setTexture(pipeLipTexture);
 	sf::RectangleShape *sfLower = new sf::RectangleShape(sf::Vector2f(lower->getSideX(), lower->getSideY()));
 	sfLower->setOrigin(lower->getSideX() / 2, lower->getSideY() / 2);
-	//sfLower->setFillColor(sf::Color(95, 136, 40));
+	sfLower->setFillColor(overlayColor);
 	sfLower->setPosition(lower->getXpos(), lower->getYpos());
 	sfLower->setTexture(pipeTexture);
 	sf::RectangleShape *sfLowerLip = new sf::RectangleShape(sf::Vector2f(lowerLip->getSideX(), lowerLip->getSideY()));
 	sfLowerLip->setOrigin(lowerLip->getSideX() / 2, lowerLip->getSideY() / 2);
-	//sfLowerLip->setFillColor(sf::Color(95, 136, 40));
+	sfLowerLip->setFillColor(overlayColor);
 	sfLowerLip->setPosition(lowerLip->getXpos(), lowerLip->getYpos());
 	sfLowerLip->setTexture(pipeLipTexture);
 
@@ -88,6 +88,8 @@ int main()
 	bool running = false, titleUp = false, alive = true, jumpKey = false;
 	double frameCount = 0, lastPipe = 0;
 	engine physicsEngine = engine();
+
+	sf::Color overlayColor(255, 255, 255);
 
 	deque<sf::RectangleShape*> *pipes = new deque<sf::RectangleShape*>;
 	deque<rectangle*> *pipeConstraints = new deque<rectangle*>;
@@ -151,14 +153,17 @@ int main()
 	elonImage.setOrigin(elon.getRadius(), elon.getRadius());
 	elonImage.setPosition(elon.getXpos(), elon.getYpos());
 	elonImage.setTexture(&elonTexture);
+	//elonImage.setFillColor(overlayColor);
 
 	sf::RectangleShape background(sf::Vector2f(800, 600));
 	background.setTexture(&backgroundTexture);
+	background.setFillColor(overlayColor);
 
 	sf::RectangleShape sfGround(sf::Vector2f(ground.getSideX(), GROUND_HEIGHT));
 	sfGround.setOrigin(ground.getSideX() / 2, ground.getSideY() / 2);
 	sfGround.setPosition(ground.getXpos(), ground.getYpos());
 	sfGround.setTexture(&groundTexture);
+	sfGround.setFillColor(overlayColor);
 
 	sf::Text scoreText;
 	scoreText.setFont(flappyFont);
@@ -183,6 +188,7 @@ int main()
 
 		window.clear();
 		window.draw(background);
+		window.draw(elonImage);
 		window.draw(title);
 		window.draw(sfGround);
 		for (sf::RectangleShape *pipe : *pipes)
@@ -190,7 +196,6 @@ int main()
 			window.draw(*pipe);
 			//cout << pipe->getLocalBounds().height << endl;
 		}
-		window.draw(elonImage);
 		window.draw(scoreText);
 		window.display();
 
@@ -270,7 +275,7 @@ int main()
 					createPipe(&physicsEngine, pipes, pipeConstraints, PIPE_THICKNESS,
 						LIP_THICKNESS, LIP_HEIGHT, GAP_SIZE, GROUND_HEIGHT,
 						(rand() % (600 - GAP_SIZE - GROUND_HEIGHT - PIPE_MARGIN * 2)) + PIPE_MARGIN,
-						&pipeTexture, &pipeLipTexture);
+						&pipeTexture, &pipeLipTexture, overlayColor);
 				}
 			}
 		}
@@ -288,12 +293,6 @@ int main()
 		}
 		else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jumpKey)
 			jumpKey = false;
-
-		// Begin the simulation
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			running = true;
-		}
 
 		// Restart
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
