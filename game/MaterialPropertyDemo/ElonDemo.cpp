@@ -71,8 +71,8 @@ void createPipe(engine *physicsEngine, deque<sf::RectangleShape*> *pipes, deque<
 int main()
 {
 	// Initialization
-	const int FRAME_RATE = 120;
-	const double PIPE_SPEED = 2.5;
+	const int FRAME_RATE = 60;
+	const double PIPE_SPEED = 5;
 	const double PIPE_FREQUENCY = 1;
 	const int GROUND_HEIGHT = 100;
 	const int PIPE_THICKNESS = 100;
@@ -116,7 +116,7 @@ int main()
 	srand(time(0));
 
 	// Initialize engine objects
-	circle elon(40, vector2(200, 300));
+	circle elon(35, vector2(200, 300));
 	elon.setElasticity(1);
 	elon.setFriction(1);
 
@@ -231,7 +231,9 @@ int main()
 			{
 				alive = false;
 				if (ground.getColliding())
+				{
 					elon.setAnchored(true);
+				}
 				else
 					elon.setVelocity(-750, elon.getVelocity().getY());
 			}
@@ -274,18 +276,51 @@ int main()
 		}
 
 		// Jump functionality
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !jumpKey && alive)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
-			jumpKey = true;
-			elon.setVelocity(0, -JUMP_VELOCITY);
+			if (!running)
+				running = true;
+			if (!jumpKey && alive)
+			{
+				jumpKey = true;
+				elon.setVelocity(0, -JUMP_VELOCITY);
+			}
 		}
 		else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jumpKey)
 			jumpKey = false;
 
-		//close the window
+		// Begin the simulation
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			running = true;
+		}
+
+		// Restart
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			running = false;
+			alive = true;
+
+			// Reset images
+			elon.setPosition(vector2(200, 300));
+			elon.setVelocity(vector2());
+			elon.setAnchored(false);
+			elonImage.setPosition(elon.getXpos(), elon.getYpos());
+			elonImage.setRotation(0);
+			title.setPosition(300, 175);
+
+			// Reset data
+			frameCount = 0;
+			lastPipe = 0;
+			score = 0;
+
+			for (int i = 0; i < pipeConstraints->size(); i++)
+			{
+				physicsEngine.removePolygon(*(*pipeConstraints)[0]);
+				pipeConstraints->pop_front();
+				pipes->pop_front();
+			}
+			
 		}
 
 		//close the window

@@ -31,21 +31,27 @@ int main()
 	o1.setVelocity(vector2(0, 0));
 	o1.setAcceleration(vector2(0, 0));
 	o1.setMass(5);
+	o1.setElasticity(.8);
 
 	circle o2 = circle(100);
 	o2.setVelocity(vector2(0, 0));
 	o2.setAcceleration(vector2(0, 0));
 	o2.setMass(5);
+	o2.setElasticity(.8);
 
 	//Adding a border to the screen
 	rectangle left = rectangle(100, 1080);
 	left.setPosition(vector2(-50, 590));
+	left.setElasticity(.8);
 	rectangle right = rectangle(100, 1080);
 	right.setPosition(vector2(1970, 590));
+	right.setElasticity(.8);
 	rectangle top = rectangle(1920, 100);
 	top.setPosition(vector2(960, -50));
+	top.setElasticity(.8);
 	rectangle bottom = rectangle(1920, 100);
 	bottom.setPosition(vector2(960, 1130));
+	bottom.setElasticity(.8);
 
 	//Set the border to never move
 	left.setAnchored(true);

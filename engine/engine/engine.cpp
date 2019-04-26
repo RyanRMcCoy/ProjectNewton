@@ -74,8 +74,8 @@ bool engine::update(int refreshRate)
 			{
 				o->setPosition(o->getPosition() + o->getVelocity() * dt);
 				o->setVelocity(o->getVelocity() + o->getAcceleration() * dt);
-				o->setColliding(false);
 			}
+			o->setColliding(false);
 		}
 
 		for (polygon *o : polygons)
@@ -84,8 +84,8 @@ bool engine::update(int refreshRate)
 			{
 				o->setPosition(o->getPosition() + o->getVelocity() * dt);
 				o->setVelocity(o->getVelocity() + o->getAcceleration() * dt);
-				o->setColliding(false);
 			}
+			o->setColliding(false);
 		}
 
 		for (unsigned int i = 0; i < circles.size() + polygons.size(); i++)
