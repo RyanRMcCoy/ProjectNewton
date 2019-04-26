@@ -14,11 +14,11 @@ int main()
 
 	// Initialize the physics engine
 	engine physics = engine();
-	int refresh = 120;
+	int refresh = 240;
 
 	// Initialize the objects in the engine
 	rectangle boxPhysics = rectangle(vector2(100, 100), vector2(150, 500));
-	boxPhysics.setVelocity(100, 0);
+	boxPhysics.setVelocity(300, -500);
 	boxPhysics.setFriction(1);
 
 	rectangle groundPhysics = rectangle(vector2(1000, 50), vector2(400, 600));
@@ -39,6 +39,8 @@ int main()
 	box.setPosition(boxPhysics.getXpos() - boxPhysics.getSideX() / 2, boxPhysics.getYpos() - boxPhysics.getSideY() / 2);
 	box.setFillColor(sf::Color::Red);
 
+	force gravity = force(&boxPhysics, vector2(0, 1960 * boxPhysics.getMass()));
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -50,7 +52,6 @@ int main()
 
 		// Updating engine and applying gravity to boxPhysics
 		physics.update(refresh);
-		force gravity = force(&boxPhysics, vector2(0, 5000));
 
 		// Wrap around for boxPhysics
 		if (boxPhysics.getXpos() - boxPhysics.getSideX() / 2 > 800) {

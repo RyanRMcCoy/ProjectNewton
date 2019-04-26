@@ -23,18 +23,20 @@ int main()
 	circle o1 = circle(100.f);
 	o1.setVelocity(vector2(500, -400));
 	o1.setAnchored(false);
-	o1.setElasticity(.7);
+	o1.setElasticity(1);
+
+	rectangle ground = rectangle(vector2(800, 100), vector2(400, 630));
+	ground.setAnchored(true);
+	ground.setElasticity(1);
 	
 	force f = force(&o1, vector2(0, 980) * o1.getMass());
 	//o1.setAcceleration(vector2(0, 980));
 
-	circle o2 = circle(100.f);
+	circle o2 = circle(60.f);
 	o2.setVelocity(vector2(-400, -300));
 	o2.setAcceleration(vector2(0, 980));
 	o2.setAnchored(true);
-	o2.setElasticity(.7);
-
-
+	o2.setElasticity(1);
 
 	//vector2 vertices[4] = {vector2(-400, -50), vector2(400, -50), vector2(400, 50), vector2(-400, 50)};
 	//vector2 vertices[4] = { vector2(0, 550), vector2(800, 550), vector2(800, 650), vector2(0, 650) };
@@ -44,6 +46,7 @@ int main()
 
 	physics.addCircle(o1);
 	physics.addCircle(o2);
+	physics.addPolygon(ground);
 
 	// Drawing initial circles on window
 
@@ -62,14 +65,9 @@ int main()
 	object2.setPosition(o2.getXpos() - o1.getRadius(), o2.getYpos() - o1.getRadius());
 
 	// Ground
-	sf::RectangleShape object3(sf::Vector2f(10000, 25));
+	sf::RectangleShape object3(sf::Vector2f(800, 100));
 	object3.setFillColor(sf::Color::Green);
-	object3.setPosition(-100, 587);
-
-	rectangle ground = rectangle(vector2(10000, 25), vector2(-100, 600));
-	ground.setAnchored(true);
-
-	physics.addPolygon(ground);
+	object3.setPosition(0, 580);
 
 	// Drawing background
 	sf::RectangleShape background(sf::Vector2f(800, 600));
