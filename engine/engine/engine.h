@@ -62,6 +62,14 @@ public:
 	/// Purpose: Returns a pointer to the vector of polygons
 	vector<polygon*> getPolygons();
 
+	/// Function: removeCircle
+	/// Purpose: Searches for and removes the circle from the circles vector
+	void removeCircle(circle &o);
+
+	/// Function: removePolygon
+	/// Purpose: Searches for and removes the polygon from the polygons vector
+	void removePolygon(polygon &o);
+
 	/// Function: update
 	/// Purpose: Refreshes or 'steps' the simulation by calculating
 	///		a time delta using the lastUpdate variable

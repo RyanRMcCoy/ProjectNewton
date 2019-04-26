@@ -35,6 +35,25 @@ vector<polygon*> engine::getPolygons()
 {
 	return polygons;
 }
+void engine::removeCircle(circle &o)
+{
+	for (int i = 0; i < circles.size(); i++)
+		if (circles[i] == &o)
+		{
+			circles.erase(circles.begin() + i);
+			break;
+		}
+}
+
+void engine::removePolygon(polygon &o)
+{
+	for (int i = 0; i < polygons.size(); i++)
+		if (polygons[i] == &o)
+		{
+			polygons.erase(polygons.begin() + i);
+			break;
+		}
+}
 
 bool engine::update(int refreshRate)
 {
@@ -55,6 +74,7 @@ bool engine::update(int refreshRate)
 			{
 				o->setPosition(o->getPosition() + o->getVelocity() * dt);
 				o->setVelocity(o->getVelocity() + o->getAcceleration() * dt);
+				o->setColliding(false);
 			}
 		}
 
@@ -64,6 +84,7 @@ bool engine::update(int refreshRate)
 			{
 				o->setPosition(o->getPosition() + o->getVelocity() * dt);
 				o->setVelocity(o->getVelocity() + o->getAcceleration() * dt);
+				o->setColliding(false);
 			}
 		}
 

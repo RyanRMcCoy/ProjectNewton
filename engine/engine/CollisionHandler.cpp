@@ -47,6 +47,9 @@ void anchoredResolve(physicalObject *o1, physicalObject *o2, vector2 *penetratio
 
 void resolve(physicalObject *o1, physicalObject *o2, vector2 *penetration, float dt)
 {
+	o1->setColliding(true);
+	o2->setColliding(true);
+
 	if (o2->getAnchored())
 	{
 		anchoredResolve(o1, o2, penetration, dt);
