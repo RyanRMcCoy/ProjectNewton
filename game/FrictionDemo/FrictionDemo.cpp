@@ -15,11 +15,13 @@ int main()
 	// Initialize the physics engine
 	engine physics = engine();
 	int refresh = 240;
+	bool running = false;
 
 	// Initialize the objects in the engine
 	rectangle boxPhysics = rectangle(vector2(100, 100), vector2(150, 500));
-	boxPhysics.setVelocity(300, -500);
+	boxPhysics.setVelocity(300, -800);
 	boxPhysics.setFriction(1);
+	boxPhysics.setElasticity(.15);
 
 	rectangle groundPhysics = rectangle(vector2(1000, 50), vector2(400, 600));
 	groundPhysics.setAnchored(true);
@@ -51,7 +53,8 @@ int main()
 		}
 
 		// Updating engine and applying gravity to boxPhysics
-		physics.update(refresh);
+		if (running)
+			physics.update(refresh);
 
 		// Wrap around for boxPhysics
 		if (boxPhysics.getXpos() - boxPhysics.getSideX() / 2 > 800) {
@@ -69,7 +72,7 @@ int main()
 
 		// Push the box to the right
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			//force push = force(&boxPhysics, vector2(100, 0));
+			running = true;
 		}
 
 		//close the window
